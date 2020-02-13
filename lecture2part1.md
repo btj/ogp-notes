@@ -152,20 +152,20 @@ class IntervalTest {
 		return interval.lowerBound;
 	}
 	
-	void setLowerBound(Interval interval, int value) {
-		interval.lowerBound = value;
-	}
-	
 	int getUpperBound(Interval interval) {
 		return interval.lowerBound + interval.width;
 	}
 	
-	void setUpperBound(Interval interval, int value) {
-		interval.width = value - interval.lowerBound;
-	}
-	
 	int getWidth(Interval interval) {
 		return interval.width;
+	}
+	
+	void setLowerBound(Interval interval, int value) {
+		interval.lowerBound = value;
+	}
+	
+	void setUpperBound(Interval interval, int value) {
+		interval.width = value - interval.lowerBound;
 	}
 	
 	void setWidth(Interval interval, int value) {
@@ -200,20 +200,20 @@ class IntervalTest {
 		return interval.lowerBound;
 	}
 	
-	void setLowerBound(Interval interval, int value) {
-		interval.lowerBound = value;
-	}
-	
 	int getUpperBound(Interval interval) {
 		return interval.lowerBound + interval.width;
 	}
 	
-	void setUpperBound(Interval interval, int value) {
-		interval.width = value - interval.lowerBound;
-	}
-	
 	int getWidth(Interval interval) {
 		return interval.width;
+	}
+	
+	void setLowerBound(Interval interval, int value) {
+		interval.lowerBound = value;
+	}
+	
+	void setUpperBound(Interval interval, int value) {
+		interval.width = value - interval.lowerBound;
 	}
 	
 	void setWidth(Interval interval, int value) {
@@ -248,20 +248,20 @@ class IntervalTest {
 		return interval.lowerBound;
 	}
 	
-	void setLowerBound(Interval interval, int value) {
-		interval.lowerBound = value;
-	}
-	
 	int getUpperBound(Interval interval) {
 		return interval.upperBound;
 	}
 	
-	void setUpperBound(Interval interval, int value) {
-		interval.upperBound = value;
-	}
-	
 	int getWidth(Interval interval) {
 		return interval.upperBound - interval.lowerBound;
+	}
+	
+	void setLowerBound(Interval interval, int value) {
+		interval.lowerBound = value;
+	}
+	
+	void setUpperBound(Interval interval, int value) {
+		interval.upperBound = value;
 	}
 	
 	void setWidth(Interval interval, int value) {
@@ -296,20 +296,20 @@ class Interval {
 		return interval.lowerBound;
 	}
 	
-	static void setLowerBound(Interval interval, int value) {
-		interval.lowerBound = value;
-	}
-	
 	static int getUpperBound(Interval interval) {
 		return interval.upperBound;
 	}
 	
-	static void setUpperBound(Interval interval, int value) {
-		interval.upperBound = value;
-	}
-	
 	static int getWidth(Interval interval) {
 		return interval.upperBound - interval.lowerBound;
+	}
+	
+	static void setLowerBound(Interval interval, int value) {
+		interval.lowerBound = value;
+	}
+	
+	static void setUpperBound(Interval interval, int value) {
+		interval.upperBound = value;
 	}
 	
 	static void setWidth(Interval interval, int value) {
@@ -362,20 +362,20 @@ class Interval {
 		return interval.lowerBound;
 	}
 	
-	static void setLowerBound(Interval interval, int value) {
-		interval.lowerBound = value;
-	}
-	
 	static int getUpperBound(Interval interval) {
 		return interval.upperBound;
 	}
 	
-	static void setUpperBound(Interval interval, int value) {
-		interval.upperBound = value;
-	}
-	
 	static int getWidth(Interval interval) {
 		return interval.upperBound - interval.lowerBound;
+	}
+	
+	static void setLowerBound(Interval interval, int value) {
+		interval.lowerBound = value;
+	}
+	
+	static void setUpperBound(Interval interval, int value) {
+		interval.upperBound = value;
 	}
 	
 	static void setWidth(Interval interval, int value) {
@@ -404,20 +404,20 @@ class Interval {
 		return this.lowerBound;
 	}
 	
-	void setLowerBound(int value) {
-		this.lowerBound = value;
-	}
-	
 	int getUpperBound() {
 		return this.upperBound;
 	}
 	
-	void setUpperBound(int value) {
-		this.upperBound = value;
-	}
-	
 	int getWidth() {
 		return this.upperBound - this.lowerBound;
+	}
+	
+	void setLowerBound(int value) {
+		this.lowerBound = value;
+	}
+	
+	void setUpperBound(int value) {
+		this.upperBound = value;
 	}
 	
 	void setWidth(int value) {
@@ -466,20 +466,20 @@ class Interval {
 		return lowerBound;
 	}
 	
-	void setLowerBound(int value) {
-		lowerBound = value;
-	}
-	
 	int getUpperBound() {
 		return upperBound;
 	}
 	
-	void setUpperBound(int value) {
-		upperBound = value;
-	}
-	
 	int getWidth() {
 		return upperBound - lowerBound;
+	}
+	
+	void setLowerBound(int value) {
+		lowerBound = value;
+	}
+	
+	void setUpperBound(int value) {
+		upperBound = value;
 	}
 	
 	void setWidth(int value) {
