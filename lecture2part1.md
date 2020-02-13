@@ -1,4 +1,14 @@
-# Lecture 2: First Steps in Modular Programming
+# Lecture 2: First Steps in Modular Programming (Part I)
+
+### Contents
+
+- [Installing Java and Eclipse](#Installing-Java-and-Eclipse)
+- [Building and running our first program in Eclipse](#Building-and-running-our-first-program-in-Eclipse)
+- [The problem](#The-problem)
+- [Encapsulating the fields of class Interval](#Encapsulating-the-fields-of-class-Interval)
+- [Moving the methods inside class Interval](#Moving-the-methods-inside-class-Interval)
+- [Enforcing encapsulation: accessibility modifiers](#Enforcing-encapsulation-accessibility-modifiers)
+- [Instance methods](#Instance-methods)
 
 In the previous lecture, we used the JLearner tool to make acquaintance with the Java programming language. We used variables, arrays, and class objects to store and process data. From this perspective, Java is not much different from Python. The main difference is that Java is statically typed, which means that we need to specify the type of each local variable, method parameter, method result, array element, and class field in our program. The types we have seen are `int`, the type of integers, `int[]`, the type of arrays of integers, `int[][]`, the type of arrays of arrays of integers, and the various class types corresponding to the classes we declared, such as `Node` and `List`.
 
