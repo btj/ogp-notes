@@ -211,6 +211,7 @@ public class StringList {
      *       uppercase letter.
      *    | IntStream.range(0, getElements().length).allMatch(i ->
      *    |     getElements()[i].equals(old(getElements())[i].toUpperCase()))
+     */
     public void allToUpperCase() {
         for (int i = 0; i < elements.length; i++)
             elements[i] = elements[i].toUpperCase();
