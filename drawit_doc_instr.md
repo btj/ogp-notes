@@ -258,6 +258,7 @@ public class StringList {
 ```
 
 Notice the following:
+- In this example, the constraint that method `getElements`'s result is not `null` and that its elements are not `null` is specified in the form of postconditions of method `getElement`. A correct alternative would be to specify it in the form of public class invariants. The choice between inspector method postconditions and public class invariants (or a combination of both) is a matter of style.
 - `Arrays.stream(array).allMatch(e -> C)` expresses that condition `C` holds for each element `e` of array `array`. Similarly, `Arrays.stream(array).anyMatch(e -> C)` expresses that condition `C` holds for at least one element `e` of array `array`.
 - `IntStream.range(a, b).allMatch(i -> C)` expresses that condition `C` holds for each integer between `a` (inclusive) and `b` (exclusive).
 - `Arrays.equals(array1, from1, to1, array2, from2, to2)` expresses that the list of elements of `array1` at indices `from1` (inclusive) to `to1` (exclusive) equals the list of elements of `array2` at indices `from2` (inclusive) to `to2` (exclusive).
