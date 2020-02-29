@@ -3,7 +3,7 @@
 The `.java` files you submit as your solution for Part 1 of the project assignment should include Javadoc comments providing complete informal and formal documentation for the public classes and their public members. 
 
 Exceptions:
-- You need not provide any documentation for classes `DoublePoint` and `DoubleVector`
+- You need not provide any documentation for classes `DoublePoint` and `DoubleVector` or its members
 - You need not provide formal documentation for the return value of `IntPoint.lineSegmentsIntersect`.
 - You need to provide formal documentation for the return value of `IntPoint.isOnLineSegment` only if you are going for a top score
 - You need to deal with method arguments that cause arithmetic overflow as illegal arguments only if you are going for a top score. That is, you need to treat as illegal arguments some set of argument values that includes the argument values that cause arithmetic overflow. You may treat additional argument values as illegal as well; just make sure that those argument values that occur in actual executions of the DrawIt application are not treated as illegal.
