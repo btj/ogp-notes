@@ -272,6 +272,8 @@ Any side-effect-free, terminating boolean Java expressions are allowed in Javado
 
 In this context, an expression, method or constructor is side-effect-free if it does not mutate any pre-existing objects. Creating and initializing new objects is allowed. (Also, of course a constructor is allowed to mutate `this`.)
 
+Note, however, that in the Javadoc comment for class or class member X, you can refer to another class or class member Y only if Y is visible to any code that can see X. For example, in the Javadoc comment for a public method of a public class, you cannot refer to private fields or methods of that class or to any non-public classes, constructors or methods in the same package.
+
 ### Advanced topics
 
 You need not read or apply this section if you are not going for a top score.
