@@ -10,6 +10,8 @@ Exceptions:
 - You need not provide formal documentation for method `IntVector.asDoubleVector`.
 - You need not provide formal documentation for the return values of `RoundedPolygon.contains` and `RoundedPolygon.getDrawingCommands`.
 
+Note: the OGP Taglets do not support all of the Javadoc tags described here. This is not a problem, since you do not need to generate or submit HTML files; you need to submit only the `.java` files themselves. Detailed submission instructions follow later.
+
 ## How to write complete documentation
 
 ### Class documentation
