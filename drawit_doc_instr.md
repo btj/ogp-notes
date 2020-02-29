@@ -88,8 +88,8 @@ public class TimeOfDay {
      */
     public boolean isBefore(TimeOfDay other) {
         return
-            t1.hours < t2.hours ||
-            t1.hours == t2.hours && t1.minutes < t2.minutes;
+            hours < other.hours ||
+            hours == other.hours && minutes < other.minutes;
     }
 }
 ```
