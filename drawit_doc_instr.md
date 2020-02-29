@@ -268,7 +268,9 @@ Notice the following:
 
 ### Expressions allowed inside Javadoc formal parts
 
-Any side-effect-free, terminating boolean Java expressions are allowed in Javadoc formal parts. This includes calling side-effect-free methods of the program being documented. Of course, to achieve complete documentation those methods should themselves be documented properly. Also, be careful not to create infinite recursions this way.
+Any side-effect-free, terminating boolean Java expressions are allowed in Javadoc formal parts. This includes calling side-effect-free methods and constructors of the program being documented. Of course, to achieve complete documentation those methods should themselves be documented properly. Also, be careful not to create infinite recursions this way. 
+
+In this context, an expression, method or constructor is side-effect-free if it does not mutate any pre-existing objects. Creating and initializing new objects is allowed. (Also, of course a constructor is allowed to mutate `this`.)
 
 ### Advanced topics
 
