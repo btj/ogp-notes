@@ -277,6 +277,8 @@ Note, however, that in the Javadoc comment for class or class member X, you can 
 
 Note also that evaluation of Javadoc formal parts must never crash, i.e. throw an Exception. If evaluation of a Javadoc formal part crashes, the documentation is considered incorrect. For example, removing the first `@throws` clause in the documentation for method `addAll` above would lead to incorrect documentation, because calling `addAll` with a `null` argument would then cause the `Arrays.stream` call in the second `@throws` clause to throw a `NullPointerException`.
 
+(Note: This rule implies that evaluation of a Javadoc formal part must never lead to calling a method with arguments that violate that method's preconditions. Indeed, the behavior of such a call is completely unspecified so it might throw an Exception. This means that it is **not** the case that a method M automatically inherits the preconditions of methods M' called in M's preconditions.)
+
 ### Advanced topics
 
 You need not read or apply this section if you are not going for a top score.
