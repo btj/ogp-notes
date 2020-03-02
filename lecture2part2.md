@@ -243,8 +243,8 @@ class Interval {
 	 *    | 0 <= value
 	 * @post This interval's width equals the given value.
 	 *     | getWidth() == value
-	 * @post If the caller specified that the lower bound should be updated, the width has remained unchanged.
-	 *     | !updateLowerBound || getWidth() == old(getWidth())
+	 * @post If the caller specified that the lower bound should be updated, the upper bound has remained unchanged.
+	 *     | !updateLowerBound || getUpperBound() == old(getUpperBound())
 	 * @post If the caller specified that the lower bound should not be updated, the lower bound has remained unchanged.
 	 *     | updateLowerBound || getLowerBound() == old(getLowerBound())
 	 */
