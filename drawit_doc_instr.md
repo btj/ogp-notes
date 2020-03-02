@@ -295,6 +295,8 @@ Instances of immutable classes need not be mentioned in `@inspects` clauses.
 
 (Documenting which objects are inspected by a method is important for at least two reasons: 1) the caller must ensure that the inspected objects are in a valid state, i.e. their representation invariants hold; 2) in a multithreaded program, no other thread must mutate the inspected objects.)
 
-If no `@mutates` or `@inspects` clause is specified for a given method or constructor, the default is that it may inspect and mutate any object. Exception: if an instance method's name starts with `get` or `is`, the default is that it may mutate no object and that it may inspect `this`.
+If no `@mutates` or `@inspects` clause is specified for a given method or constructor, the default is that it may inspect and mutate any object that is not an instance of an immutable class. Exception: if an instance method's name starts with `get` or `is`, the default is that it may mutate no object and that it may inspect `this`.
 
 Each of these clauses takes a comma-separated list of zero or more expressions that should evaluate to an object. If an expression evaluates to `null`, it is ignored.
+
+Obviously, it is an error to specify an instance of an immutable class in a `@modifies` clause.
