@@ -9,6 +9,7 @@ Exceptions:
 - You need to deal with method arguments that cause arithmetic overflow as illegal arguments only if you are going for a top score. That is, you need to treat as illegal arguments some set of argument values that includes the argument values that cause arithmetic overflow. You may treat additional argument values as illegal as well; just make sure that those argument values that occur in actual executions of the DrawIt application are not treated as illegal.
 - You need not provide formal documentation for method `IntVector.asDoubleVector`.
 - You need not provide formal documentation for the return values of `RoundedPolygon.contains` and `RoundedPolygon.getDrawingCommands`.
+- You need not document which exact string is returned by `PointArrays.checkDefinesProperPolygon`; your documentation only needs to specify when the return value is `null` and when it is not `null`.
 
 Note: the OGP Taglets do not support all of the Javadoc tags described here. This is not a problem, since you do not need to generate or submit HTML files; you need to submit only the `.java` files themselves. Detailed submission instructions follow later.
 
