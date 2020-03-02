@@ -275,6 +275,8 @@ In this context, an expression, method or constructor is side-effect-free if it 
 
 Note, however, that in the Javadoc comment for class or class member X, you can refer to another class or class member Y only if Y is visible to any code that can see X. For example, in the Javadoc comment for a public method of a public class, you cannot refer to private fields or methods of that class or to any non-public classes, constructors or methods in the same package.
 
+Note also that evaluation of Javadoc formal parts must never crash, i.e. throw an Exception. If evaluation of a Javadoc formal part crashes, the documentation is considered incorrect. For example, removing the first `@throws` clause in the documentation for method `addAll` above would lead to incorrect documentation, because calling `addAll` with a `null` argument would then cause the `Arrays.stream` call in the second `@throws` clause to throw a `NullPointerException`.
+
 ### Advanced topics
 
 You need not read or apply this section if you are not going for a top score.
