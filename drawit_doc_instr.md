@@ -283,7 +283,7 @@ Note also that evaluation of Javadoc formal parts must never crash, i.e. throw a
 
 You need not read or apply this section if you are not going for a top score.
 
-To achieve a complete specification of the behavior of a method or constructor, the `@mutates`, `@inspects`, and `@creates` clauses should be used to indicate which pre-existing objects are mutated and inspected, and which objects are created by the method or constructor.
+To achieve a complete specification of the behavior of a method or constructor, the `@mutates` and `@inspects` clauses should be used to indicate which pre-existing objects are mutated and inspected by the method or constructor, and the `@creates` clause should be used to indicate which objects that are visible to the client after the method or constructor finishes were created by the method or constructor.
 
 #### Mutates clauses
 
@@ -311,4 +311,6 @@ Obviously, it is an error to specify an instance of an immutable class in a `@mu
 
 By specifying an object in a `@creates` clause, you indicate that the object was created during the execution of the method, and furthermore, that the object is distinct from any direct or indirect representation object of any object mentioned in any of the method's `@inspects` or `@mutates` clauses.
 
-The purpose is to allow the client to conclude that the returned object will not be inspected or mutated by any future method calls that mutate or inspect pre-existing objects.
+The purpose is to allow the client to conclude that the object will not be inspected or mutated by any future method calls that mutate or inspect pre-existing objects.
+
+Objects created by a method or constructor that do not become visible to the client when the method or constructor finishes need not (and cannot) be mentioned in a `@creates` clause.
