@@ -285,9 +285,13 @@ You need not read or apply this section if you are not going for a top score.
 
 To achieve a complete specification of the behavior of a method or constructor, the `@mutates`, `@inspects`, and `@creates` clauses should be used to indicate which pre-existing objects are mutated and inspected, and which objects are created by the method or constructor.
 
+#### Mutates clauses
+
 A method must not mutate any pre-existing objects not mentioned in its `@mutates` clause and not used to represent the state of any objects mentioned in its `@mutates` clause. That is, an execution of a method may mutate an object O if and only if either O was newly created during the method execution (i.e. it did not exist when the method execution started), or O is mentioned in the method's `@mutates` clause, or O is a representation object of an object mentioned in the method's `@mutates` clause, or O is a representation object of a representation object of an object mentioned in the method's `@mutates` clause, and so forth.
 
 An object O is a representation object of another object O' if a field marked `@representationObject` of O' holds a reference to O. For example, a `StringList` object's `elements` array is a representation object of the `StringList` object. This is why method `allToUpperCase` can mutate the array object, even though it is not mentioned by the method's `@mutates` clause.
+
+#### Inspects clauses
 
 Similarly, a method must not inspect the state of any pre-existing *mutable* objects not mentioned in its `@inspects` or `@mutates` clause and not used to represent the state of any objects mentioned in its `@inspects` or `@mutates` clause.
 
@@ -295,8 +299,16 @@ Instances of immutable classes need not be mentioned in `@inspects` clauses.
 
 (Documenting which objects are inspected by a method is important for at least two reasons: 1) the caller must ensure that the inspected objects are in a valid state, i.e. their representation invariants hold; 2) in a multithreaded program, no other thread must mutate the inspected objects.)
 
+#### Defaults
+
 If no `@mutates` or `@inspects` clause is specified for a given method or constructor, the default is that it may inspect and mutate any object that is not an instance of an immutable class. Exception: if an instance method's name starts with `get` or `is`, the default is that it may mutate no object and that it may inspect `this`.
 
 Each of these clauses takes a comma-separated list of zero or more expressions that should evaluate to an object. If an expression evaluates to `null`, it is ignored.
 
-Obviously, it is an error to specify an instance of an immutable class in a `@modifies` clause.
+Obviously, it is an error to specify an instance of an immutable class in a `@mutates` clause.
+
+#### Creates clauses
+
+By specifying an object in a `@creates` clause, you indicate that the object was created during the execution of the method, and furthermore, that the object is distinct from any direct or indirect representation object of any object mentioned in any of the method's `@inspects` or `@mutates` clauses.
+
+The purpose is to allow the client to conclude that the returned object will not be inspected or mutated by any future method calls that mutate or inspect pre-existing objects.
