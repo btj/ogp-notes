@@ -110,3 +110,207 @@ Important remarks about these datatypes:
 - For further reading on floating-point numbers, see [here](https://people.eecs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF) and [here](https://cr.yp.to/2005-590/goldberg.pdf).
 - Underscores can be used to make numbers more readable: `2_000_000_000`, `9_000_000_000_000_000_000L`, `9.999_999_999_999_99`. For integers, Java supports hexadecimal notation (e.g. `0xf` denotes 15 and `0x10` denotes 16), binary notation (e.g. `0b1000_0000` denotes 128), and octal notation (e.g. `0100` denotes 64).
 - If you installed [AdoptOpenJDK](https://adoptopenjdk.net/) JDK 9 or newer, you can play with Java's datatypes and operators by opening a Command Prompt (on Windows: right-click the Start button and choose Command Prompt; on macOS: Applications -> Utilities -> Terminal) and entering `jshell`. Then enter e.g. `2_000_000_000 + 2_000_000_000` to see the result of evaluating the expression. To see the type of the result, enter `/vars`.
+
+However, for many applications, these datatypes are not sufficient. For example, using floating-point numbers to count money in financial applications is a bad idea. Indeed, not all decimal fractions can be represented exactly as a binary floating-point number. For example: `0.10 + 0.10 + 0.10 + 0.10 + 0.10 + 0.10 + 0.10 + 0.10 + 0.10 + 0.10 == 1.00` yields `false`!
+
+Financial applications would be much easier to write in Java if Java had a built-in type of fractions. Fortunately, Java supports _data abstraction_ by means of _classes_. By defining classes, we can extend Java with new datatypes. This way, we can split the task of developing a financial application in Java into two simpler subtasks:
+- The development of a financial application, not in Java but in Java++, an extension of Java with a type `Fraction` whose values are (some subset of) the rational numbers*.
+- The development of a fractions module, that implements datatype `Fraction` as a class that internally uses Java's built-in datatypes.
+
+(*) Unfortunately, in Java the values of a class type such as `Fraction` always include the special value `null`, known as the _null reference_, in addition to the _object references_ that refer to _instances_ of class `Fraction`. Tony Hoare, who originally introduced null references in the programming language Algol, calls this his "billion-dollar mistake". With new programming languages such as [Kotlin](https://kotlinlang.org/) that do not suffer from this issue gaining popularity, the industry is slowly eliminating this scourge.
+
+We call the application written in Java++ a _client module_ of the fractions module. Composing the client module with the decimal numbers module yields a system that implements the financial application in Java.
+
+Again, these two subtasks are simpler and easier than the overall application development task:
+- The developers of the client module are working in a more powerful language, with more datatypes built in. They need not worry about how to implement fractions in Java.
+- The developers of the fractions module only need to worry about correctly implementing the fractions abstraction. They need not worry about how it will be used or what it will be used for.
+
+Again, the full benefit of this decomposition is obtained only if sufficiently _precise_ and _abstract_ _documentation_ is provided for the `Fraction` datatype's _API_:
+- If the developers of the financial application need to look inside the implementation of the `Fraction` datatype to understand its behavior, then they are still exposed to the complexity of implementing fractions in terms of Java's built-in datatypes.
+- Conversely, if the developers of the fractions module need to inspect the client module to understand the client's expectations with respect to the `Fraction` datatype's behavior, then they are still exposed to the complexity of the entire financial application.
+
+Here is an example of a properly documented implementation of the fractions module:
+```java
+import java.math.BigInteger;
+
+/**
+ * Each instance of this class represents a rational number.
+ * 
+ * @immutable
+ * 
+ * @invar The denominator is positive.
+ *    | 0 < getDenominator()
+ * @invar The numerator is greater than the minimum {@code long} value.
+ *    | Long.MIN_VALUE < getNumerator()
+ * @invar The fraction is irreducible: the greatest common divisor of
+ *        the absolute value of the numerator and the denominator is one.
+ *    | MoreMath.gcd(Math.abs(getNumerator()), getDenominator()) == 1 
+ */
+public class Fraction {
+	
+	/**
+	 * @invar | 0 < denominator
+	 * @invar | Long.MIN_VALUE < numerator
+	 * @invar | MoreMath.gcd(Math.abs(numerator), denominator) == 1
+	 */
+	private final long numerator;
+	private final long denominator;
+	
+	public long getNumerator() { return numerator; }
+	public long getDenominator() { return denominator; }
+	
+	private Fraction(long numerator, long denominator) {
+		this.numerator = numerator;
+		this.denominator = denominator;
+	}
+	
+	/**
+	 * Returns an object representing the rational number defined by the given numerator and denominator.
+	 * 
+	 * @throws IllegalArgumentException if the given denominator is zero.
+	 *    | denominator == 0
+	 * @throws ArithmeticException if arithmetic overflow occurs.
+	 *    | true
+	 * @post The result is not null.
+	 *    | result != null
+	 * @post The rational number represented by the result equals the rational number defined by the
+	 *       given numerator and denominator.
+	 *    | BigInteger.valueOf(result.getNumerator()).multiply(BigInteger.valueOf(denominator)).equals(
+	 *    |     BigInteger.valueOf(numerator).multiply(BigInteger.valueOf(result.getDenominator())))
+	 */
+	public static Fraction of(long numerator, long denominator) {
+		if (denominator == 0)
+			throw new IllegalArgumentException("denominator is zero");
+		long gcd = MoreMath.gcd(
+				MoreMath.absExact(numerator),
+				MoreMath.absExact(denominator));
+		if (denominator < 0)
+			gcd = -gcd;
+		return new Fraction(numerator / gcd, denominator / gcd);
+	}
+	
+	/**
+	 * Returns whether this object and the given object represent the same rational number.
+	 *
+	 * @throws IllegalArgumentException if {@code other} is null.
+	 *    | other == null
+	 * @post
+	 *    | result == (
+	 *    |     getNumerator() == other.getNumerator() &&
+	 *    |     getDenominator() == other.getDenominator()
+	 *    | )
+	 */
+	public boolean equals(Fraction other) {
+		if (other == null)
+			throw new IllegalArgumentException("other is null");
+		return numerator == other.numerator && denominator == other.denominator;
+	}
+	
+	/**
+	 * Returns an object representing the rational number obtained by adding
+	 * the rational number represented by this object to the rational number
+	 * represented by the given object.
+	 * 
+	 * @throws IllegalArgumentException if {@code other} is null.
+	 *    | other == null
+	 * @throws ArithmeticException if arithmetic overflow occurs.
+	 *    | true
+	 * @post The result is not null.
+	 *    | result != null
+	 * @post a/b == c/d + e/f if and only if adf == cbf + ebd.
+	 *    | BigInteger.valueOf(result.getNumerator()).
+	 *    |     multiply(BigInteger.valueOf(this.getDenominator())).
+	 *    |     multiply(BigInteger.valueOf(other.getDenominator())).
+	 *    |     equals(
+	 *    |         BigInteger.valueOf(this.getNumerator()).
+	 *    |             multiply(BigInteger.valueOf(result.getDenominator())).
+	 *    |             multiply(BigInteger.valueOf(other.getDenominator())).
+	 *    |             add(
+	 *    |                 BigInteger.valueOf(other.getNumerator()).
+	 *    |                     multiply(BigInteger.valueOf(result.getDenominator())).
+	 *    |                     multiply(BigInteger.valueOf(this.getDenominator()))))
+	 */
+	public Fraction plus(Fraction other) {
+		if (other == null)
+			throw new IllegalArgumentException("other is null");
+		long gcd = MoreMath.gcd(this.denominator, other.denominator);
+		long numerator = Math.addExact(
+				Math.multiplyExact(this.numerator, other.denominator / gcd),
+				Math.multiplyExact(other.numerator, this.denominator / gcd));
+		long denominator =
+				Math.multiplyExact(this.denominator, other.denominator / gcd);
+		return Fraction.of(numerator, denominator);
+	}
+	
+}
+```
+
+It uses the following library of math methods:
+```java
+import java.util.stream.LongStream;
+
+public class MoreMath {
+
+	/**
+	 * Returns the absolute value of the given number.
+	 * 
+	 * @throws ArithmeticException if arithmetic overflow occurs.
+	 *    | x == Long.MIN_VALUE
+	 * @post The result is nonnegative.
+	 *    | 0 <= result
+	 * @post The result equals either the argument or its negation.
+	 *    | result == x || result == -x
+	 */
+	public static long absExact(long x) {
+		if (x == Long.MIN_VALUE)
+			throw new ArithmeticException("Arithmetic overflow");
+		return Math.abs(x);
+	}
+
+	/**
+	 * Returns whether the first given number divides the second given number.
+	 * 
+	 * @pre The first given number is not zero.
+	 *    | a != 0
+	 * @post | result == (b % a == 0)
+	 */
+	public static boolean divides(long a, long b) {
+		return b % a == 0;
+	}
+	
+	/**
+	 * Returns the greatest common divisor of the two given integers.
+	 * 
+	 * @pre The given numbers are nonnegative.
+	 *    | 0 <= a && 0 <= b
+	 * @pre At least one given number is nonzero.
+	 *    | a != 0 || b != 0
+	 * @post The result is positive.
+	 *    | 0 < result
+	 * @post The result divides both given numbers.
+	 *    | divides(result, a) && divides(result, b)
+	 * @post No greater number divides both given numbers.
+	 *    | LongStream.range(result, Math.max(a, b)).allMatch(x -> !(divides(x + 1, a) && divides(x + 1, b)))
+	 */
+	public static long gcd(long a, long b) {
+		if (a == 0) return b;
+		if (b == 0) return a;
+		if (a < b) return gcd(b % a, a);
+		return gcd(a % b, b);
+	}
+	
+}
+```
+
+Notice that the documentation for `Fraction` uses Java's `BigInteger` class to avoid arithmetic overflow inside the documentation.
+
+Client modules can use the `Fraction` class to perform financial computations in a safe and simple way. For example: the `assert` statement in the
+following code snippet succeeds:
+```java
+Fraction tenCents = Fraction.of(10, 100);
+Fraction total = Fraction.of(0, 100);
+for (int i = 0; i < 10; i++)
+  total = total.plus(tenCents);
+assert total.equals(Fraction.of(100, 100));
+```
+
