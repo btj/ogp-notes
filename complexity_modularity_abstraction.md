@@ -169,7 +169,7 @@ public class Fraction {
 	 * 
 	 * @throws IllegalArgumentException if the given denominator is zero.
 	 *    | denominator == 0
-	 * @throws ArithmeticException if arithmetic overflow occurs.
+	 * @may_throw ArithmeticException if arithmetic overflow occurs.
 	 *    | true
 	 * @post The result is not null.
 	 *    | result != null
@@ -213,7 +213,7 @@ public class Fraction {
 	 * 
 	 * @throws IllegalArgumentException if {@code other} is null.
 	 *    | other == null
-	 * @throws ArithmeticException if arithmetic overflow occurs.
+	 * @may_throw ArithmeticException if arithmetic overflow occurs.
 	 *    | true
 	 * @post The result is not null.
 	 *    | result != null
