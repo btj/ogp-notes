@@ -332,7 +332,7 @@ for (int i = 0; i < 10; i++)
 assert total.equals(Fraction.of(100, 100));
 ```
 
-### Mutable versus immutable data abstraction
+### Mutable versus immutable data abstractions
 
 An alternative abstraction that one could introduce for simplifying the task of building financial applications,
 is a _mutable_ class for calculating with fractions:
