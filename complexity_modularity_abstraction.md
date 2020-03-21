@@ -429,7 +429,7 @@ public class FractionContainer {
      * defined by the given numerator and denominator.
      * 
      * @throws IllegalArgumentException if the given denominator is zero.
-     *    | other == null
+     *    | denominator == 0
      * @may_throw ArithmeticException if arithmetic overflow occurs.
      *    | true
      * @post a/b == c/d + e/f if and only if adf == cbf + ebd.
