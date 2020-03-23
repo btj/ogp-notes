@@ -122,7 +122,7 @@ public class OOPStudent {
      *    | old(getTeammate()).getTeammate() == null
      */
     public void clearTeammate() {
-        if (teammate != null)
+        if (teammate == null)
             throw new IllegalStateException("This student does not have a teammate");
         this.teammate.teammate = null;
         this.teammate = null;    
