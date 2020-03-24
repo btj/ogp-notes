@@ -256,4 +256,4 @@ We say a behavioral type D is a behavioral subtype of a behavioral type C if eac
 
 If the specifications of the methods of D that override methods of C strengthen the specifications of the overridden methods, then it follows that behavioral type D is a behavioral subtype of type C.
 
-We can then summarize the approach for dealing with dynamic binding as follows: Java ensures that a subclass D of a class C is a _syntactic_ subtype; to achieve correct programs, we must ensure that D is a _behavioral_ subtype of C as well.
+We can then summarize the approach for dealing with dynamic binding as follows: Java ensures that a subclass D of a class C is a _syntactic_ subtype of C; to achieve correct programs, we must ensure that D is a _behavioral_ subtype of C as well.
