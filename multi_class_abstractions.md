@@ -285,5 +285,191 @@ Notice the following:
 - We define each object's peer group by putting a `@peerObject` tag in the Javadoc comment for field `team` and a `@peerObjects` tag in the Javadoc comment for field `members`. The latter means that each element of `X.members` is a peer object of `X`.
 - We also let our clients know each object's peer group by also putting a `@peerObject` tag in the Javadoc comment for getter `getTeam()` and a `@peerObjects` tag in the Javadoc comment for getter `getMembers()`.
 - The representation invariant `team == null || team.members.contains(this)` declared in class `ProjectCourseStudent` is not well-defined if `team.members` is null. This invariant should be guarded by another invariant that says that `team.members` is not null, and that is checked first. There is a representation invariant `members != null` in class `Team`. We can use it to guard the invariant in class `ProjectCourseStudent` by defining the order of checking the representation invariants of a peer group as follows: first, the Phase 1 representation invariant of each peer object is checked; then, the Phase 2 representation invariant of each peer object is checked; and so on, until all representation invariants have been checked. We simply define the Phase 1 representation invariant of an object to be the first representation invariant defined in the object's class, and so on. This is why we insert a dummy representation invariant `true` into class `ProjectCourseStudent`; this ensures that the invariant that relies on `team.members` being non-null is a Phase 2 invariant.
+- We use methods `LogicalSet.plus` and `LogicalSet.minus` from [`logicalcollections`](https://github.com/btj/logicalcollections) to concisely specify the effect of `join` and `leaveTeam` on the team's set of members.
 
+## Nesting class-encapsulated and package-encapsulated abstractions
 
+Making the fields of a module package-accessible is probably fine for small modules such as the example module, but for larger modules this quickly becomes error-prone. Therefore, it is preferrable to _always_ declare fields as `private`, and to encapsulate them into a class-level abstraction, even if the class is part of a multi-class abstraction as well. We call this a case of _nested abstractions_. In such cases of class-level abstractions nested within a package-level abstraction, each class of the package is a _client_ of the class-level abstractions implemented by the other classes of the package.
+
+When doing so, we can take the opportunity to move as many of the package's representation invariants as possible into the individual class-level abstractions. In the example, we can move the invariants stating that `members` is not null and that the elements of `members` are not null into the `Team` class-level abstraction:
+
+```java
+package bigteams;
+
+import logicalcollections.LogicalSet;
+
+/**
+ * Each instance of this class represents a student in a project course,
+ * as part of a student-team graph.
+ * 
+ * @invar If a student is in a team, it is among its members.
+ *    | getTeam() == null || getTeam().getMembers().contains(this)
+ */
+public class ProjectCourseStudent {
+    
+    private Team team;
+
+    /**
+     * @invar | getTeamInternal() == null || getTeamInternal().getMembersInternal().contains(this)
+     * 
+     * @peerObject
+     */
+    Team getTeamInternal() { return team; }
+    
+    /**
+     * Returns this student's team, or {@code null} if they are not in a team.
+     * 
+     * @peerObject
+     */
+    public Team getTeam() { return team; }
+    
+    /**
+     * Initializes this object as representing a student who is not in a team.
+     */
+    public ProjectCourseStudent() {}
+
+    /**
+     * Make this student a member of the given team.
+     *
+     * @pre {@code team} is not null.
+     *      (Cannot make this a @throws for now because of https://github.com/fsc4j/fsc4j/issues/6 .)
+     *    | team != null
+     * @throws IllegalStateException if this student is already in a team.
+     *    | getTeam() != null
+     * 
+     * @mutates_properties | this.getTeam(), team.getMembers()
+     * 
+     * @post The given team's members equal its old members plus this student.
+     *    | team.getMembers().equals(LogicalSet.plus(old(team.getMembers()), this))
+     */
+    public void join(Team team) {
+        if (this.team != null)
+            throw new IllegalStateException("this student is already in a team");
+        
+        this.team = team;
+        team.addMember(this);
+    }
+
+    /**
+     * Make this student no longer be a member of their team.
+     * 
+     * @pre This student is in a team.
+     *      (Cannot make this a @throws for now because of https://github.com/fsc4j/fsc4j/issues/6 .)
+     *    | getTeam() != null
+     * 
+     * @mutates_properties | this.getTeam(), this.getTeam().getMembers()
+     * 
+     * @post This student is not in a team.
+     *    | getTeam() == null
+     * @post This student's old team's members are its old members minus this student.
+     *    | old(getTeam()).getMembers().equals(LogicalSet.minus(old(getTeam().getMembers()), this))
+     */
+    public void leaveTeam() {
+        if (this.team == null)
+            throw new IllegalStateException("this student is not in a team");
+        
+        team.removeMember(this);
+        team = null;
+    }
+}
+```
+
+```java
+package bigteams;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import logicalcollections.LogicalSet;
+
+/**
+ * Each instance of this class represents a team in a student-team graph.
+ * 
+ * @invar Each of this team's members has this team has its team.
+ *    | getMembers().stream().allMatch(s -> s != null && s.getTeam() == this)
+ */
+public class Team {
+
+    /**
+     * @invar | members != null
+     * @invar | members.stream().allMatch(s -> s != null)
+     * 
+     * @representationObject
+     */
+    private HashSet<ProjectCourseStudent> members = new HashSet<>();
+    
+    /**
+     * Returns this team's set of members.
+     * 
+     * @invar | getMembersInternal().stream().allMatch(s -> s.getTeamInternal() == this)
+     * 
+     * @post | result != null && result.stream().allMatch(s -> s != null)
+     * @peerObjects
+     */
+    Set<ProjectCourseStudent> getMembersInternal() { return Set.copyOf(members); }
+    
+    /**
+     * Returns this team's set of members.
+     * 
+     * @post | result != null
+     * @creates | result
+     * @peerObjects
+     */
+    public Set<ProjectCourseStudent> getMembers() { return Set.copyOf(members); }
+
+    /**
+     * Initializes this object as representing an empty team.
+     * 
+     * @mutates | this
+     * @post This team has no members.
+     *    | getMembers().isEmpty()
+     */
+    public Team() {}
+    
+    /**
+     * Adds the given student to this team's set of students.
+     * 
+     * @throws IllegalArgumentException if {@code student} is null
+     *    | student == null
+     * @mutates | this
+     * @post This team's set of members equals its old set of members plus the given student.
+     *    | getMembersInternal().equals(LogicalSet.plus(old(getMembersInternal()), student))
+     */
+    void addMember(ProjectCourseStudent student) {
+        if (student == null)
+            throw new IllegalArgumentException("student is null");
+        
+        members.add(student);
+    }
+    
+    /**
+     * Removes the given student from this team's set of students.
+     * 
+     * @throws IllegalArgumentException if {@code student} is null
+     *    | student == null
+     * @mutates | this
+     * @post This team's set of members equals its old set of members minus the given student.
+     *    | getMembersInternal().equals(LogicalSet.minus(old(getMembersInternal()), student))
+     */
+    void removeMember(ProjectCourseStudent student) {
+        if (student == null)
+            throw new IllegalArgumentException("student is null");
+        
+        members.remove(student);
+    }
+    
+}
+```
+(We do not show class `BigTeamsTest` again because it is unchanged.)
+
+Notice the following:
+- An instance of a class that is part of a class-encapsulated abstraction nested within a package-encapsulated abstraction may have both a class-level peer group and a package-level peer group. The class-level peer group is always a subset of the package-level peer group. The class-level peer group is defined by the `@peerObject` and `@peerObjects` tags in the Javadoc comments for the class's private fields; the package-level peer group is defined by the `@peerObject` and `@peerObjects` tags in the Javadoc comments for the package's package-accessible getters. In the example, the objects have no class-level peer groups (or, equivalently, the class-level peer group of O is just the singleton {O}).
+- We specify a class-level abstraction's representation invariants using `@invar` tags in the Javadoc comments for the class' private fields.
+- In the case of a class-encapsulated abstraction nested within a package-encapsulated abstraction, we specify the class-level abstraction's abstract state invariants using `@post` tags in the Javadoc comments for the class' nonprivate getters.
+- We specify a package-level abstraction's representation invariants using `@invar` tags in the Javadoc comments for the package's package-accessible fields or getters.
+- We specift a package-level abstraction's abstract state invariants using `@invar` tags in the Javadoc comments for the package's classes and/or using `@post` tags in the Javadoc comments for the package's public getters.
+- A public constructor's author must ensure that when the constructor returns, all of the constructed object's class-level and package-level representation invariants hold. (Those of its peer objects must hold as well, but usually a newly constructed object does not yet have any peer objects.)
+- At every call of a package-accessible method, it is the caller's responsibility to ensure that for each member O of the class-level peer group of each object inspected or mutated by the method, all of O's class-level representation invariants hold. It is the method author's responsibility to ensure that all of these invariants hold again when the method returns.
+- At every call of a public method, it is the caller's responsibility to ensure that for each member O of the package-level peer group of each object inspected or mutated by the method, all of O's class-level and package-level representation invariants hold. It is the method author's responsibility to ensure that all of these invariants hold again when the method returns.
+- This means that it is not correct to call package-accessible getters inside a class-level representation invariant or public getters inside any representation invariant, because this would introduce a circularity: the getter would be allowed to assume the invariants in whose definition it is involved. It is, however, allowed (and generally necessary) to call package-accessible getters in package-level representation invariants, because these getters can assume only the class-level representation invariants.
+- We introduce package-accessible mutators `addMember` and `removeMember` into class `Team` to allow methods `join` and `leaveTeam` in class `ProjectCourseStudent` to restore the consistency of the package-level bidirectional association.
