@@ -55,7 +55,7 @@ Does this mean that method `printLocations` is incorrect? Or does it mean that m
 
 The solution, of course, is to perform _modular reasoning_ instead. In the modular reasoning approach, we assign a _specification_ to each method, which specifies the _correct behaviors_ of the method. This way, we define a notion of _correctness of a method_: a method M is correct if and only if all of its behaviors are allowed by its specification, _assuming that the method calls performed by M behave in accordance with the called methods' specifications_.
 
-To convince ourselves of the correctness of a program, we simply need to check that each method complies with its specification, under the assumption that called methods comply with theirs. If each of a program's methods is correct in this way, and the main method's specification expresses the allowed behaviors of the program as a whole, then the correctness of the program as a whole follows as a corrollary.
+To convince ourselves of the correctness of a program, we simply need to check that each method complies with its specification, under the assumption that called methods comply with theirs. If each of a program's methods is correct in this way, and the main method's specification expresses the allowed behaviors of the program as a whole, then the correctness of the program as a whole follows as a corollary.
 
 If we have verified a program modularly, and then we modify one of its methods, we only need to re-check that that one method still complies with its original specification. If so, we can immediately conclude that the correctness of the program as a whole is preserved.
 
@@ -201,15 +201,15 @@ In the example, there are two cases:
 
 We summarize the basic principle of effective modular reasoning about programs with dynamic binding as follows:
 - A method is correct if and only if its behaviors are allowed by its own specification and by the specifications of all methods it overrides, assuming that the behavior of each call it performs complies with the specification of the _resolved_ method of the call.
-- If all of a program's methods are correct, and the specification of the program's main method expresses the allowed behaviors of the program as a whole, then correctness of the program as a whole follows as a corrollary.
+- If all of a program's methods are correct, and the specification of the program's main method expresses the allowed behaviors of the program as a whole, then correctness of the program as a whole follows as a corollary.
 
 ### Derived principle: strengthening of specifications
 
 If we apply this basic principe directly, we potentially have to verify a single method implementation against many different specifications. To avoid this, we can instead use a derived principle, that requires us to only check that 1) each method complies with its own specification, and 2) that each method's specification _strengthens_ the specifications of all methods it overrides. We say that a specification S strengthens another specification S' if and only if each imaginable method that complies with S also complies with S'.
 
-If a specification consists of a precondition and a postcondition, then we have the following property: specification S strenghtens specification S' if 1) the precondition of S _weakens_ the precondition of S', and 2) the postcondition of S strengthens the postcondition of S'.
+If a specification consists of a precondition and a postcondition, then we have the following property: specification S strengthens specification S' if 1) the precondition of S _weakens_ the precondition of S', and 2) the postcondition of S strengthens the postcondition of S'.
 
-For example, in the following sequence of specifications for a method `abs`, each next specification strenghtens the preceding one:
+For example, in the following sequence of specifications for a method `abs`, each next specification strengthens the preceding one:
 ```java
 /**
  * @pre | false
