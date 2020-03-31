@@ -18,7 +18,7 @@ program elements it uses (that is, whose program elements it _imports_).
 This approach allows each module to be developed, understood, verified, and
 evolved independently from, and in parallel with, other modules, and
 therefore allows much larger and more complex software systems to be built,
-maintained, and evolved, than would otherwise be possible.
+maintained and evolved than would otherwise be possible.
 
 The focus of this course will be on how to design and clearly define the syntax and semantics of module APIs. Only if APIs are well-defined can the benefits of modular programming be realized fully.
 
