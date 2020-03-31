@@ -10,9 +10,9 @@
 - [Enforcing encapsulation: accessibility modifiers](#Enforcing-encapsulation-accessibility-modifiers)
 - [Instance methods](#Instance-methods)
 
-In the previous lecture, we used the JLearner tool to make acquaintance with the Java programming language. We used variables, arrays, and class objects to store and process data. From this perspective, Java is not much different from Python. The main difference is that Java is statically typed, which means that we need to specify the type of each local variable, method parameter, method result, array element, and class field in our program. The types we have seen are `int`, the type of integers, `int[]`, the type of arrays of integers, `int[][]`, the type of arrays of arrays of integers, and the various class types corresponding to the classes we declared, such as `Node` and `List`.
+In the previous lecture, we used the JLearner tool to make acquaintance with the Java programming language. We used variables, arrays and class objects to store and process data. From this perspective, Java is not much different from Python. The main difference is that Java is statically typed, which means that we need to specify the type of each local variable, method parameter, method result, array element and class field in our program. The types we have seen are `int`, the type of integers, `int[]`, the type of arrays of integers, `int[][]`, the type of arrays of arrays of integers, and the various class types corresponding to the classes we declared, such as `Node` and `List`.
 
-In this lecture, we will move on to _modular programming_. In modular programming, we split our program into _modules_, with the goal of being able to build, understand, verify, and evolve each module separately and in parallel with the other modules of the program. To achieve this, it is necessary that we clearly specify the _API_ between a module and its _clients_ (the modules that use the module).
+In this lecture, we will move on to _modular programming_. In modular programming, we split our program into _modules_, with the goal of being able to build, understand, verify and evolve each module separately and in parallel with the other modules of the program. To achieve this, it is necessary that we clearly specify the _API_ between a module and its _clients_ (the modules that use the module).
 
 To illustrate this, let's write a program that stores and manipulates _intervals_ of integers. An interval is defined by a lower bound and an upper bound, so we declare a class `Interval`, with fields `lowerBound` and `upperBound`:
 
@@ -36,11 +36,11 @@ assert width == 4;
 
 The `assert` statement checks if a given expression evaluates to `true`. If not, it reports an error.
 
-We can run this program directly in [JLearner](https://btj.github.io/jlearner/), but since JLearner does not support Java's modularity features, at this point, we will switch to a more complex but more powerful tool: the Eclipse IDE (Integrated Development Environment).
+We can run this program directly in [JLearner](https://btj.github.io/jlearner/), but since JLearner does not support Java's modularity features at this point, we will switch to a more complex but more powerful tool: the Eclipse IDE (Integrated Development Environment).
 
 ## Installing Java and Eclipse
 
-The first thing you always need to develop Java programs on your computer, is a Java Development Kit (JDK). You can download one from Oracle, but we recommend the one from [AdoptOpenJDK](https://adoptopenjdk.net/). Choose the latest OpenJDK version (as of this writing, the latest version is OpenJDK 13), and the HotSpot JVM. (Note: in the Windows installer, do not uncheck the _Add to PATH_ option.)
+The first thing you always need to develop Java programs on your computer is a Java Development Kit (JDK). You can download one from Oracle, but we recommend the one from [AdoptOpenJDK](https://adoptopenjdk.net/). Choose the latest OpenJDK version (as of this writing, the latest version is OpenJDK 13) and the HotSpot JVM. (Note: in the Windows installer, do not uncheck the _Add to PATH_ option.)
 
 Once you have installed a JDK on your machine, you can install Eclipse. We recommend that you install the modified version of Eclipse, called [Formal Specifications Checker for Java (FSC4J)](https://github.com/fsc4j/fsc4j), that we are developing. It gives you feedback about the formal documentation you write. To install it, just follow the instructions on the FSC4J website.
 
@@ -48,7 +48,7 @@ Once you have installed a JDK on your machine, you can install Eclipse. We recom
 
 Once Eclipse is installed, start it by double-clicking the Eclipse program. First, if you see the _Welcome to the Eclipse IDE for Java Developers_ screen, uncheck the _Always show Welcome at start up_ box in the bottom right corner of the screen, and then click the _Workbench_ button in the top right corner of the screen.
 
-In Eclipse, to create a program you must first create a project. To do so, in the File menu, choose New -> Java Project. Enter `interval` as the project name and click _Finish_. In the _Create module-info.java_ dialog box, choose _Don't Create_. The project will now appear in your _Package Explorer_ view. If you do not see the Package Explorer view, in the Window menu, choose Show View -> Package Explorer.
+In Eclipse, to create a program, you must first create a project. To do so, in the File menu, choose New -> Java Project. Enter `interval` as the project name and click _Finish_. In the _Create module-info.java_ dialog box, choose _Don't Create_. The project will now appear in your _Package Explorer_ view. If you do not see the Package Explorer view, in the Window menu, choose Show View -> Package Explorer.
 
 In the Package Explorer, if the node for project `interval` is collapsed, expand it by clicking the node. You will see that the project has an `src` folder. This is where you will store all of the program's source code files. (In Java, names of source code files end with `.java`.) Any `.java` file outside the `src` folder will be ignored by Eclipse.
 
@@ -385,7 +385,7 @@ class Interval {
 }
 ```
 
-Now, if we replace `Interval.setUpperBound(interval, 7)` by `interval.upperBound = 7` in class `IntervalTest`, we immediately get a compilation error: `The field Interval.upperBound is not visible.`. Fix the error by restoring the setter call.
+Now, if we replace `Interval.setUpperBound(interval, 7)` by `interval.upperBound = 7` in class `IntervalTest`, we immediately get a compilation error: `The field Interval.upperBound is not visible.` Fix the error by restoring the setter call.
 
 By making the fields of class `Interval` private, we now get the guarantee that any client code of class `Interval` that has no compilation errors will not break if we change the way we store the interval properties. If our module is used by many clients around the world, this is an extremely valuable guarantee.
 
