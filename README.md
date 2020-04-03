@@ -33,3 +33,5 @@
   - Concepts: Non-modular reasoning, modular reasoning, method specifications, correctness of methods; method call resolution, resolved method vs called method, static versus dynamic method call binding; strenghtening of specifications, behavioral types, behavioral subtyping
 - [Interfaces](interfaces.md)
   - Concepts: interfaces, multiple inheritance, static fields, the Singleton pattern
+- [Implementation inheritance](implementation_inheritance.md)
+  - Concepts: Inheritance of fields and methods, `super` constructor calls, `super` method calls
