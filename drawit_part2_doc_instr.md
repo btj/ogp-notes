@@ -378,7 +378,7 @@ static void allAddAll(StringList[] lists, String[] strings) {
 }
 
 /**
- * @inspects | list, ...lists
+ * @inspects | lists, ...lists
  */
 static boolean anyIsEmpty(StringList[] lists) {
     for (StringList list : lists)
