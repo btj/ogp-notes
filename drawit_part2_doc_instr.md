@@ -109,6 +109,12 @@ If not all possible values of the types of the fields of a class represent a val
 
 The above `TimeOfDay` example illustrates this.
 
+If an `@invar` clause for an object O mentions a field of an object O', then O' must be a representation object of O or a peer object of O.
+
+An `@invar` clause must be well-defined (i.e. must not crash or loop forever) for arbitrary (concrete) states of the objects involved, with the following exceptions:
+- An `@invar` clause is evaluated only if preceding `@invar` clauses of the same object evaluated to `true`. So, if, for example, the first clause says that some field is non-null, the second clause is allowed to call a method on the object referenced by that field.
+- The N'th `@invar` clause of an object O that is a member of a peer group is evaluated only if, for each member O' of the same peer group, and each I < N, the I'th `@invar` clause of O' evaluated to `true`. So, for example, if the second `@invar` clause of some class calls a method on the `foo` field of a peer object, this is fine provided that the first `@invar` clause of the peer object's class says that `foo` is non-null.
+
 Note: the Formal Specifications Checker for Java does not yet check representation invariants at run time.
 
 ### Constructors and methods documentation
