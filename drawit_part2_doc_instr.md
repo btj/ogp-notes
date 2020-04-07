@@ -342,7 +342,7 @@ The clause `@mutates_properties | O1.M1(), O2.M2()` is equivalent to `@mutates |
 
 #### Inspects clauses
 
-Similarly, a method must not inspect the state of any pre-existing *mutable* objects not mentioned in its `@inspects` or `@mutates` clause and not used to represent the state of any objects mentioned in its `@inspects` or `@mutates` clause.
+Similarly, a method must not inspect the state of any pre-existing *mutable* objects that are not in the peer group of any object mentioned in its `@inspects` or `@mutates` clause and not used to represent the state of any objects mentioned in its `@inspects` or `@mutates` clause.
 
 Instances of immutable classes need not be mentioned in `@inspects` clauses.
 
