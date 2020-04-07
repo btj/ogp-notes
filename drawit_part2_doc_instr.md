@@ -419,5 +419,5 @@ class Rectangle {
 
 }
 ```
-Note: the `...collection` syntax is not yet supported well by FSC4J. You may need to write the clause without the vertical bar to work around FSC4J problems. For example,
-you may need to write `@mutates_properties (...rectangles).getWidth()` instead of `@mutates_properties | (...rectangles).getWidth()`.
+<s>Note: the `...collection` syntax is not yet supported well by FSC4J. You may need to write the clause without the vertical bar to work around FSC4J problems. For example,
+you may need to write `@mutates_properties (...rectangles).getWidth()` instead of `@mutates_properties | (...rectangles).getWidth()`.</s> This syntax is now well-supported by FSC4J (since version 0.1.3) so you should NOT apply the workaround anymore.
