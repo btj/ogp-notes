@@ -69,3 +69,15 @@ Extend class `RoundedPolygon` so that it stores a _bounding box_ for its vertice
 Furthermore, create an interface `RoundedPolygonContainsTestStrategy` with a method `boolean contains(RoundedPolygon polygon, IntPoint point)`, and two implementing classes, named `FastRoundedPolygonContainsTestStrategy` and `PreciseRoundedPolygonContainsTestStrategy`, that implement method `contains` by calling `contains` on the bounding box and by calling `contains` on the `RoundedPolygon` object itself, respectively. Class `FastRoundedPolygonContainsTestStrategy` shall deal with `null` arguments contractually; class `PreciseRoundedPolygonContainsTestStrategy` shall deal with `null` arguments defensively.
   
 The challenge is to write proper documentation for interface `RoundedPolygonContainsTestStrategy` and its subclasses while adhering to the principle of behavioral subtyping. The documentation for method `contains` of interface `RoundedPolygonContainsTestStrategy` should be as precise as possible (but not more precise than that).
+
+## 5. Override `Object` methods `equals`, `hashCode`, `toString` in class `Extent`
+
+Extend class `drawit.shapegroups1.Extent` with methods that override methods `equals`, `hashCode`, and `toString` from class `java.lang.Object`. These should not distinguish two `drawit.shapegroups1.Extent` objects that represent the same rectangle.
+
+Extend class `drawit.shapegroups2.Extent` analogously.
+
+Write test cases that check that your extended `Extent` objects exhibit the correct behavior when used as elements of collections from the Java Collections API (such as `java.util.ArrayList` and `java.util.HashSet`). For example, method `contains` of classes `ArrayList` and `HashSet` shall return `true` if the collection contains an `Extent` object that represents the same rectangle as the given `Extent` object.
+
+## General comment
+
+As usual, for all of the features you implement, you shall also develop a comprehensive test suite.
