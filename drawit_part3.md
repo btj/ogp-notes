@@ -1,6 +1,6 @@
 # OGP Project Assignment Part 3
 
-In Part 3 of the OGP Project, you will apply inheritance in four ways:
+In Part 3 of the OGP Project, you will apply inheritance in five ways:
 
 ## 1. Introduce ShapeGroup subclasses
 
