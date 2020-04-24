@@ -292,6 +292,7 @@ The following methods from the Java Platform API may be convenient when writing 
 - [`Objects.equals`](https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Objects.html#equals%28java.lang.Object,java.lang.Object%29)
   for comparing two objects that may be null using `Object.equals`
 - `Stream.mapToInt`, `IntStream.min`, `IntStream.max`, `OptionalInt.getAsInt`:
+
   ```java
   /** @pre | times != null && times.length > 0 */
   static int getMaxHours(TimeOfDay[] times) {
@@ -299,6 +300,7 @@ The following methods from the Java Platform API may be convenient when writing 
   }
   ```
 - `Stream.filter`, `Stream.findFirst`, `Optional.orElse`:
+
   ```java
   /**
    * Returns the first element of {@code strings} that is longer than {@code length},
