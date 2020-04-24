@@ -27,7 +27,7 @@ The GUI extends the Part 1 GUI with the following functionality:
 - To select a child of a `ShapeGroup`, first select the `ShapeGroup` and then click inside the child.
 - To bring a subgroup of a `ShapeGroup` to the front, select the subgroup and press `F` (Shift-F). To send it to the back, press `B` (Shift-B).
 
-You shall create proper documentation for the API. See the [detailed documentation instructions](https://github.com/btj/ogp-notes/blob/master/drawit_part2_doc_instr.md). **Note: these instructions are mostly unchanged since Part 1. The main changes are in the list of exceptions at the top and the list of useful library methods towards the end.**
+You shall create proper documentation for the API. See the [detailed documentation instructions](https://btj.github.io/ogp-notes/drawit_part2_doc_instr.html). **Note: these instructions are mostly unchanged since Part 1. The main changes are in the list of exceptions at the top and the list of useful library methods towards the end.**
 
 ### Notes
 
