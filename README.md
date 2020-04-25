@@ -24,8 +24,6 @@
 
 ## Inheritance
 
-(Not relevant to Part 2 of the project.)
-
 - [Polymorphism and dynamic binding](inheritance.md)
   - Concepts: polymorphism, subclassing, inheritance, `instanceof`, typecasts; dynamic binding, method overriding, `@Override`; class `Object`, `Object.equals`, `Object.hashCode`, `Object.toString`, `Object.getClass`
 - [Behavioral subtyping: modular reasoning about programs that use dynamic binding](behavioral_subtyping.md)
@@ -35,3 +33,12 @@
   - Concepts: interfaces, multiple inheritance, static fields, the Singleton pattern
 - [Implementation inheritance](implementation_inheritance.md)
   - Concepts: Inheritance of fields and methods, `super` constructor calls, `super` method calls
+
+## Advanced topics
+
+(Students of course H02C5A can ignore this material.)
+
+- [Iterators](iterators.md)
+  - Concepts: (external) iterators, iterables, nested classes, inner classes, local classes, anonymous classes, enhanced `for` loop, internal iterators, lambda expressions, capturing outer variables, effectively final variables
+- [Streams](https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/package-summary.html)
+  - Concepts: streams, sources, map, filter, reduce, collect, parallel streams
