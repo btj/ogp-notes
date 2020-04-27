@@ -78,6 +78,8 @@ Extend class `drawit.shapegroups2.Extent` analogously.
 
 Write test cases that check that your extended `Extent` objects exhibit the correct behavior when used as elements of collections from the Java Collections API (such as `java.util.ArrayList` and `java.util.HashSet`). For example, method `contains` of classes `ArrayList` and `HashSet` shall return `true` if the collection contains an `Extent` object that represents the same rectangle as the given `Extent` object.
 
+You need not write any documentation for these methods.
+
 ## General comment
 
 As usual, for all of the features you implement, you shall also develop a comprehensive test suite.
