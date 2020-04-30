@@ -249,13 +249,12 @@ If we assign a specification to each method of a class, then in doing so, we def
 
 (Notice that the behavioral type defined by class is defined entirely by its _documentation_; the _implementation_ of a class is completely irrelevant to the behavioral type it defines. (But the implementation of class C _is_ relevant to the question of whether the instances of class C are of the behavioral type C.))
 
-Using this definition, we can rephrase the principle of modular reasoning about programs with dynamic binding as follows:
-- a method is correct if it complies with its specification, assuming that each object it interacts with is of the behavioral type given by its static type.
-- (If all methods of a class C are correct in this way, then this implies that the instances of class C are of behavioral type C.)
-- If a class D extends a class C, then behavioral type D is a _behavioral subtype_ of behavioral type C.
-
-We say a behavioral type D is a behavioral subtype of a behavioral type C if each object that is of behavioral type D is also of behavioral type C.
+We say a behavioral type D is a _behavioral subtype_ of a behavioral type C if each object that is of behavioral type D is also of behavioral type C.
 
 If the specifications of the methods of D that override methods of C strengthen the specifications of the overridden methods, then it follows that behavioral type D is a behavioral subtype of type C.
 
-We can then summarize the approach for dealing with dynamic binding as follows: Java's static type checker ensures that a subclass D of a class C is a _syntactic_ subtype of C; to achieve correct programs, we must ensure that D is a _behavioral_ subtype of C as well.
+We say that a program _respects behavioral subtyping_ if, for every class D of the program that extends a class C, it is the case that D is a behavioral subtype of C.
+
+Using these definitions, we can rephrase the principle of modular reasoning about programs with dynamic binding as follows: if A) each method of a program complies with its specification, assuming that each object it interacts with is of the behavioral type given by its static type, and B) the program respects behavioral subtyping, and C) the specification of the program's main method expresses the correctness of the program as a whole, then the program as a whole exhibits only correct behaviors.
+
+Or, to phrase it as a slogan: Java's static type checker ensures that a subclass D of a class C is a _syntactic_ subtype of C; to achieve correct programs, we must ensure that D is a _behavioral_ subtype of C as well.
