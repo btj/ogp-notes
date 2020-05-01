@@ -245,7 +245,7 @@ The first specification is the weakest possible one: it does not allow any calls
 
 ### Derived principle: behavioral subtyping
 
-If we assign a specification to each method of a class, then in doing so, we define a _behavioral type_. We say an object O is of behavioral type C, if, for every method M of C, calls of M on O comply with the specification of M in C.
+If we assign a specification to each method of a class, then in doing so, we define a _behavioral type_. We say an object O is of behavioral type C, if, for every method M of C, the behavior of a call of M on O complies with the specification of M in C.
 
 (Notice that the behavioral type defined by class is defined entirely by its _documentation_; the _implementation_ of a class is completely irrelevant to the behavioral type it defines. (But the implementation of class C _is_ relevant to the question of whether the instances of class C are of the behavioral type C.))
 
