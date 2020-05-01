@@ -258,3 +258,11 @@ We say that a program _respects behavioral subtyping_ if, for every class D of t
 Using these definitions, we can rephrase the principle of modular reasoning about programs with dynamic binding as follows: if A) each method of a program complies with its specification, assuming that each object it interacts with is of the behavioral type given by its static type, and B) the program respects behavioral subtyping, and C) the specification of the program's main method expresses the correctness of the program as a whole, then the program as a whole exhibits only correct behaviors.
 
 Or, to phrase it as a slogan: Java's static type checker ensures that a subclass D of a class C is a _syntactic_ subtype of C; to achieve correct programs, we must ensure that D is a _behavioral_ subtype of C as well.
+
+## Further reading
+
+_Note: the material in this section is outside the scope of the course and is provided for the information of interested students only._
+
+For a much more detailed, formal, academic treatment of the approach to modular reasoning about programs that involve dynamically-bound method calls and the notion of behavioral subtyping described in this note, we refer interested students to _Matthew J. Parkinson. [Local reasoning for Java.](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-654.pdf) PhD Thesis, Cambridge University, 2005._
+
+Work on behavioral notions of subtyping in object-oriented programming goes back to the early nineties with work by America, Liskov and Wing, Leavens, and others; see the bibliography in Parkinson's thesis. Some of this early work, however, confusingly discusses the problem in terms of _substituting subtype objects for supertype objects_. This is **not** a good way to think of the problem of modular reasoning about object-oriented programs. Most importantly, it invites confusing behavioral types with implementations. We repeat that a behavioral type is defined entirely by the type's _documentation_, not by any implementations. The correct image is that of a _single object_ that is of two behavioral types (one of which is a behavioral subtype of the other). One example of where the substitution narrative breaks down is if the supertype is an abstract class (or an interface): in that case, no object can exist whose class is the supertype.
