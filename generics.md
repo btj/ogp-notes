@@ -328,7 +328,7 @@ class University {
     int getNbFinishers() {
         int result = 0;
         for (Iterator<Student> iterator = students.iterator(); iterator.hasNext(); ) {
-            Student student = (Student)iterator.next();
+            Student student = iterator.next();
             if (student.nbCredits >= 120)
                 result++;
         }
@@ -348,7 +348,7 @@ class University {
         int nbStaff = 0;
         int totalNbPubs = 0;
         for (Iterator<Staff> iterator = staffMembers.iterator(); iterator.hasNext(); ) {
-            Staff staff = (Staff)iterator.next();
+            Staff staff = iterator.next();
             nbStaff++;
             totalNbPubs += staff.nbPubs;
         }
