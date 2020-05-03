@@ -19,7 +19,7 @@
 - [Single-class entity-relationship abstractions](entity_relationship_abstractions.md)
   - Example: [html](https://github.com/btj/html_ir)
   - Concepts: entity graphs, multi-object abstractions, bidirectional associations, consistency of bidirectional associations, peer objects, peer groups
-- [Multi-class entity-relationship abstractions](multi_class_abstractions.md) (not relevant to Part 2 of project)
+- [Multi-class entity-relationship abstractions](multi_class_abstractions.md)
   - Concepts: packages, package-accessible fields/constructors/methods/classes, package representation invariants, package abstract state invariants, `HashSet`
 
 ## Inheritance
