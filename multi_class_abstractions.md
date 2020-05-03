@@ -156,9 +156,8 @@ public class ProjectCourseStudent {
     /**
      * Make this student a member of the given team.
      *
-     * @pre {@code team} is not null.
-     *      (Cannot make this a @throws for now because of https://github.com/fsc4j/fsc4j/issues/6 .)
-     *    | team != null
+     * @throws IllegalArgumentException if {@code team} is null.
+     *    | team == null
      * @throws IllegalStateException if this student is already in a team.
      *    | getTeam() != null
      * 
@@ -168,6 +167,8 @@ public class ProjectCourseStudent {
      *    | team.getMembers().equals(LogicalSet.plus(old(team.getMembers()), this))
      */
     public void join(Team team) {
+        if (team == null)
+            throw new IllegalArgumentException("team is null");
         if (this.team != null)
             throw new IllegalStateException("this student is already in a team");
         
@@ -178,9 +179,8 @@ public class ProjectCourseStudent {
     /**
      * Make this student no longer be a member of their team.
      * 
-     * @pre This student is in a team.
-     *      (Cannot make this a @throws for now because of https://github.com/fsc4j/fsc4j/issues/6 .)
-     *    | getTeam() != null
+     * @throws IllegalStateException if this student is not in a team.
+     *    | getTeam() == null
      * 
      * @mutates_properties | this.getTeam(), this.getTeam().getMembers()
      * 
@@ -331,9 +331,8 @@ public class ProjectCourseStudent {
     /**
      * Make this student a member of the given team.
      *
-     * @pre {@code team} is not null.
-     *      (Cannot make this a @throws for now because of https://github.com/fsc4j/fsc4j/issues/6 .)
-     *    | team != null
+     * @throws IllegalArgumentException if {@code team} is null.
+     *    | team == null
      * @throws IllegalStateException if this student is already in a team.
      *    | getTeam() != null
      * 
@@ -343,6 +342,8 @@ public class ProjectCourseStudent {
      *    | team.getMembers().equals(LogicalSet.plus(old(team.getMembers()), this))
      */
     public void join(Team team) {
+        if (team == null)
+            throw new IllegalArgumentException("team is null");
         if (this.team != null)
             throw new IllegalStateException("this student is already in a team");
         
@@ -353,9 +354,8 @@ public class ProjectCourseStudent {
     /**
      * Make this student no longer be a member of their team.
      * 
-     * @pre This student is in a team.
-     *      (Cannot make this a @throws for now because of https://github.com/fsc4j/fsc4j/issues/6 .)
-     *    | getTeam() != null
+     * @throws IllegalStateException if this student is not in a team.
+     *    | getTeam() == null
      * 
      * @mutates_properties | this.getTeam(), this.getTeam().getMembers()
      * 
