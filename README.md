@@ -42,3 +42,5 @@
   - Concepts: (external) iterators, iterables, nested classes, inner classes, local classes, anonymous classes, enhanced `for` loop, internal iterators, lambda expressions, capturing outer variables, effectively final variables
 - [Streams](https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/package-summary.html)
   - Concepts: streams, sources, map, filter, reduce, collect, parallel streams
+- [Generics](generics.md)
+  - Concepts: generic class, generic interface, type parameter, type argument, generic type instantiation, parameterized type, bounded type parameter, covariance, contravariance, invariance, upper-bounded wildcard, lower-bounded wildcard, generic method, erasure, unchecked cast warning
