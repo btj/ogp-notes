@@ -17,7 +17,12 @@ composition graphs example: we will consider graphs of project course students
 and the teams they belong to. For simplicity, a team may have arbitrarily many
 members, but each student may be a member of only one team.
 
-Here is an initial attempt to implement an abstraction that stores such graphs:
+To implement an abstraction for storing such graphs, we will introduce a class `ProjectCourseStudent` to represent students and
+a class `Team` to represent teams:
+
+<img src="abstractions.png"></img>
+
+Here is an initial attempt at implementing these classes:
 
 ```java
 package bigteams;
