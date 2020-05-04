@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>20</x>
+      <y>390</y>
+      <w>1150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;1130.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>560</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>:IntList
+--
+getElements() = [1,2,3]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>310</x>
+      <y>270</y>
+      <w>80</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>1, 2, 3
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>20</x>
+      <y>320</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Data
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>20</x>
+      <y>430</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Java objects
+that store the data
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>530</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>s1: Student</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>590</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>s2: Student</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>650</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>s3: Student</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>710</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>s4: Student</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>530</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>t1: Team</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>650</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>t2: Team</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>520</y>
+      <w>320</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+r1=getMembers()
+r2=getTeam()</panel_attributes>
+    <additional_attributes>10.0;20.0;300.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>580</y>
+      <w>400</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+r1=getMembers()
+r2=getTeam()</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0;310.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>640</y>
+      <w>320</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+r1=getMembers()
+r2=getTeam()</panel_attributes>
+    <additional_attributes>10.0;20.0;300.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>670</y>
+      <w>400</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+r1=getMembers()
+r2=getTeam()</panel_attributes>
+    <additional_attributes>10.0;50.0;310.0;50.0;310.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>770</x>
+      <y>150</y>
+      <w>280</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Students = {s1, s2, s3, s4}
+
+Teams = {t1, t2}
+
+"is member of" ⊆ Students × Teams
+
+"is member of" = {
+  (s1, t1),
+  (s2, t2),
+  (s3, t2),
+  (s4, t2)
+}
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>790</x>
+      <y>20</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Multi-object abstraction
+(entity-relationship
+abstraction):
+
+multiple client-visible objects
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>250</x>
+      <y>20</y>
+      <w>200</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Single-object abstraction
+(mutable or immutable
+value abstraction):
+
+single client-visible object
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
