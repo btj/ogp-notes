@@ -66,11 +66,15 @@ You need **not** implement an analogous exporter for `drawit.shapegroups2.ShapeG
 
 ## 4. Create a RoundedPolygonContainsTestStrategy class hierarchy
 
-Extend class `RoundedPolygon` so that it stores a _bounding box_ for its vertices, i.e. a `drawit.shapegroups1.Extent` object that represents the smallest nonempty axis-aligned rectangle that contains all of the polygon's vertices. (If the polygon has less than three vertices, there may be multiple different smallest nonempty axis-aligned rectangles that contain all of the vertices; in that case, any one of them is a valid bounding box.) Each mutator that mutates the list of vertices should also update the bounding box.
+Add code to class `RoundedPolygon` so that it stores a _bounding box_ for its vertices, i.e. a `drawit.shapegroups1.Extent` object that represents the smallest nonempty axis-aligned rectangle that contains all of the polygon's vertices. (If the polygon has less than three vertices, there may be multiple different smallest nonempty axis-aligned rectangles that contain all of the vertices; in that case, any one of them is a valid bounding box.) Each mutator that mutates the list of vertices should also update the bounding box.
 
 Furthermore, create an interface `RoundedPolygonContainsTestStrategy` with a method `boolean contains(RoundedPolygon polygon, IntPoint point)`, and two implementing classes, named `FastRoundedPolygonContainsTestStrategy` and `PreciseRoundedPolygonContainsTestStrategy`, that implement method `contains` by calling `contains` on the bounding box and by calling `contains` on the `RoundedPolygon` object itself, respectively. Class `FastRoundedPolygonContainsTestStrategy` shall deal with `null` arguments contractually; class `PreciseRoundedPolygonContainsTestStrategy` shall deal with `null` arguments defensively.
   
 The challenge is to write proper documentation for interface `RoundedPolygonContainsTestStrategy` and its subclasses while adhering to the principle of behavioral subtyping. The documentation for method `contains` of interface `RoundedPolygonContainsTestStrategy` should be as precise as possible (but not more precise than that).
+
+As always, you can use calls of side-effect-free public methods inside the documentation for other public methods. In particular, you can use calls of method `contains` of class `RoundedPolygon` to document your hierarchy. Generally, any methods you refer to inside documentation should be properly documented themselves; an exception is that you still need not write documentation for method `contains` of class `RoundedPolygon`.
+
+You can add this hierarchy to package `drawit` (but it does not really matter because this code will be checked manually only; the automatic check will ignore it).
 
 ## 5. Override `Object` methods `equals`, `hashCode`, `toString` in class `Extent`
 
