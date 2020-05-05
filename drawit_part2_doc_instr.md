@@ -11,7 +11,7 @@ Exceptions:
 - You need not provide formal documentation for method `IntVector.asDoubleVector`.
 - You need not provide formal documentation for the return values of `RoundedPolygon.contains`, `RoundedPolygon.getDrawingCommands`, or `ShapeGroup.getDrawingCommands`.
 - You need not document which exact string is returned by `PointArrays.checkDefinesProperPolygon`; your documentation only needs to specify when the return value is `null` and when it is not `null`.
-- You need to provide formal documentation for methods `toInnerCoordinates` (both overloads) and `toGlobalCoordinates` only if you are going for a top score.
+- You need to provide formal documentation for methods `toInnerCoordinates` (both overloads) and `toGlobalCoordinates` only if you are going for a top score. (This is not applicable to students of course H02C5A.)
 
 ## How to write complete documentation
 
