@@ -20,6 +20,8 @@ You shall create a package `drawit.shapes1` where a `ShapeGroupShape` stores a `
 
 You need not write any documentation for this package or its contents.
 
+**Note:** the constraints imposed upon clients in the documentation of method `createControlPoints` are to be interpreted as _preconditions_. You can rely on it that the client (= the DrawIt GUI) will comply with these restrictions; you need not write any code to check or enforce them.
+
 ## 3. Create a ShapeGroup exporter
 
 Create a package `drawit.shapegroups1.exporter` with a class `ShapeGroupExporter` that has a method
