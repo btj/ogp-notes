@@ -2,7 +2,7 @@
 
 The question addressed by this course is: how can we manage the complexity of the task of building large software systems?
 
-The approach we teach is an instance of a general approach for any complex task: _divide and conquer_. This means that we try to split the problem up into subproblems, such that 1) each subprogram is easier to solve than the overall problem, and 2) solving all of the subprograms yields a solution for the overall problem.
+The approach we teach is an instance of a general approach for any complex task: _divide and conquer_. This means that we try to split the problem up into subproblems, such that 1) each subproblem is easier to solve than the overall problem, and 2) solving all of the subproblems yields a solution for the overall problem.
 
 In the case of software development, this means trying to _decompose_ the system development task into a set of simpler subsystem development tasks, such that the resulting subsystems can be composed to yield a system that solves the overall task.
 
@@ -14,7 +14,7 @@ In the case of procedural abstractions, we try to identify _operations_ such tha
 
 Only a very limited number of operations are built into the Java programming language: `+`, `-`, `*`, `/`, `%`, `<`, `>`, `<=`, `>=`, `==`, `!=`, `&&`, `||`, and the bitwise operators `&`, `|`, `^`, `<<`, `>>`, and `>>>`. Anything else you want to do in a Java program, you need to _implement_ in terms of these basic operations.
 
-For example, if an application needs to perform square root computations, it will have to implement a square root operation in terms of addition, subtraction, etc. The complexity of building such an application, then, includes the complexity of implementing a square root implementation.
+For example, if an application needs to perform square root computations, it will have to implement a square root operation in terms of addition, subtraction, etc. The complexity of building such an application, then, includes the complexity of implementing a square root computation.
 
 The life of the application's developers would have been easier if square root had been a primitive operation in the Java programming language. Building the application would have been a simpler task.
 
