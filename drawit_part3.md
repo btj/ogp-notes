@@ -74,7 +74,7 @@ The challenge is to write proper documentation for interface `RoundedPolygonCont
 
 As always, you can use calls of side-effect-free public methods inside the documentation for other public methods. In particular, you can use calls of method `contains` of class `RoundedPolygon` to document your hierarchy. Generally, any methods you refer to inside documentation should be properly documented themselves; an exception is that you still need not write documentation for method `contains` of class `RoundedPolygon`.
 
-You can add this hierarchy to package `drawit` (but it does not really matter because this code will be checked manually only; the automatic check will ignore it).
+Add this hierarchy to package `drawit`.
 
 ## 5. Override `Object` methods `equals`, `hashCode`, `toString` in class `Extent`
 
