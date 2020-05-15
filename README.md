@@ -2,7 +2,8 @@
 
 ## Single-object abstractions
 
-- [Principles of programming in Java](lecture1.md)
+- [Introduction: Topic of the course](intro.md)
+- [Principles of programming in Java](programming.md)
   - Concepts: values, variables, types, methods, parameters, arguments, return values, classes, fields, objects, object creation, object references, method activations and the call stack
 - First steps in modular programming [Part 1](lecture2part1.md) [Part 2](lecture2part2.md)
   - Example: [squareroot](https://github.com/btj/squareroot)
