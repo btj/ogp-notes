@@ -42,7 +42,7 @@ We can run this program directly in [JLearner](https://btj.github.io/jlearner/),
 
 The first thing you always need to develop Java programs on your computer, is a Java Development Kit (JDK). You can download one from Oracle, but we recommend the one from [AdoptOpenJDK](https://adoptopenjdk.net/). Choose the latest OpenJDK version (as of this writing, the latest version is OpenJDK 13), and the HotSpot JVM. (Note: in the Windows installer, do not uncheck the _Add to PATH_ option.)
 
-Once you have installed a JDK on your machine, you can install Eclipse. We recommend that you install the modified version of Eclipse, called [Formal Specifications Checker for Java (FSC4J)](https://github.com/fsc4j/fsc4j), that we are developing. It gives you feedback about the formal documentation you write. To install it, just follow the instructions on the FSC4J website.
+Once you have installed a JDK on your machine, you can install Eclipse. We recommend that you install the modified version of Eclipse, called [Formal Specifications Checker for Java (FSC4J)](https://fsc4j.github.io/fsc4j), that we are developing. It gives you feedback about the formal documentation you write. To install it, just follow the instructions on the FSC4J website.
 
 ## Building and running our first program in Eclipse
 
