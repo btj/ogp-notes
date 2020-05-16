@@ -237,7 +237,7 @@ class Interval {
 	}
 	
 	/**
-	 * Sets's this interval's width to the given value.
+	 * Sets this interval's width to the given value.
 	 *
 	 * @pre The given value is nonnegative.
 	 *    | 0 <= value
