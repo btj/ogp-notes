@@ -240,13 +240,19 @@ $if(beamer)$
 $endif$
 $if(listings)$
 %\usepackage{geometry}
+\definecolor{ogpjavadoc}{HTML}{3F5FBF}
 \addtolength{\hoffset}{-2cm}
 \usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
 \lstset{defaultdialect=[5.3]Lua}
 \lstset{defaultdialect=[x86masm]Assembler}
 \usepackage[scaled]{luximono}
-\lstset{language=java,basicstyle=\ttfamily\footnotesize,frame=lines}
+\lstset{
+    language=java,
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{ogpjavadoc}\ttfamily\footnotesize,
+    frame=lines,
+    rulecolor=\color{black}}
 %\lstset{xleftmargin=-2cm,xrightmargin=-2cm}
 $endif$
 $if(lhs)$
