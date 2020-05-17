@@ -92,7 +92,7 @@ The datatypes built into Java itself are the following:
 
 Important remarks about these datatypes:
 - Values of type `char` are used to represent text characters. The notation `'X'` denotes the `char` value assigned to character `X` by the Unicode character encoding standard. For example, `'A'` denotes the `char` value 65.
-- The arithmetic operations (`+`, `-`, `*`, `/`, `%`) do not operate directly on types `byte`, `short`, or `char`; instead, operands of type `byte`, `short`, or `char` are first _promoted_ to type `int`. For example, the type of expression `'A' + 'A'` is `int` and its value is 130.
+- The arithmetic operations (`+`, `-`, `*`, `/`, `%`) do not operate directly on types `byte`, `short`, or `char`; instead, operands of type `byte`, `short`, or `char` are first _promoted_ to type `int`. For example, the type of expression `'A' - 'Z'` is `int` and its value is -25.
 - An expression that applies an arithmetic operator to two operands of type `int` is of type `int` itself, even though the mathematical result of the operation might not be within the limits of type `int`. In that case (known as _arithmetic overflow_), the value 2<sup>32</sup> is added to or subtracted from the result as many times as necessary to bring it within the limits of the type. For example: the expression `2000000000 + 2000000000` is of type `int` and its value is -294967296 (= 4000000000 - 2<sup>32</sup>).
 - If either operand of an arithmetic expression is of type `long` and the other operand is of any integer type, the expression itself is of type `long` and 2<sup>64</sup> is added to or subtracted from the result as many times as necessary to bring it within the limits of type `long`.
 - Type `float` has three kinds of values:
