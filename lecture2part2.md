@@ -80,7 +80,7 @@ But what if we want to initialize an `Interval` object with a given lower bound 
 	}
 ```
 
-Java does not allow this, because there would be now way to decide which constructor to use to execute an instance creation expression `new Interval(3, 7)`. Java does allow a class to declare multiple constructors, but each constructor must have either a different number of parameters or different parameter types. So, one way to add our additional constructor is as follows:
+Java does not allow this, because there would be no way to decide which constructor to use to execute an instance creation expression `new Interval(3, 7)`. Java does allow a class to declare multiple constructors, but each constructor must have either a different number of parameters or different parameter types. So, one way to add our additional constructor is as follows:
 
 ```java
 	Interval(int lowerBound, int width, boolean dummy) {
