@@ -228,7 +228,7 @@ public class StringList {
      * @throws IllegalArgumentException if argument {@code other} is 
      *         {@code null}
      *    | other == null
-     * @throws IllegalArgumentException if the elements of the given array
+     * @throws IllegalArgumentException if any of the elements of the given array
      *         are {@code null}
      *    | Arrays.stream(other).anyMatch(e -> e == null)
      *
