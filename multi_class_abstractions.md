@@ -150,6 +150,7 @@ public class ProjectCourseStudent {
      * Returns this student's team, or {@code null} if they are not in a team.
      * 
      * @peerObject
+     * @basic
      */
     public Team getTeam() { return team; }
     
@@ -233,6 +234,7 @@ public class Team {
      * @post | result != null
      * @creates | result
      * @peerObjects
+     * @basic
      */
     public Set<ProjectCourseStudent> getMembers() { return Set.copyOf(members); }
 
@@ -291,6 +293,7 @@ Notice the following:
 - We also let our clients know each object's peer group by also putting a `@peerObject` tag in the Javadoc comment for getter `getTeam()` and a `@peerObjects` tag in the Javadoc comment for getter `getMembers()`.
 - The representation invariant `team == null || team.members.contains(this)` declared in class `ProjectCourseStudent` is not well-defined if `team.members` is null. This invariant should be guarded by another invariant that says that `team.members` is not null, and that is checked first. There is a representation invariant `members != null` in class `Team`. We can use it to guard the invariant in class `ProjectCourseStudent` by defining the order of checking the representation invariants of a peer group as follows: first, the Phase 1 representation invariant of each peer object is checked; then, the Phase 2 representation invariant of each peer object is checked; and so on, until all representation invariants have been checked. We simply define the Phase 1 representation invariant of an object to be the first representation invariant defined in the object's class, and so on. This is why we insert a dummy representation invariant `true` into class `ProjectCourseStudent`; this ensures that the invariant that relies on `team.members` being non-null is a Phase 2 invariant.
 - We use methods `LogicalSet.plus` and `LogicalSet.minus` from [`logicalcollections`](https://github.com/btj/logicalcollections) to concisely specify the effect of `join` and `leaveTeam` on the team's set of members.
+- We use a `@mutates_properties | this.getTeam(), team.getMembers()` clause to conveniently specify that `joinTeam(team)` mutates the peer group of `this` and the peer group of `team`, and that for any object O in either of these peer groups, and for any basic getter M of O, we have either that (O, M) is in the set {(`this`, `getTeam`), (`team`, `getMembers`)} or `Objects.equals(O.M(), old(O.M()))`. That is, from the client's point of view, `joinTeam(team)` mutates only `this.getTeam()` and `team.getMembers()` and leaves all other properties of both peer groups involved (as given by the peer group objects' basic getters) unchanged. (A getter is basic if it is marked using the `@basic` tag.)
 
 ## Nesting class-encapsulated and package-encapsulated abstractions
 
@@ -325,6 +328,7 @@ public class ProjectCourseStudent {
      * Returns this student's team, or {@code null} if they are not in a team.
      * 
      * @peerObject
+     * @basic
      */
     public Team getTeam() { return team; }
     
@@ -419,6 +423,7 @@ public class Team {
      * @post | result != null
      * @creates | result
      * @peerObjects
+     * @basic
      */
     public Set<ProjectCourseStudent> getMembers() { return Set.copyOf(members); }
 
