@@ -43,6 +43,7 @@ public class Team {
      */
     private Set<Student> members;
     public Set<Student> getMembers() { return members; }   // WRONG: Leaking representation object
+    // ...
 }
 ```
 Public method `getMembers()` returns a reference to the `Set<Student>` object used by the `Team` object to store its members.
