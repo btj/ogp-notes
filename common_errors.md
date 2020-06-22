@@ -123,3 +123,7 @@ public class Team {
     }
 }
 ```
+
+### Comparing hash codes to decide equality of objects
+
+Just because two objects have the same hash code, does not mean that they are equal. For most classes, it will necessarily be the case that some unequal objects have the same hash code. This is because the type `int` of hash codes has only 2<sup>32</sup> different values, and for most classes, an object has more than 2<sup>32</sup> possible different abstract values. For example, an `IntPoint` class with an X and Y coordinate of type `int` has 2<sup>64</sup> possible abstract values. Therefore, any `hashCode()` implementation for class `IntPoint` will map at least 2<sup>32</sup> different abstract values of this class to the same hash code.
