@@ -357,7 +357,7 @@ class University {
 
 }
 ```
-Note: if the type arguments for an instance creation expression can be derived from the context, they can be omitted: in the exampe above, instead of `new LinkedList<Student>()`, we can simply write
+Note: if the type arguments for an instance creation expression can be derived from the context, they can be omitted: in the example above, instead of `new LinkedList<Student>()`, we can simply write
 `new LinkedList<>()`; this is known as _diamond notation_.
 
 ## Bounded type parameters
