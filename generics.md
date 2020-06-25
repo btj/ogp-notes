@@ -526,7 +526,7 @@ Suppose we add the following static method to class `LinkedList`:
 
 ```java
 static void copyInto(LinkedList<...> from, LinkedList<...> to) {
-    fron.copyInto(to); // equvalently: to.addAll(from);
+    from.copyInto(to); // equivalently: to.addAll(from);
 }
 ```
 
@@ -539,7 +539,7 @@ static <T> void copyInto2(LinkedList<? extends T> from, LinkedList<T> to) {
 static <T> void copyInto3(LinkedList<? extends T> from, LinkedList<? super T> to) {
 ```
 
-Assuming we pick the first declaration, we can rewrite method `getMembers()` in class `University` to use this methods as follows:
+Assuming we pick the first declaration, we can rewrite method `getMembers()` in class `University` to use this method as follows:
 ```java
 LinkedList<Member> getMembers() {
     LinkedList<Member> members = new LinkedList<>();
