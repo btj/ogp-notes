@@ -90,7 +90,7 @@ public class Room {
 
 	/**
 	 * @invar | exams != null
-	 * @invar | exams.stream().allMatch(exam -> exam != null && exam.getRooms().contains(this))
+	 * @invar | exams.stream().allMatch(exam -> exam != null && exam.rooms.contains(this))
 	 * @representationObject // gevorderd
 	 * @peerObjects // gevorderd
 	 */
