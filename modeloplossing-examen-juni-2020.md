@@ -184,6 +184,7 @@ In dalende volgorde van hoe zwaar dit aangerekend is.
 - Sommige van de abstracte toestandsinvarianten niet vermelden, of sommige van de representatie-invarianten niet vermelden.
 - Onvolledige postcondities, die de nieuwe toestand van de gemuteerde peer groups niet volledig specificeren.
 - Geen postconditie voor de constructor.
+- Schendingen van de zichtbaarheidsregel: als de documentatie voor een programma-element X verwijst naar een programma-element Y, dan moet voor elke partij voor wie X zichtbaar is, ook Y zichtbaar zijn. In het bijzonder mag je niet verwijzen naar private of package-toegankelijke velden in de documentatie voor publieke klassen, constructoren, of methodes.
 
 ### Perfect antwoord
 
