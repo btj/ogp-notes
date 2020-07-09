@@ -111,3 +111,147 @@ class NodesTest { // optional
 
 }
 ```
+
+## Question 3
+
+The following solution would yield a perfect score for this question.
+
+You did not need to write the elements marked as optional.
+
+```java
+package node_appearances; // optional
+
+import java.awt.Color; // optional
+
+public abstract class NodeAppearance {
+	
+	private final Color color;
+	
+	public Color getColor() { return color; }
+	
+	public NodeAppearance(Color color) {
+		this.color = color;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (this == other)
+			return true;
+		if (other == null)
+			return false;
+		if (getClass() != other.getClass())
+			return false;
+		return color.equals(((NodeAppearance)other).color);
+	}
+	
+	@Override
+	public int hashCode() { // optional
+		return color.hashCode();
+	}
+
+}
+```
+```java
+package node_appearances; // optional
+
+import java.awt.Color; // optional
+import java.util.Objects; // optional
+
+public class SquareNodeAppearance extends NodeAppearance {
+
+	private final int width;
+	
+	public int getWidth() { return width; }
+	
+	public SquareNodeAppearance(Color color, int width) {
+		super(color);
+		this.width = width;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (!super.equals(other))
+			return false;
+		return width == ((SquareNodeAppearance)other).width;
+	}
+	
+	@Override
+	public int hashCode() { // optional
+		return Objects.hash(getColor(), width);
+	}
+	
+}
+```
+```java
+package node_appearances; // optional
+
+import java.awt.Color; // optional
+import java.util.Objects; // optional
+
+public class CircularNodeAppearance extends NodeAppearance {
+	
+	private final int radius;
+	
+	public int getRadius() { return radius; }
+	
+	public CircularNodeAppearance(Color color, int radius) {
+		super(color);
+		this.radius = radius;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (!super.equals(other))
+			return false;
+		return radius == ((CircularNodeAppearance)other).radius;
+	}
+	
+	@Override
+	public int hashCode() { // optional
+		return Objects.hash(getColor(), radius);
+	}
+
+}
+```
+```java
+package node_appearances.tests; // optional
+
+import static org.junit.jupiter.api.Assertions.*; // optional
+
+import java.awt.Color; // optional
+
+import org.junit.jupiter.api.Test; // optional
+
+import node_appearances.CircularNodeAppearance; // optional
+import node_appearances.SquareNodeAppearance; // optional
+
+class NodeAppearancesTest { // optional
+
+	@Test // optional
+	void test() { // optional
+		SquareNodeAppearance a1 = new SquareNodeAppearance(Color.red, 5);
+		assertEquals(Color.red, a1.getColor());
+		assertEquals(5, a1.getWidth());
+		
+		assertEquals(a1, new SquareNodeAppearance(Color.red, 5));
+		assertNotEquals(a1, new SquareNodeAppearance(Color.green, 5));
+		assertNotEquals(a1, new SquareNodeAppearance(Color.red, 7));
+		
+		assertEquals(a1.hashCode(), new SquareNodeAppearance(Color.red, 5).hashCode()); // optional
+		
+		CircularNodeAppearance a2 = new CircularNodeAppearance(Color.blue, 9);
+		assertEquals(Color.blue, a2.getColor());
+		assertEquals(9, a2.getRadius());
+		
+		assertEquals(a2, new CircularNodeAppearance(Color.blue, 9));
+		assertNotEquals(a2, new CircularNodeAppearance(Color.cyan, 9));
+		assertNotEquals(a2, new CircularNodeAppearance(Color.blue, 11));
+		
+		assertEquals(a2.hashCode(), new CircularNodeAppearance(Color.blue, 9).hashCode()); // optional
+		
+		assertNotEquals(a1, a2);
+		assertNotEquals(a2, a1);
+	}
+
+}
+```
