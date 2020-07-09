@@ -255,3 +255,7 @@ class NodeAppearancesTest { // optional
 
 }
 ```
+
+## Common Errors
+
+See [Common errors](common_errors.md).
