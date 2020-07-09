@@ -1,4 +1,0 @@
-# Principles of Programming in Java
-
-Term:: Definition. This is a long definition. It spans many lines. It goes on and on and just keeps going on forever and ever and keeps taking more space on the page.
-Term2:: Another definition.
