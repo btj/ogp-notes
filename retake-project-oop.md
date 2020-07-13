@@ -33,9 +33,9 @@ Section 1 above. You must provide complete `@throws`
 clauses and postconditions, complete abstract state invariants and complete
 representation invariants.
 
-To obtain a score of 15/20 or more, you must additionally execute Section 2.
+To obtain a score of 13/20 or more, you must additionally execute Section 2.
 
-To obtain a score of 17/20 or more, you must execute Section 3 as well; furthermore, for Section 1 you must provide all necessary `@inspects`, `@mutates`, `@mutates_properties`, `@representationObject`, `@peerObject`, and `@peerObjects` clauses.
+To obtain a score of 15/20 or more, you must execute Section 3 as well; furthermore, for Section 1 you must provide all necessary `@inspects`, `@mutates`, `@mutates_properties`, `@representationObject`, `@peerObject`, and `@peerObjects` clauses.
 
 To obtain a score of 20/20, additionally, for Section 1 you must apply nested abstractions.
 
@@ -48,9 +48,9 @@ Section 1 above. You must provide complete `@throws`
 clauses and postconditions, complete abstract state invariants and complete
 representation invariants.
 
-To obtain a score of 13/20 or more, you must additionally execute Section 2.
+To obtain a score of 15/20 or more, you must additionally execute Section 2.
 
-To obtain a score of 15/20 or more, you must execute Section 3 as well; furthermore, for Section 1 you must provide all necessary `@inspects`, `@mutates`, `@mutates_properties`, `@representationObject`, `@peerObject`, and `@peerObjects` clauses.
+To obtain a score of 17/20 or more, you must execute Section 3 as well; furthermore, for Section 1 you must provide all necessary `@inspects`, `@mutates`, `@mutates_properties`, `@representationObject`, `@peerObject`, and `@peerObjects` clauses.
 
 To obtain a score of 20/20, additionally, for Section 1 you must apply nested abstractions.
 
