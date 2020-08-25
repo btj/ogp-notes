@@ -12,6 +12,8 @@
   - Concepts: Using Eclipse, creating JUnit test cases, creating classes, instance methods, encapsulation, `private` versus `public`, using Git, constructors
 - [Managing complexity through modularity and abstraction](complexity_modularity_abstraction.md)
   - Concepts: modularity, abstraction, API, client module, importance of documentation, information hiding, procedural abstraction, data abstraction, immutable versus mutable abstractions, abstract value/state of an object, Java's built-in datatypes and operators
+- [Representation objects and representation exposure](representation_objects.md)
+  - Concepts: representation object, representation exposure
 - [How to properly document single-object abstractions](drawit_doc_instr.md)
   - Concepts: defensive programming, contractual programming, preconditions, postconditions, class representation invariants (= private class invariants), class abstract state invariants (= public class invariants), getters, mutators
 
