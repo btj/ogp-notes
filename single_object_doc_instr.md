@@ -91,7 +91,8 @@ The above `TimeOfDay` example illustrates this.
 
 ## Constructors and methods documentation
 
-If not all possible values of the types of the parameters of a constructor or method are legal values, you shall deal with this either defensively or contractually.
+If not all possible values of the types of the parameters of a constructor or method are legal values, or if not all possible invocations of a constructor or method are legal for other reasons,
+you shall deal with this either defensively or contractually.
 
 ### Defensive programming
 

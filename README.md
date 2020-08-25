@@ -24,6 +24,7 @@
   - Concepts: entity graphs, multi-object abstractions, bidirectional associations, consistency of bidirectional associations, peer objects, peer groups
 - [Multi-class entity-relationship abstractions](multi_class_abstractions.md)
   - Concepts: packages, package-accessible fields/constructors/methods/classes, package representation invariants, package abstract state invariants, `HashSet`
+- [How to properly document multi-object abstractions](multi_object_doc_instr.md)
 
 ## Inheritance
 
@@ -43,7 +44,7 @@
 
 - [Iterators](iterators.md)
   - Concepts: (external) iterators, iterables, nested classes, inner classes, local classes, anonymous classes, enhanced `for` loop, internal iterators, lambda expressions, capturing outer variables, effectively final variables
-- [Streams](https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/package-summary.html)
+- [Streams](https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/package-summary.html) (on the web)
   - Concepts: streams, sources, map, filter, reduce, collect, parallel streams
 - [Generics](generics.md)
   - Concepts: generic class, generic interface, type parameter, type argument, generic type instantiation, parameterized type, bounded type parameter, covariance, contravariance, invariance, upper-bounded wildcard, lower-bounded wildcard, generic method, erasure, unchecked cast warning
