@@ -14,7 +14,7 @@
   - Concepts: modularity, abstraction, API, client module, importance of documentation, information hiding, procedural abstraction, data abstraction, immutable versus mutable abstractions, abstract value/state of an object, Java's built-in datatypes and operators
 - [Representation objects and representation exposure](representation_objects.md)
   - Concepts: representation object, representation exposure
-- [How to properly document single-object abstractions](drawit_doc_instr.md)
+- [How to properly document single-object abstractions](single_object_doc_instr.md)
   - Concepts: defensive programming, contractual programming, preconditions, postconditions, class representation invariants (= private class invariants), class abstract state invariants (= public class invariants), getters, mutators
 
 ## Multi-object abstractions (= entity-relationship abstractions)
