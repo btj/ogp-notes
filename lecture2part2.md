@@ -140,7 +140,8 @@ package interval;
  * 
  * @invar This interval's lower bound is not greater than its upper bound.
  *     | getLowerBound() <= getUpperBound()
- * @invar This interval's width equals the difference between its upper bound and its lower bound.
+ * @invar This interval's width equals the difference between its upper bound
+ *        and its lower bound.
  *     | getWidth() == getUpperBound() - getLowerBound()
  */
 class Interval {
@@ -243,9 +244,11 @@ class Interval {
 	 *    | 0 <= value
 	 * @post This interval's width equals the given value.
 	 *     | getWidth() == value
-	 * @post If the caller specified that the lower bound should be updated, the upper bound has remained unchanged.
+	 * @post If the caller specified that the lower bound should be updated, the
+         *       upper bound has remained unchanged.
 	 *     | !updateLowerBound || getUpperBound() == old(getUpperBound())
-	 * @post If the caller specified that the lower bound should not be updated, the lower bound has remained unchanged.
+	 * @post If the caller specified that the lower bound should not be updated,
+         *       the lower bound has remained unchanged.
 	 *     | updateLowerBound || getLowerBound() == old(getLowerBound())
 	 */
 	void setWidth(int value, boolean updateLowerBound) {

@@ -52,9 +52,10 @@ public class String {
      * @throws NullPointerException | other == null
      * @post | result != null
      * @post | result.getLength() == getLength() + other.getLength()
-     * @post | IntStream.range(0, getLength()).allMatch(i -> result.charAt(i) == charAt(i))
-     * @post | IntStream.range(0, other.getLength())
-     *       |     .allMatch(i -> result.charAt(getLength() + i) == other.charAt(i))
+     * @post | IntStream.range(0, getLength()).allMatch(i ->
+     *       |     result.charAt(i) == charAt(i))
+     * @post | IntStream.range(0, other.getLength()).allMatch(i ->
+     *       |     result.charAt(getLength() + i) == other.charAt(i))
      */
     public String concat(String other)
 
@@ -128,14 +129,16 @@ public class String {
      * @throws NullPointerException | other == null
      * @post | result != null
      * @post | result.getLength() == getLength() + other.getLength()
-     * @post | IntStream.range(0, getLength()).allMatch(i -> result.charAt(i) == charAt(i))
-     * @post | IntStream.range(0, other.getLength())
-     *       |     .allMatch(i -> result.charAt(getLength() + i) == other.charAt(i))
+     * @post | IntStream.range(0, getLength()).allMatch(i ->
+     *       |     result.charAt(i) == charAt(i))
+     * @post | IntStream.range(0, other.getLength()).allMatch(i ->
+     *       |     result.charAt(getLength() + i) == other.charAt(i))
      */
     public String concat(String other) {
         char[] cs = new char[characters.length + other.characters.length];
         System.arraycopy(characters, 0, cs, 0, characters.length);
-        System.arraycopy(other.characters, 0, cs, characters.length, other.characters.length);
+        System.arraycopy(other.characters, 0, cs, characters.length,
+            other.characters.length);
         return new String(cs);
     }
 
@@ -156,10 +159,11 @@ Let's see what happens if we break encapsulation. Here is a first attempt to add
      *
      * @post | result != null
      * @post | result.length == getLength()
-     * @post | IntStream.range(0, getLength()).allMatch(i -> result[i] == charAt(i))
+     * @post | IntStream.range(0, getLength()).allMatch(i ->
+     *       |     result[i] == charAt(i))
      */
     public char[] toCharArray() {
-        return characters;  // WRONG! Representation exposure; breaks encapsulation.
+        return characters;  // WRONG! Representation exposure
     }
 ```
 Although this method satisfies its postconditions, it is still wrong. This is because it *leaks* the receiver object's representation object; it *exposes* the representation object to clients. This is wrong because it allows clients to perform inappropriate mutations of the abstract value of the `String` object by mutating the representation object. That is, it allows clients to break the immutability of the `String` object:
@@ -180,7 +184,8 @@ A correct way to implement method `toCharArray` is by returning a copy of the re
      * @creates | result
      * @post | result != null
      * @post | result.length == getLength()
-     * @post | IntStream.range(0, getLength()).allMatch(i -> result[i] == charAt(i))
+     * @post | IntStream.range(0, getLength()).allMatch(i ->
+     *       |     result[i] == charAt(i))
      */
     public char[] toCharArray() {
         return characters.clone();
@@ -208,7 +213,8 @@ A class must never leak its representation objects. But not leaking representati
      *       |     .allMatch(i -> result.charAt(i) == characters[i])
      */
     public static String valueOf(char[] characters) {
-        return new String(characters); // WRONG! Client-supplied object used as representation object.
+        return new String(characters); // WRONG! Client-supplied object
+                                       // used as representation object.
     }
 ```
 
@@ -312,8 +318,10 @@ public class FractionList {
      * @mutates | this
      * @post | getSize() == old(getSize()) + 1
      * @post | Arrays.equals(
-     *       |     IntStream.range(0, old(getSize())).mapToObj(i -> getElementAt(i)).toArray(),
-     *       |     old(IntStream.range(0, getSize()).mapToObj(i -> getElementAt(i)).toArray()))
+     *       |     IntStream.range(0, old(getSize()))
+     *       |         .mapToObj(i -> getElementAt(i)).toArray(),
+     *       |     old(IntStream.range(0, getSize())
+     *       |         .mapToObj(i -> getElementAt(i)).toArray()))
      * @post | Objects.equals(getElementAt(old(getSize())), element)
      */
     public void add(Fraction element) {
@@ -341,7 +349,7 @@ FractionList myList = new FractionList();
 myList.add(Fraction.ZERO);
 Fraction[] elements = myList.getElements();
 elements[0] = null;
-// Object myList is now in an inconsistent state; its representation invariants do not hold.
+// Object myList is now in an inconsistent state
 myList.sum(); // crashes with a NullPointerException
 ```
 Method `sum` relies on the receiver's representation invariants for its safe execution; indeed, running this method
@@ -597,7 +605,8 @@ public class ByteBuffer {
      * @post The elements of the array referenced by this object, except for the
      *       element at the old offset, have remained unchanged.
      *    | IntStream.range(0, getArray().length).allMatch(i ->
-     *    |     i == old(getOffset()) || getArray()[i] == old(getArray().clone())[i])
+     *    |     i == old(getOffset())
+     *    |     || getArray()[i] == old(getArray().clone())[i])
      */
     public void put(byte b) {
         this.array[offset] = b;
@@ -614,7 +623,8 @@ ByteBuffer myBuffer = new ByteBuffer(myBytes);
 assert myBytes[0] == 1; // Succeeds
 myBuffer.put(4);
 assert myBytes[0] == 4; // Succeeds, as expected:
-                        // `myBuffer.put()` mutates `myBuffer.getArray()` a.k.a. `myBytes`
+                        // `myBuffer.put()` mutates `myBuffer.getArray()`
+                        // a.k.a. `myBytes`
 
 byte[] moreBytes = myBuffer.getArray();
 assert moreBytes[1] == 2; // Succeeds

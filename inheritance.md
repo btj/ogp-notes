@@ -31,16 +31,23 @@ public class Triangle {
     
     public boolean contains(int x, int y) {
         return
-                Math.signum(((long)x - x1) * ((long)y2 - y1) - ((long)y - y1) * ((long)x2 - x1)) *
-                Math.signum(((long)x3 - x1) * ((long)y2 - y1) - ((long)y3 - y1) * ((long)x2 - x1)) >= 0 &&
-                Math.signum(((long)x - x2) * ((long)y3 - y2) - ((long)y - y2) * ((long)x3 - x2)) *
-                Math.signum(((long)x1 - x2) * ((long)y3 - y2) - ((long)y1 - y2) * ((long)x3 - x2)) >= 0 &&
-                Math.signum(((long)x - x3) * ((long)y1 - y3) - ((long)y - y3) * ((long)x1 - x3)) *
-                Math.signum(((long)x2 - x3) * ((long)y1 - y3) - ((long)y2 - y3) * ((long)x1 - x3)) >= 0;
+                Math.signum(((long)x - x1) * ((long)y2 - y1)
+                    - ((long)y - y1) * ((long)x2 - x1)) *
+                Math.signum(((long)x3 - x1) * ((long)y2 - y1)
+                    - ((long)y3 - y1) * ((long)x2 - x1)) >= 0 &&
+                Math.signum(((long)x - x2) * ((long)y3 - y2)
+                    - ((long)y - y2) * ((long)x3 - x2)) *
+                Math.signum(((long)x1 - x2) * ((long)y3 - y2)
+                    - ((long)y1 - y2) * ((long)x3 - x2)) >= 0 &&
+                Math.signum(((long)x - x3) * ((long)y1 - y3)
+                    - ((long)y - y3) * ((long)x1 - x3)) *
+                Math.signum(((long)x2 - x3) * ((long)y1 - y3)
+                    - ((long)y2 - y3) * ((long)x1 - x3)) >= 0;
     }
     
     public String getDrawingCommand() {
-        return "triangle " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x3 + " " + y3;
+        return "triangle "
+            + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x3 + " " + y3;
     }
 
 }
@@ -237,25 +244,35 @@ public class Object {
     public Class getClass() { /* ... */ }
 
     /**
-     * Returns a number suitable for use as a hash code when using this object as a key in a hash table.
-     * Note: two objects that are equal according to the `equals(Object)` method must have the same hash code.
-     * The implementation of this method in class java.lang.Object returns a hash code
-     * based on the identity of this object. That is, this implementation usually returns a different number
-     * for different objects, although this is not guaranteed.
+     * Returns a number suitable for use as a hash code when using this object as
+     * a key in a hash table.
+     *
+     * Note: two objects that are equal according to the `equals(Object)` method
+     * must have the same hash code.
+     *
+     * The implementation of this method in class java.lang.Object returns a hash
+     * code based on the identity of this object. That is, this implementation
+     * usually returns a different number for different objects, although this is
+     * not guaranteed.
      */
     public int hashCode() { /* ... */ }
 
     /**
      * Returns a textual representation of this object.
-     * The implementation of this method in class java.lang.Object is based on the name of this object's class
-     * and this object's identity-based hash code.
+     *
+     * The implementation of this method in class java.lang.Object is based on the
+     * name of this object's class and this object's identity-based hash code.
      */
-    public String toString() { return this.getClass().getName() + "@" + Integer.toHexString(this.hashCode()); }
+    public String toString() {
+        return this.getClass().getName() + "@"
+            + Integer.toHexString(this.hashCode());
+    }
 
     /**
      * Returns whether this object is conceptually equal to the given object.
-     * The implementation of this method in class java.lang.Object returns whether this object and the given
-     * object are the same object.
+     *
+     * The implementation of this method in class java.lang.Object returns whether
+     * this object and the given object are the same object.
      */
     public boolean equals(Object other) { return other == this; }
 
@@ -322,17 +339,19 @@ The `@Override` annotations cause Java's static type checker to check that the m
 
 As a result of overriding these methods from class `Object`, we get the following behavior:
 ```java
-assertEquals("This is Point [x=10, y=20].", "This is " + new Point(10, 20) + ".");
-assertEquals(true, new Point(10, 20).equals(new Point(10, 20)));
+assertEquals("This is Point [x=10, y=20].","This is " + new Point(10, 20) + ".");
+assertTrue(new Point(10, 20).equals(new Point(10, 20)));
 assertEquals(new Point(10, 20), new Point(10, 20));
-assertEquals(true, Arrays.asList(new Point(3, 9), new Point(7, 20)).contains(new Point(3, 9)));
-assertEquals(true, Set.of(new Point(3, 9), new Point(7, 20)).contains(new Point(7, 20)));
+assertTrue(
+    Arrays.asList(new Point(3, 9), new Point(7, 20)).contains(new Point(3, 9)));
+assertTrue(Set.of(new Point(3, 9), new Point(7, 20)).contains(new Point(7, 20)));
 ```
 
 If we had not overridden these methods, the behavior would be as follows:
 ```java
 assertEquals("This is Point@12345678.", "This is " + new Point(10, 20) + ".");
-assertEquals(false, new Point(10, 20).equals(new Point(10, 20)));
-assertEquals(false, Arrays.asList(new Point(3, 9), new Point(7, 20)).contains(new Point(3, 9)));
-assertEquals(false, Set.of(new Point(3, 9), new Point(7, 20)).contains(new Point(7, 20)));
+assertFalse(new Point(10, 20).equals(new Point(10, 20)));
+assertFalse(
+    Arrays.asList(new Point(3, 9), new Point(7, 20)).contains(new Point(3, 9)));
+assertFalse(Set.of(new Point(3, 9), new Point(7, 20)).contains(new Point(7, 20)));
 ```

@@ -21,6 +21,15 @@ pandoc -o course-notes.html -f gfm \
   implementation_inheritance.md \
   iterators.md \
   generics.md
-pandoc -V documentclass=book -V classoption=oneside --toc --template=latex.template --listings -o course-notes.tex course-notes.html
+pandoc --wrap=none -V documentclass=book --toc --template=latex.template --listings -o course-notes.tex course-notes.html
+sed -i '' \
+  -e 's/\chapter{Managing Complexity through Modularity and Abstraction}/\chapter[Managing Complexity: Modularity \\\& Abstraction]{Managing Complexity through Modularity and Abstraction}/' \
+  -e 's/\section{FractionLists: Representation Exposure Breaks Consistency}/\section[Representation Exposure Breaks Consistency]{FractionLists: Representation Exposure Breaks Consistency}/' \
+  -e 's/\chapter{How to properly document single-object abstractions}/\chapter[How to document single-object abstractions]{How to properly document single-object abstractions}/' \
+  -e 's/\section{Nesting class-encapsulated and package-encapsulated abstractions}/\section[Nesting class-level and package-level abstractions]{Nesting class-encapsulated and package-encapsulated abstractions}/' \
+  -e 's/\chapter{How to properly document multi-object abstractions}/\chapter[How to document multi-object abstractions]{How to properly document multi-object abstractions}/' \
+  -e 's/\chapter{Behavioral subtyping: modular reasoning about programs that use dynamic binding}/\chapter[Modular reasoning about dynamic binding]{Behavioral subtyping: modular reasoning about programs that use dynamic binding}/' \
+  -e 's/\section{Modular reasoning about programs that use dynamic binding}/\section[Modular reasoning about dynamic binding]{Modular reasoning about programs that use dynamic binding}/' \
+  course-notes.tex
 pdflatex course-notes.tex
 pdflatex course-notes.tex

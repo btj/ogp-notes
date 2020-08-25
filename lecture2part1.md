@@ -385,7 +385,7 @@ class Interval {
 }
 ```
 
-Now, if we replace `Interval.setUpperBound(interval, 7)` by `interval.upperBound = 7` in class `IntervalTest`, we immediately get a compilation error: `The field Interval.upperBound is not visible.`. Fix the error by restoring the setter call.
+Now, if we replace `Interval.setUpperBound(interval, 7)` by `interval.upperBound = 7` in class `IntervalTest`, we immediately get a compilation error: _The field `Interval.upperBound` is not visible._ Fix the error by restoring the setter call.
 
 By making the fields of class `Interval` private, we now get the guarantee that any client code of class `Interval` that has no compilation errors will not break if we change the way we store the interval properties. If our module is used by many clients around the world, this is an extremely valuable guarantee.
 

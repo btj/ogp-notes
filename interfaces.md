@@ -38,7 +38,9 @@ public class IntValue extends Value {
     public Type getType() { return IntType.INSTANCE; }
     private IntValue(int value) { this.value = value; }
     public final static IntValue ZERO = new IntValue(0);
-    public static IntValue of(int value) { return value == 0 ? ZERO : new IntValue(value); }
+    public static IntValue of(int value) {
+        return value == 0 ? ZERO : new IntValue(value);
+    }
 }
 
 public class StringValue extends Value {
@@ -46,7 +48,9 @@ public class StringValue extends Value {
     public Type getType() { return StringType.INSTANCE; }
     private StringValue(String value) { this.value = value; }
     public final static StringValue EMPTY = new StringValue("");
-    public static StringValue of(String value) { return value.equals("") ? EMPTY : new StringValue(value); }
+    public static StringValue of(String value) {
+        return value.equals("") ? EMPTY : new StringValue(value);
+    }
 }
 ```
 First of all, notice the following:
@@ -67,38 +71,45 @@ public abstract class AndableType {
 public class BooleanType extends Type, AndableType { // ERROR
     // ...
     public Value and(Value leftOperand, Value rightOperand) {
-        return BooleanValue.of(((BooleanValue)leftOperand).value & ((BooleanValue)rightOperand).value);
+        return BooleanValue.of(((BooleanValue)leftOperand).value
+            & ((BooleanValue)rightOperand).value);
     }
 }
 public class IntType extends Type, AddableType, AndableType { // ERROR
     // ...
     public Value add(Value leftOperand, Value rightOperand) {
-        return IntValue.of(((IntValue)leftOperand).value + ((IntValue)rightOperand).value);
+        return IntValue.of(((IntValue)leftOperand).value
+            + ((IntValue)rightOperand).value);
     }
     public Value and(Value leftOperand, Value rightOperand) {
-        return IntValue.of((IntValue)leftOperand).value & ((IntValue)rightOperand).value);
+        return IntValue.of((IntValue)leftOperand).value
+            & ((IntValue)rightOperand).value);
     }
 }
 public class StringType extends Type, AddableType { // ERROR
     // ...
     public Value add(Value leftOperand, Value rightOperand) {
-        return StringValue.of(((StringValue)leftOperand).value + ((StringValue)rightOperand).value);
+        return StringValue.of(((StringValue)leftOperand).value
+            + ((StringValue)rightOperand).value);
     }
 }
 public class Interpreter {
-    public static Value evaluate(Value leftOperand, char operator, Value rightOperand) {
-        Type type = leftOperand.getType();
-        if (type != rightOperand.getType())
-            throw new UnsupportedOperationException("The operand types do not match");
+    public static Value evaluate(Value value1, char operator, Value value2) {
+        Type type = value1.getType();
+        if (type != value2.getType())
+            throw new UnsupportedOperationException(
+                "The operand types do not match");
         switch (operator) {
             case '+':
                 if (!(type instanceof AddableType))
-                    throw new UnsupportedOperationException("Type " + type + " does not support the + operator");
-                return ((AddableType)type).add(leftOperand, rightOperand);
+                    throw new UnsupportedOperationException(
+                        "Type " + type + " does not support the + operator");
+                return ((AddableType)type).add(value, value2);
             case '&':
                 if (!(type instanceof AndableType))
-                    throw new UnsupportedOperationException("Type " + type + " does not support the & operator");
-                return ((AndableType)type).and(leftOperand, rightOperand);
+                    throw new UnsupportedOperationException(
+                        "Type " + type + " does not support the & operator");
+                return ((AndableType)type).and(value1, value2);
             // ...
          }
     }
@@ -115,38 +126,45 @@ public interface AndableType {
 public class BooleanType extends Type implements AndableType {
     // ...
     public Value and(Value leftOperand, Value rightOperand) {
-        return BooleanValue.of(((BooleanValue)leftOperand).value & ((BooleanValue)rightOperand).value);
+        return BooleanValue.of(((BooleanValue)leftOperand).value
+            & ((BooleanValue)rightOperand).value);
     }
 }
 public class IntType extends Type implements AddableType, AndableType {
     // ...
     public Value add(Value leftOperand, Value rightOperand) {
-        return IntValue.of(((IntValue)leftOperand).value + ((IntValue)rightOperand).value);
+        return IntValue.of(((IntValue)leftOperand).value
+            + ((IntValue)rightOperand).value);
     }
     public Value and(Value leftOperand, Value rightOperand) {
-        return IntValue.of((IntValue)leftOperand).value & ((IntValue)rightOperand).value);
+        return IntValue.of((IntValue)leftOperand).value
+            & ((IntValue)rightOperand).value);
     }
 }
 public class StringType extends Type implements AddableType {
     // ...
     public Value add(Value leftOperand, Value rightOperand) {
-        return StringValue.of(((StringValue)leftOperand).value + ((StringValue)rightOperand).value);
+        return StringValue.of(((StringValue)leftOperand).value
+            + ((StringValue)rightOperand).value);
     }
 }
 public class Interpreter {
-    public static Value evaluate(Value leftOperand, char operator, Value rightOperand) {
+    public static Value evaluate(Value value1, char operator, Value value2) {
         Type type = leftOperand.getType();
         if (type != rightOperand.getType())
-            throw new UnsupportedOperationException("The operand types do not match");
+            throw new UnsupportedOperationException(
+                "The operand types do not match");
         switch (operator) {
             case '+':
                 if (!(type instanceof AddableType))
-                    throw new UnsupportedOperationException("Type " + type + " does not support the + operator");
-                return ((AddableType)type).add(leftOperand, rightOperand);
+                    throw new UnsupportedOperationException(
+                        "Type " + type + " does not support the + operator");
+                return ((AddableType)type).add(value1, value2);
             case '&':
                 if (!(type instanceof AndableType))
-                    throw new UnsupportedOperationException("Type " + type + " does not support the & operator");
-                return ((AndableType)type).and(leftOperand, rightOperand);
+                    throw new UnsupportedOperationException(
+                        "Type " + type + " does not support the & operator");
+                return ((AndableType)type).and(value1, value2);
             // ...
          }
     }

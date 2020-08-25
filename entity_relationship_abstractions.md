@@ -58,7 +58,8 @@ public class OOPStudent {
     }
 
     /**
-     * Returns this student's teammate, or {@code null} if this student has no teammate.
+     * Returns this student's teammate, or {@code null} if this student has no
+     * teammate.
      * 
      * @peerObject
      */
@@ -67,8 +68,8 @@ public class OOPStudent {
     }
 
     /**
-     * Initializes this object to represent a student with the given study programme
-     * and no teammate.
+     * Initializes this object to represent a student with the given study
+     * programme and no teammate.
      * 
      * @throws IllegalArgumentException if {@code studyProgramme} is null
      *    | studyProgramme == null
@@ -96,7 +97,8 @@ public class OOPStudent {
      * @post This student's teammate equals the given teammate
      *    | getTeammate() == teammate
      * @post The given student's teammate equals this student
-     *       (Note: this postcondition is redundant because it follows from the public class invariant.)
+     *       (Note: this postcondition is redundant because it follows from the
+     *       public class invariant.)
      *    | teammate.getTeammate() == this
      */
     public void setTeammate(OOPStudent teammate) {
@@ -105,7 +107,8 @@ public class OOPStudent {
         if (this.teammate != null)
             throw new IllegalStateException("This student already has a teammate");
         if (teammate.teammate != null)
-            throw new IllegalArgumentException("The given teammate already has a teammate");
+            throw new IllegalArgumentException(
+                "The given teammate already has a teammate");
         this.teammate = teammate;
         teammate.teammate = this;
     }
@@ -123,7 +126,8 @@ public class OOPStudent {
      */
     public void clearTeammate() {
         if (teammate == null)
-            throw new IllegalStateException("This student does not have a teammate");
+            throw new IllegalStateException(
+                "This student does not have a teammate");
         this.teammate.teammate = null;
         this.teammate = null;    
     }

@@ -139,8 +139,8 @@ import logicalcollections.LogicalSet;
 public class ProjectCourseStudent {
     
     /**
-     * @invar | true // Phase 1 representation invariant
-     * @invar | team == null || team.members.contains(this) // Phase 2 representation invariant
+     * @invar | true  // Phase 1 representation invariant
+     * @invar | team == null || team.members.contains(this)  // Phase 2 rep. inv.
      * 
      * @peerObject
      */
@@ -192,8 +192,10 @@ public class ProjectCourseStudent {
      * 
      * @post This student is not in a team.
      *    | getTeam() == null
-     * @post This student's old team's members are its old members minus this student.
-     *    | old(getTeam()).getMembers().equals(LogicalSet.minus(old(getTeam().getMembers()), this))
+     * @post This student's old team's members are its old members minus this
+     *       student.
+     *    | old(getTeam()).getMembers().equals(
+     *    |     LogicalSet.minus(old(getTeam().getMembers()), this))
      */
     public void leaveTeam() {
         if (this.team == null)
@@ -220,8 +222,9 @@ import java.util.Set;
 public class Team {
     
     /**
-     * @invar | members != null // Phase 1 representation invariant
-     * @invar | members.stream().allMatch(s -> s != null && s.team == this) // Phase 2 representation invariant
+     * @invar | members != null  // Phase 1 representation invariant
+     * @invar | members.stream().allMatch(s ->
+     *        |     s != null && s.team == this)  // Phase 2 rep. inv.
      * 
      * @representationObject
      * @peerObjects
@@ -318,7 +321,8 @@ public class ProjectCourseStudent {
     private Team team;
 
     /**
-     * @invar | getTeamInternal() == null || getTeamInternal().getMembersInternal().contains(this)
+     * @invar | getTeamInternal() == null
+     *        | || getTeamInternal().getMembersInternal().contains(this)
      * 
      * @peerObject
      */
@@ -370,8 +374,10 @@ public class ProjectCourseStudent {
      * 
      * @post This student is not in a team.
      *    | getTeam() == null
-     * @post This student's old team's members are its old members minus this student.
-     *    | old(getTeam()).getMembers().equals(LogicalSet.minus(old(getTeam().getMembers()), this))
+     * @post This student's old team's members are its old members minus this
+     *       student.
+     *    | old(getTeam()).getMembers().equals(
+     *    |     LogicalSet.minus(old(getTeam().getMembers()), this))
      */
     public void leaveTeam() {
         if (this.team == null)
@@ -410,7 +416,8 @@ public class Team {
     /**
      * Returns this team's set of members.
      * 
-     * @invar | getMembersInternal().stream().allMatch(s -> s.getTeamInternal() == this)
+     * @invar | getMembersInternal().stream().allMatch(s ->
+     *        |     s.getTeamInternal() == this)
      * 
      * @post | result != null && result.stream().allMatch(s -> s != null)
      * @peerObjects
@@ -442,8 +449,10 @@ public class Team {
      * @throws IllegalArgumentException if {@code student} is null
      *    | student == null
      * @mutates | this
-     * @post This team's set of members equals its old set of members plus the given student.
-     *    | getMembersInternal().equals(LogicalSet.plus(old(getMembersInternal()), student))
+     * @post This team's set of members equals its old set of members plus the
+     *       given student.
+     *    | getMembersInternal().equals(
+     *    |     LogicalSet.plus(old(getMembersInternal()), student))
      */
     void addMember(ProjectCourseStudent student) {
         if (student == null)
@@ -458,8 +467,10 @@ public class Team {
      * @throws IllegalArgumentException if {@code student} is null
      *    | student == null
      * @mutates | this
-     * @post This team's set of members equals its old set of members minus the given student.
-     *    | getMembersInternal().equals(LogicalSet.minus(old(getMembersInternal()), student))
+     * @post This team's set of members equals its old set of members minus the
+     *       given student.
+     *    | getMembersInternal().equals(
+     *    |     LogicalSet.minus(old(getMembersInternal()), student))
      */
     void removeMember(ProjectCourseStudent student) {
         if (student == null)

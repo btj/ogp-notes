@@ -241,7 +241,7 @@ $endif$
 $if(listings)$
 %\usepackage{geometry}
 \definecolor{ogpjavadoc}{HTML}{3F5FBF}
-\addtolength{\hoffset}{-2cm}
+%\addtolength{\hoffset}{-2cm}
 \usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
 \lstset{defaultdialect=[5.3]Lua}

@@ -34,7 +34,9 @@ public class ClientProgram {
     }
 
     public void printAll(LinkedList linkedList) {
-        for (LinkedList.Node node = linkedList.firstNode; node != null; node = node.next)
+        for (LinkedList.Node node = linkedList.firstNode;
+             node != null;
+             node = node.next)
             System.out.println(node.value);
     }
 
@@ -70,14 +72,20 @@ We show the styles used by some of the most popular programming languages (trans
 // Java
 public interface Iterator {
     boolean hasNext();
-    /** Mutates the iterator to point to the next element and returns the current element. */
+    /**
+     * Mutates the iterator to point to the next element and returns the current
+     * element.
+     */
     Object next();
 }
 
 // C#
 public interface Enumerator {
     Object getCurrent();
-    /** Mutates the enumerator to point to the next element, or returns `false` if the end has been reached. */
+    /**
+     * Mutates the enumerator to point to the next element, or returns `false` if
+     * the end has been reached.
+     */
     boolean moveNext();
 }
 
@@ -85,14 +93,17 @@ public interface Enumerator {
 public interface Iterator {
     Object getCurrent(); // syntax in C++: *iterator
     void moveNext(); // syntax in C++: iterator++
-    // in C++, to tell whether you have reached the end of the data structure, you have
-    // to test equality with a special "one-past-the-end" iterator
+    // in C++, to tell whether you have reached the end of the data structure, you
+    // have to test equality with a special "one-past-the-end" iterator
     boolean equals(Iterator other);
 }
 
 // Python
 public interface Iterator {
-    /** Throws a StopIteration exception if the end of the data structure has been reached. */
+    /**
+     * Throws a StopIteration exception if the end of the data structure has been
+     * reached.
+     */
     Object next();
 }
 
@@ -100,7 +111,10 @@ public interface Iterator {
 public interface Iterator {
     // Nested classes inside interfaces are implicitly public and static
     class NextResult { public Object value; public boolean done; }
-    /** If result.done is true, result.value is not an element but an "iterator return value". */
+    /**
+     * If result.done is true, result.value is not an element but an "iterator
+     * return value".
+     */
     NextResult next();
 }
 ```
@@ -487,7 +501,8 @@ public class ClientProgram {
         });
     }
 
-    public void printBoth(Predicate condition, Iterable collection1, Iterable collection2) {
+    public void printBoth(Predicate condition,
+            Iterable collection1, Iterable collection2) {
         printAll(condition, collection1);
         printAll(condition, collection2);
     }

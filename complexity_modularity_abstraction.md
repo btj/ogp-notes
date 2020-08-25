@@ -170,7 +170,8 @@ public class Fraction {
     public static final Fraction ZERO = new Fraction(0, 1);
     
     /**
-     * Returns an object representing the rational number defined by the given numerator and denominator.
+     * Returns an object representing the rational number defined by the given
+     * numerator and denominator.
      * 
      * @throws IllegalArgumentException if the given denominator is zero.
      *    | denominator == 0
@@ -178,10 +179,12 @@ public class Fraction {
      *    | true
      * @post The result is not null.
      *    | result != null
-     * @post The rational number represented by the result equals the rational number defined by the
-     *       given numerator and denominator.
-     *    | BigInteger.valueOf(result.getNumerator()).multiply(BigInteger.valueOf(denominator)).equals(
-     *    |     BigInteger.valueOf(numerator).multiply(BigInteger.valueOf(result.getDenominator())))
+     * @post The rational number represented by the result equals the rational
+     *       number defined by the given numerator and denominator.
+     *    | BigInteger.valueOf(result.getNumerator())
+     *    |     .multiply(BigInteger.valueOf(denominator)).equals(
+     *    |         BigInteger.valueOf(numerator).multiply(
+     *    |             BigInteger.valueOf(result.getDenominator())))
      */
     public static Fraction of(long numerator, long denominator) {
         if (denominator == 0)
@@ -197,7 +200,8 @@ public class Fraction {
     }
     
     /**
-     * Returns whether this object and the given object represent the same rational number.
+     * Returns whether this object and the given object represent the same
+     * rational number.
      *
      * @throws IllegalArgumentException if {@code other} is null.
      *    | other == null
@@ -210,7 +214,8 @@ public class Fraction {
     public boolean equals(Fraction other) {
         if (other == null)
             throw new IllegalArgumentException("other is null");
-        return numerator == other.numerator && denominator == other.denominator;
+        return numerator == other.numerator
+               && denominator == other.denominator;
     }
     
     /**
@@ -232,10 +237,9 @@ public class Fraction {
      *    |         BigInteger.valueOf(this.getNumerator()).
      *    |             multiply(BigInteger.valueOf(result.getDenominator())).
      *    |             multiply(BigInteger.valueOf(other.getDenominator())).
-     *    |             add(
-     *    |                 BigInteger.valueOf(other.getNumerator()).
-     *    |                     multiply(BigInteger.valueOf(result.getDenominator())).
-     *    |                     multiply(BigInteger.valueOf(this.getDenominator()))))
+     *    |             add(BigInteger.valueOf(other.getNumerator()).
+     *    |                 multiply(BigInteger.valueOf(result.getDenominator())).
+     *    |                 multiply(BigInteger.valueOf(this.getDenominator()))))
      */
     public Fraction plus(Fraction other) {
         if (other == null)
@@ -297,7 +301,8 @@ public class MoreMath {
      * @post The result divides both given numbers.
      *    | divides(result, a) && divides(result, b)
      * @post No greater number divides both given numbers.
-     *    | LongStream.range(result, Math.max(a, b)).allMatch(x -> !(divides(x + 1, a) && divides(x + 1, b)))
+     *    | LongStream.range(result, Math.max(a, b)).allMatch(x ->
+     *    |     !(divides(x + 1, a) && divides(x + 1, b)))
      */
     public static long gcd(long a, long b) {
         if (a == 0) return b;
@@ -406,10 +411,12 @@ public class FractionContainer {
      *    | denominator == 0
      * @may_throw ArithmeticException if arithmetic overflow occurs.
      *    | true
-     * @post The rational number stored by this object equals the rational number defined by the
-     *       given numerator and denominator.
-     *    | BigInteger.valueOf(getNumerator()).multiply(BigInteger.valueOf(denominator)).equals(
-     *    |     BigInteger.valueOf(numerator).multiply(BigInteger.valueOf(getDenominator())))
+     * @post The rational number stored by this object equals the rational
+     *       number defined by the given numerator and denominator.
+     *    | BigInteger.valueOf(getNumerator())
+     *    |     .multiply(BigInteger.valueOf(denominator)).equals(
+     *    |         BigInteger.valueOf(numerator)
+     *    |             .multiply(BigInteger.valueOf(getDenominator())))
      */
     public void set(long numerator, long denominator) {
         if (denominator == 0)
@@ -436,14 +443,12 @@ public class FractionContainer {
      *    | BigInteger.valueOf(getNumerator()).
      *    |     multiply(BigInteger.valueOf(old(getDenominator()))).
      *    |     multiply(BigInteger.valueOf(denominator)).
-     *    |     equals(
-     *    |         BigInteger.valueOf(old(getNumerator())).
-     *    |             multiply(BigInteger.valueOf(getDenominator())).
-     *    |             multiply(BigInteger.valueOf(denominator)).
-     *    |             add(
-     *    |                 BigInteger.valueOf(numerator).
-     *    |                     multiply(BigInteger.valueOf(getDenominator())).
-     *    |                     multiply(BigInteger.valueOf(old(getDenominator())))))
+     *    |     equals(BigInteger.valueOf(old(getNumerator())).
+     *    |         multiply(BigInteger.valueOf(getDenominator())).
+     *    |         multiply(BigInteger.valueOf(denominator)).add(
+     *    |             BigInteger.valueOf(numerator).
+     *    |                 multiply(BigInteger.valueOf(getDenominator())).
+     *    |                 multiply(BigInteger.valueOf(old(getDenominator())))))
      */
     public void add(long numerator, long denominator) {
         if (denominator == 0)

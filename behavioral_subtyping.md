@@ -64,7 +64,11 @@ If the changed method no longer complies with its original specification, we nee
 In the example, there are at least two possible specifications that we can assign to method `getLocations`:
 - We can assign a strong specification:
   ```java
-  /** @post | result != null && result.length == 3 && Arrays.stream(result).allMatch(e -> e != null) */
+  /**
+   * @post | result != null
+   * @post | result.length == 3
+   * @post | Arrays.stream(result).allMatch(e -> e != null)
+   */
   String[] getLocations() {
       return new String[] {"Brussels", "Paris", "Berlin"};
   }
@@ -76,7 +80,10 @@ In the example, there are at least two possible specifications that we can assig
   be updated as well.
 - We can also assign a weaker specification:
   ```java
-  /** @post | result != null && Arrays.stream(result).allMatch(e -> e != null) */
+  /**
+   * @post | result != null
+   * @post | Arrays.stream(result).allMatch(e -> e != null)
+   */
   String[] getLocations() {
       return new String[] {"Brussels", "Paris", "Berlin"};
   }
@@ -162,7 +169,11 @@ These two calls illustrate the two different types of method calls in Java:
 
 To reason about programs that use dynamic binding, such as the one shown above, we can simply apply the principle we introduced above: assign a specification to each method of the program, and check that each method's behavior complies with its specification, assuming that the behavior of method calls complies with the called methods' specifications. Suppose we assign the strong specification to method `getLocations` in class `CompanyA`:
 ```java
-/** @post | result != null && result.length == 3 && Arrays.stream(result).allMatch(e -> e != null) */
+/**
+ * @post | result != null
+ * @post | result.length == 3
+ * @post | Arrays.stream(result).allMatch(e -> e != null)
+ */
 String[] getLocations() {
     return new String[] {"Brussels", "Paris", "Berlin"};
 }
@@ -176,7 +187,11 @@ However, this approach does _not_ deal optimally with another type of program mo
 Indeed, suppose we extend the example program with the following class:
 ```java
 class CompanyB extends Company {
-    /** @post | result != null && result.length == 2 && Arrays.stream(result).allMatch(e -> e != null) */
+    /**
+     * @post | result != null
+     * @post | result.length == 2
+     * @post | Arrays.stream(result).allMatch(e -> e != null)
+     */
     String[] getLocations() {
         return new String[] {"Vienna", "Prague"};
     }

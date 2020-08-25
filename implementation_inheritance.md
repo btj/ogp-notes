@@ -41,7 +41,8 @@ public class TransparentColor extends Color {
     }
     @Override
     public String toString() {
-        return "rgba(" + red + ", " + green + ", " + blue + ", " + transparency + ")";
+        return
+            "rgba(" + red + ", " + green + ", " + blue + ", " + transparency + ")";
     }
     @Override
     public boolean equals(Object other) {

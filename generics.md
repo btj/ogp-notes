@@ -18,7 +18,10 @@ class University {
 
     boolean hasStaff(Staff staff) { ... }
 
-    /** Returns the average number of scientific publications authored by this university's staff members. */
+    /**
+     * Returns the average number of scientific publications authored by this
+     * university's staff members.
+     */
     int getAvgNbPubs() { ... }
 
 }
@@ -110,7 +113,8 @@ class University {
     /** Returns the number of students that have obtained at least 120 credits. */
     int getNbFinishers() {
         int result = 0;
-        for (IteratorOfStudent iterator = students.iterator(); iterator.hasNext(); ) {
+        for (IteratorOfStudent iterator = students.iterator();
+             iterator.hasNext(); ) {
             Student student = iterator.next();
             if (student.nbCredits >= 120)
                 result++;
@@ -126,11 +130,15 @@ class University {
         return staffMembers.contains(staff);
     }
 
-    /** Returns the average number of scientific publications authored by this university's staff members. */
+    /**
+     * Returns the average number of scientific publications authored by this
+     * university's staff members.
+     */
     int getAvgNbPubs() {
         int nbStaff = 0;
         int totalNbPubs = 0;
-        for (IteratorOfStaff iterator = staffMembers.iterator(); iterator.hasNext(); ) {
+        for (IteratorOfStaff iterator = staffMembers.iterator();
+             iterator.hasNext(); ) {
             Staff staff = iterator.next();
             nbStaff++;
             totalNbPubs += staff.nbPubs;
@@ -233,7 +241,10 @@ class University {
         return staffMembers.contains(staff);
     }
 
-    /** Returns the average number of scientific publications authored by this university's staff members. */
+    /**
+     * Returns the average number of scientific publications authored by this
+     * university's staff members.
+     */
     int getAvgNbPubs() {
         int nbStaff = 0;
         int totalNbPubs = 0;
@@ -327,7 +338,8 @@ class University {
     /** Returns the number of students that have obtained at least 120 credits. */
     int getNbFinishers() {
         int result = 0;
-        for (Iterator<Student> iterator = students.iterator(); iterator.hasNext(); ) {
+        for (Iterator<Student> iterator = students.iterator();
+             iterator.hasNext(); ) {
             Student student = iterator.next();
             if (student.nbCredits >= 120)
                 result++;
@@ -343,11 +355,15 @@ class University {
         return staffMembers.contains(staff);
     }
 
-    /** Returns the average number of scientific publications authored by this university's staff members. */
+    /**
+     * Returns the average number of scientific publications authored by this
+     * university's staff members.
+     */
     int getAvgNbPubs() {
         int nbStaff = 0;
         int totalNbPubs = 0;
-        for (Iterator<Staff> iterator = staffMembers.iterator(); iterator.hasNext(); ) {
+        for (Iterator<Staff> iterator = staffMembers.iterator();
+             iterator.hasNext(); ) {
             Staff staff = iterator.next();
             nbStaff++;
             totalNbPubs += staff.nbPubs;
@@ -368,8 +384,8 @@ as a subclass of `LinkedList<T>`. For class `SortedLinkedList<T>` to be able to 
 interface Comparable<T> {
     
     /**
-     * Returns a negative number, zero, or a positive number if this object compares as
-     * less than, equal to, or greater than {@code other}.
+     * Returns a negative number, zero, or a positive number if this object
+     * compares as less than, equal to, or greater than {@code other}.
      */
     int compareTo(T other);
     
