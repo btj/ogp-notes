@@ -1,0 +1,9 @@
+*.aux
+*.log
+*.toc
+course-notes.html
+course-notes.tex
+course-notes.pdf
+incrementAges.png
+linked_list_sum_recursive.png
+language.md

@@ -24,6 +24,10 @@ public class Color {
             ((Color)other).green == green &&
             ((Color)other).blue == blue;
     }
+    @Override
+    public int hashCode() {
+        return Objects.hash(red, green, blue);
+    }
 }
 ```
 Often, this class is sufficient. But sometimes, we need to additionally store a _transparency value_. Instead of duplicating the existing functionality of `Color`,
@@ -41,8 +45,13 @@ public class TransparentColor extends Color {
     }
     @Override
     public boolean equals(Object other) {
-        return super.equals(other) &&
-        ((TransparentColor)other).transparency == transparency;
+        return
+            super.equals(other) &&
+            ((TransparentColor)other).transparency == transparency;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), transparency);
     }
 }
 ```

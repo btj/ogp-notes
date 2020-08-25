@@ -1,4 +1,4 @@
-# Lecture 2: First Steps in Modular Programming (Part II)
+# First Steps in Modular Programming (Part II)
 
 ## Constructors
 

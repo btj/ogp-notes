@@ -26,10 +26,11 @@ public class String {
     public int getLength()
 
     /**
-     * Returns the character at the given index in the sequence of characters represented by this object.
-     * The first character is at index 0.
+     * Returns the character at the given index in the sequence of characters
+     * represented by this object. The first character is at index 0.
      *
-     * @throws IndexOutOfBoundsException if the given index is less than zero or not less than the length of this object.
+     * @throws IndexOutOfBoundsException if the given index is less than zero or
+     *         not less than the length of this object.
      *    | index < 0 || getLength() <= index
      */
     public char charAt(int index)
@@ -44,14 +45,16 @@ public class String {
     public static String valueOf(char c)
 
     /**
-     * Returns a `String` object that represents the sequence of characters obtained by concatenating the sequence of
-     * characters represented by this object and the given object, respectively.
+     * Returns a `String` object that represents the sequence of characters
+     * obtained by concatenating the sequence of characters represented by this
+     * object and the given object, respectively.
      *
      * @throws NullPointerException | other == null
      * @post | result != null
      * @post | result.getLength() == getLength() + other.getLength()
      * @post | IntStream.range(0, getLength()).allMatch(i -> result.charAt(i) == charAt(i))
-     * @post | IntStream.range(0, other.getLength()).allMatch(i -> result.charAt(getLength() + i) == other.charAt(i))
+     * @post | IntStream.range(0, other.getLength())
+     *       |     .allMatch(i -> result.charAt(getLength() + i) == other.charAt(i))
      */
     public String concat(String other)
 
@@ -93,10 +96,11 @@ public class String {
     }
 
     /**
-     * Returns the character at the given index in the sequence of characters represented by this object.
-     * The first character is at index 0.
+     * Returns the character at the given index in the sequence of characters
+     * represented by this object. The first character is at index 0.
      *
-     * @throws IndexOutOfBoundsException if the given index is less than zero or not less than the length of this object.
+     * @throws IndexOutOfBoundsException if the given index is less than zero
+     *         or not less than the length of this object.
      *    | index < 0 || getLength() <= index
      */
     public char charAt(int index) {
@@ -117,14 +121,16 @@ public class String {
     }
 
     /**
-     * Returns a `String` object that represents the sequence of characters obtained by concatenating the sequence of
-     * characters represented by this object and the given object, respectively.
+     * Returns a `String` object that represents the sequence of characters
+     * obtained by concatenating the sequence of characters represented by this
+     * object and the given object, respectively.
      *
      * @throws NullPointerException | other == null
      * @post | result != null
      * @post | result.getLength() == getLength() + other.getLength()
      * @post | IntStream.range(0, getLength()).allMatch(i -> result.charAt(i) == charAt(i))
-     * @post | IntStream.range(0, other.getLength()).allMatch(i -> result.charAt(getLength() + i) == other.charAt(i))
+     * @post | IntStream.range(0, other.getLength())
+     *       |     .allMatch(i -> result.charAt(getLength() + i) == other.charAt(i))
      */
     public String concat(String other) {
         char[] cs = new char[characters.length + other.characters.length];
@@ -145,7 +151,8 @@ Notice that the existence of A is completely invisible to clients of S: the API 
 Let's see what happens if we break encapsulation. Here is a first attempt to add a method `toCharArray` to class `String`:
 ```java
     /**
-     * Returns an array containing the sequence of characters represented by this object.
+     * Returns an array containing the sequence of characters represented by this
+     * object.
      *
      * @post | result != null
      * @post | result.length == getLength()
@@ -167,7 +174,8 @@ An immutable class is only considered properly encapsulated if it protects its i
 A correct way to implement method `toCharArray` is by returning a copy of the representation object:
 ```java
     /**
-     * Returns a new array containing the sequence of characters represented by this object.
+     * Returns a new array containing the sequence of characters represented by
+     * this object.
      *
      * @creates | result
      * @post | result != null
@@ -189,13 +197,15 @@ A class must never leak its representation objects. But not leaking representati
 
 ```java
     /**
-     * Returns a `String` object whose sequence of characters equals the sequence of characters stored in the given array.
+     * Returns a `String` object whose sequence of characters equals the
+     * sequence of characters stored in the given array.
      *
      * @throws NullPointerException | characters == null
      * @inspects | characters
      * @post | result != null
      * @post | result.getLength() == characters.length
-     * @post | IntStream.range(0, characters.length).allMatch(i -> result.charAt(i) == characters[i])
+     * @post | IntStream.range(0, characters.length)
+     *       |     .allMatch(i -> result.charAt(i) == characters[i])
      */
     public static String valueOf(char[] characters) {
         return new String(characters); // WRONG! Client-supplied object used as representation object.
@@ -214,13 +224,15 @@ assert a.charAt(0) == 'a'; // Fails
 A correct way to implement the `valueOf(char[])` method is by copying the argument:
 ```java
     /**
-     * Returns a `String` object whose sequence of characters equals the sequence of characters stored in the given array.
+     * Returns a `String` object whose sequence of characters equals the
+     * sequence of characters stored in the given array.
      *
      * @throws NullPointerException | characters == null
      * @inspects | characters
      * @post | result != null
      * @post | result.getLength() == characters.length
-     * @post | IntStream.range(0, characters.length).allMatch(i -> result.charAt(i) == characters[i])
+     * @post | IntStream.range(0, characters.length)
+     *       |     .allMatch(i -> result.charAt(i) == characters[i])
      */
     public static String valueOf(char[] characters) {
         return new String(characters.clone());
@@ -248,7 +260,8 @@ public class FractionList {
     private Fraction[] elements;
 
     /**
-     * Returns the number of elements in the list of fractions stored by this object.
+     * Returns the number of elements in the list of fractions stored by this
+     * object.
      *
      * @post | 0 <= result
      */
@@ -257,7 +270,8 @@ public class FractionList {
     }
 
     /**
-     * Returns the element at the given index in the list of fractions stored by this object.
+     * Returns the element at the given index in the list of fractions stored by
+     * this object.
      *
      * @throws IndexOutOfBoundsException | 0 < index || index <= getSize()
      */
@@ -269,7 +283,8 @@ public class FractionList {
     }
 
     /**
-     * Returns the sum of the elements of the list of fractions stored by this object.
+     * Returns the sum of the elements of the list of fractions stored by this
+     * object.
      *
      * @post | Objects.equals(result,
      *       |     IntStream.range(0, getSize())
@@ -290,7 +305,8 @@ public class FractionList {
     }
 
     /**
-     * Adds the given element to the end of the list of fractions stored by this object.
+     * Adds the given element to the end of the list of fractions stored by this
+     * object.
      *
      * @throws NullPointerException | element == null
      * @mutates | this
@@ -337,7 +353,8 @@ As before, we can fix this leak by copying the array:
      * Returns a new array containing the list of fractions stored by this object.
      *
      * @creates | result
-     * @post | Arrays.equals(result, IntStream.range(0, getSize()).mapToObj(i -> getElementAt(i)).toArray())
+     * @post | Arrays.equals(result, IntStream.range(0, getSize())
+     *       |     .mapToObj(i -> getElementAt(i)).toArray())
      */
     public Fraction[] getElements() {
         return elements.clone();
@@ -354,7 +371,8 @@ Consider the following INCORRECT attempt at designing and implementing an API fo
 
 ```java
 /**
- * Each instance of this class stores a sequence of bytes and an offset into that sequence.
+ * Each instance of this class stores a sequence of bytes and an offset into that
+ * sequence.
  */
 public class ByteBuffer {
 
@@ -380,7 +398,8 @@ public class ByteBuffer {
     public int getOffset() { return offset; }
 
     /**
-     * Initializes this object so that it stores the given sequence of bytes and offset zero.
+     * Initializes this object so that it stores the given sequence of bytes and
+     * offset zero.
      *
      * @throws IllegalArgumentException if the given array is null
      *    | bytes == null
@@ -394,15 +413,18 @@ public class ByteBuffer {
     }
 
     /**
-     * Writes the given byte into the sequence of bytes stored by this object at the current offset, and increments the offset.
+     * Writes the given byte into the sequence of bytes stored by this object
+     * at the current offset, and increments the offset.
      *
-     * @throws ArrayIndexOutOfBoundsException if the current offset is outside the bounds of the sequence of bytes stored by this object.
+     * @throws ArrayIndexOutOfBoundsException if the current offset is outside
+     *         the bounds of the sequence of bytes stored by this object.
      *    | getBytes().length <= getOffset()
      * @mutates | this // WRONG!
      * @post | getOffset() == old(getOffset()) + 1
      * @post | getBytes().length == old(getBytes().length)
      * @post | getBytes()[old(getOffset())] == b
-     * @post | IntStream.range(0, getBytes().length).allMatch(i -> i == old(getOffset()) || getBytes()[i] == old(getBytes())[i])
+     * @post | IntStream.range(0, getBytes().length).allMatch(i ->
+     *       |     i == old(getOffset()) || getBytes()[i] == old(getBytes())[i])
      */
     public void put(byte b) {
         this.bytes[offset] = b;
@@ -432,7 +454,8 @@ In this version of class `ByteBuffer`, the backing array is hidden from the clie
 
 ```java
 /**
- * Each instance of this class stores a sequence of bytes and an offset into that sequence.
+ * Each instance of this class stores a sequence of bytes and an offset into
+ * that sequence.
  */
 public class ByteBuffer {
 
@@ -461,7 +484,8 @@ public class ByteBuffer {
     public int getOffset() { return offset; }
 
     /**
-     * Initializes this object so that it stores the given sequence of bytes and offset zero.
+     * Initializes this object so that it stores the given sequence of bytes
+     * and offset zero.
      *
      * @throws NullPointerException if the given array is null
      *    | bytes == null
@@ -474,15 +498,18 @@ public class ByteBuffer {
     }
 
     /**
-     * Writes the given byte into the sequence of bytes stored by this object at the current offset, and increments the offset.
+     * Writes the given byte into the sequence of bytes stored by this object
+     * at the current offset, and increments the offset.
      *
-     * @throws ArrayIndexOutOfBoundsException if the current offset is outside the bounds of the sequence of bytes stored by this object.
+     * @throws ArrayIndexOutOfBoundsException if the current offset is outside
+     *         the bounds of the sequence of bytes stored by this object.
      *    | getBytes().length <= getOffset()
      * @mutates | this
      * @post | getOffset() == old(getOffset()) + 1
      * @post | getBytes().length == old(getBytes().length)
      * @post | getBytes()[old(getOffset())] == b
-     * @post | IntStream.range(0, getBytes().length).allMatch(i -> i == old(getOffset()) || getBytes()[i] == old(getBytes())[i])
+     * @post | IntStream.range(0, getBytes().length).allMatch(i ->
+     *       |     i == old(getOffset()) || getBytes()[i] == old(getBytes())[i])
      */
     public void put(byte b) {
         this.bytes[offset] = b;
@@ -515,7 +542,8 @@ This class is similar to Java's `ByteBuffer` class.
 
 ```java
 /**
- * Each instance of this class stores a reference to a byte array and an offset into that array.
+ * Each instance of this class stores a reference to a byte array and an offset
+ * into that array.
  */
 public class ByteBuffer {
 
@@ -530,7 +558,8 @@ public class ByteBuffer {
      * Returns the array reference stored by this object.
      *
      * @post | result != null
-     * @immutable This object is associated with the same array reference throughout its lifetime.
+     * @immutable This object is associated with the same array reference
+     *            throughout its lifetime.
      */
     public byte[] getArray() { return array; }
 
@@ -556,15 +585,19 @@ public class ByteBuffer {
     }
 
     /**
-     * Writes the given byte into the referenced array at the current offset, and increments the offset.
+     * Writes the given byte into the referenced array at the current offset, and
+     * increments the offset.
      *
-     * @throws ArrayIndexOutOfBoundsException if the current offset is outside the bound of the referenced array.
+     * @throws ArrayIndexOutOfBoundsException if the current offset is outside
+     *         the bound of the referenced array.
      *     | getArray().length <= getOffset()
      * @mutates | this, getArray()
      * @post | getOffset() == old(getOffset()) + 1
      * @post | getArray()[old(getOffset())] == b
-     * @post The elements of the array referenced by this object, except for the element at the old offset, have remained unchanged.
-     *    | IntStream.range(0, getArray().length).allMatch(i -> i == old(getOffset()) || getArray()[i] == old(getArray().clone())[i])
+     * @post The elements of the array referenced by this object, except for the
+     *       element at the old offset, have remained unchanged.
+     *    | IntStream.range(0, getArray().length).allMatch(i ->
+     *    |     i == old(getOffset()) || getArray()[i] == old(getArray().clone())[i])
      */
     public void put(byte b) {
         this.array[offset] = b;
@@ -580,7 +613,8 @@ byte[] myBytes = {1, 2, 3};
 ByteBuffer myBuffer = new ByteBuffer(myBytes);
 assert myBytes[0] == 1; // Succeeds
 myBuffer.put(4);
-assert myBytes[0] == 4; // Succeeds, as expected: `myBuffer.put()` mutates `myBuffer.getArray()` a.k.a. `myBytes`
+assert myBytes[0] == 4; // Succeeds, as expected:
+                        // `myBuffer.put()` mutates `myBuffer.getArray()` a.k.a. `myBytes`
 
 byte[] moreBytes = myBuffer.getArray();
 assert moreBytes[1] == 2; // Succeeds

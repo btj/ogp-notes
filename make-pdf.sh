@@ -10,9 +10,11 @@ pandoc -o course-notes.html -f gfm \
   lecture2part1.md \
   lecture2part2.md \
   complexity_modularity_abstraction.md \
-  drawit_doc_instr.md \
+  representation_objects.md \
+  single_object_doc_instr.md \
   entity_relationship_abstractions.md \
   multi_class_abstractions.md \
+  multi_object_doc_instr.md \
   inheritance.md \
   behavioral_subtyping.md \
   interfaces.md \

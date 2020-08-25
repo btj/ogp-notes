@@ -1,4 +1,4 @@
-# Lecture 2: First Steps in Modular Programming (Part I)
+# First Steps in Modular Programming (Part I)
 
 ### Contents
 
