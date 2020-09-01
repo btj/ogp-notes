@@ -350,9 +350,9 @@ myList.add(Fraction.ZERO);
 Fraction[] elements = myList.getElements();
 elements[0] = null;
 // Object myList is now in an inconsistent state
-myList.sum(); // crashes with a NullPointerException
+myList.getSum(); // crashes with a NullPointerException
 ```
-Method `sum` relies on the receiver's representation invariants for its safe execution; indeed, running this method
+Method `getSum` relies on the receiver's representation invariants for its safe execution; indeed, running this method
 after breaking the representation invariants causes the method to crash.
 
 As before, we can fix this leak by copying the array:
