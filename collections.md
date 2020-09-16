@@ -462,3 +462,223 @@ public class HashSet implements Set {
 }
 ```
 Notice that the `HashSet` object simply delegates the `contains`, `add`, and `remove` operations to the element's bucket, which is determined by retrieving its *hash code* using the `hashCode()` method and deriving the bucket index by taking the remainder of dividing the hash code by the number of buckets. If method `hashCode()` implements a good hash function, which means that the hash codes of the elements are uniformly distributed, then the expected number of elements in each bucket is proportional to the *load factor*, which is the total number of elements divided by the number of buckets. This means that if the load factor is bounded, then so is the expected number of elements in each bucket, and as a result, the expected time taken by `contains`, `add`, and `remove` is independent of the number of elements in the `HashSet` object. The `HashSet` implementation shown above has a fixed capacity; this works well if the maximum load (i.e. number of elements) of the `HashSet` object is known beforehand. If not, code should be added to increase the capacity and *rehash* (i.e. copy the elements from the old buckets to the new buckets) when the load factor exceeds some fixed threshold value.
+
+## Maps
+
+Applications often need to store a set of *key-value pairs* (where distinct pairs have distinct keys) and efficiently add a pair and retrieve the value associated with a given key. In Java, such sets are known as *maps* and a key-value pair is called a *map entry*.
+
+We first define the `Map` interface:
+```java
+package collections;
+
+import java.util.Objects;
+
+public interface Map {
+	
+	/** @immutable */
+	class Entry {
+		
+		/**
+		 * @invar | key != null
+		 * @invar | value != null
+		 */
+		private final Object key;
+		private final Object value;
+		
+		/** @post | result != null */
+		public Object getKey() { return key; }
+		/** @post | result != null */
+		public Object getValue() { return value; }
+		
+		/**
+		 * @pre | key != null
+		 * @pre | value != null
+		 * @post | getKey() == key
+		 * @post | getValue() == value
+		 */
+		public Entry(Object key, Object value) {
+			this.key = key;
+			this.value = value;
+		}
+		
+		@Override
+		public boolean equals(Object other) {
+			return other instanceof Entry
+				&& key.equals(((Entry)other).getKey())
+				&& value.equals(((Entry)other).getValue());
+		}
+		
+		@Override
+		public int hashCode() {
+			return Objects.hash(key, value);
+		}
+		
+	}
+	
+	/**
+	 * @inspects | this
+	 * @creates | result
+	 * @post | result != null
+	 * @post | result.stream().allMatch(e -> e instanceof Entry)
+	 * @post No key appears twice.
+	 *       | result.stream().map(e -> ((Entry)e).getKey()).distinct().count()
+	 *       | == result.size()
+	 */
+	Set entrySet();
+	
+	/**
+	 * @post | result == entrySet().stream()
+	 *       |     .filter(e -> ((Entry)e).getKey().equals(key))
+	 *       |     .findFirst().orElse(null)
+	 */
+	Object get(Object key);
+
+	/**
+	 * @pre | key != null
+	 * @pre | value != null
+	 * @mutates | this
+	 * @post The given entry is in the entry set.
+	 *       | entrySet().contains(new Entry(key, value))
+	 * @post No entries, except for the updated one, have disappeared from the
+	 *       entry set.
+	 *       | old(entrySet()).stream().allMatch(e ->
+	 *       |     ((Entry)e).getKey().equals(key) || entrySet().contains(e))
+	 * @post No entries, except for the updated one, have been added to the entry
+	 *       set.
+	 *       | entrySet().stream().allMatch(e ->
+	 *       |     ((Entry)e).getKey().equals(key) || old(entrySet()).contains(e))
+	 */
+	void put(Object key, Object value);
+	
+	/**
+	 * @pre | key != null
+	 * @mutates | this
+	 * @post All entries in the entry set were already in the entry set and
+	 *       have a key that is different from the given key. 
+	 *       | entrySet().stream().allMatch(e -> !((Entry)e).getKey().equals(key)
+	 *       |     && old(entrySet()).contains(e))
+	 * @post All entries that were in the entry set, except for the specified one,
+	 *       are still in the entry set.
+	 *       | old(entrySet()).stream().allMatch(e ->
+	 *       |     ((Entry)e).getKey().equals(key) || entrySet().contains(e))
+	 */
+	void remove(Object key);
+
+}
+```
+We can implement this interface efficiently using a hash table. Again, we first need a separate `Map` implementation for storing the entries that belong to a particular bucket. For this purpose, we define a simple `ArrayList`-based implementation:
+```java
+package collections;
+
+public class ArrayMap implements Map {
+
+	/**
+	 * @invar | entries != null
+	 * @invar | entries.stream().allMatch(e -> e instanceof Entry)
+	 * @invar | entries.stream().map(e -> ((Entry)e).getKey()).distinct().count()
+	 *        | == entries.size()
+	 * 
+	 * @representationObject
+	 */
+	private ArrayList entries = new ArrayList();
+	
+	private int indexOf(Object key) {
+		for (int i = 0; i < entries.size(); i++) {
+			Entry entry = (Entry)entries.get(i);
+			if (entry.getKey().equals(key))
+				return i;
+		}
+		return -1;
+	}
+	
+	public Set entrySet() {
+		Set result = new ArraySet();
+		for (int i = 0; i < entries.size(); i++)
+			result.add(entries.get(i));
+		return result;
+	}
+
+	public Object get(Object key) {
+		int index = indexOf(key);
+		return index == -1 ? null : ((Entry)entries.get(index)).getValue();
+	}
+	
+	/**
+	 * @post | entrySet().size() == 0
+	 */
+	public ArrayMap() {}
+
+	public void put(Object key, Object value) {
+		int index = indexOf(key);
+		if (index != -1)
+			entries.remove(index);
+		entries.add(new Entry(key, value));
+	}
+	
+	public void remove(Object key) {
+		int index = indexOf(key);
+		if (index != -1)
+			entries.remove(index);
+	}
+	
+
+}
+```
+We can now define the efficient hash table-based implementation:
+```java
+package collections;
+
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+public class HashMap implements Map {
+	
+	/**
+	 * @invar | buckets != null
+	 * @invar | Arrays.stream(buckets).allMatch(b -> b != null)
+	 * @invar | IntStream.range(0, buckets.length).allMatch(i ->
+	 *        |     buckets[i].entrySet().stream().allMatch(e ->
+	 *        |         Math.floorMod(((Entry)e).getKey().hashCode(),
+	 *        |             buckets.length) == i))
+	 * 
+	 * @representationObject
+	 * @representationObjects
+	 */
+	private Map[] buckets;
+	
+	private Map getBucket(Object key) {
+		return buckets[Math.floorMod(key.hashCode(), buckets.length)];
+	}
+
+	public Set entrySet() {
+		ArraySet result = new ArraySet();
+		for (int i = 0; i < buckets.length; i++)
+			for (Object entry : buckets[i].entrySet().toArray())
+				result.add(entry);
+		return result;
+	}
+
+	public Object get(Object key) {
+		return getBucket(key).get(key);
+	}
+	
+	/**
+	 * @pre | 0 < capacity
+	 * @post | entrySet().size() == 0
+	 */
+	public HashMap(int capacity) {
+		buckets = new Map[capacity];
+		for (int i = 0; i < capacity; i++)
+			buckets[i] = new ArrayMap();
+	}
+
+	public void put(Object key, Object value) {
+		getBucket(key).put(key, value);
+	}
+
+	public void remove(Object key) {
+		getBucket(key).remove(key);
+	}
+
+}
+```
