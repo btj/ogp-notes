@@ -17,15 +17,6 @@
 - [How to properly document single-object abstractions](single_object_doc_instr.md)
   - Concepts: defensive programming, contractual programming, preconditions, postconditions, class representation invariants (= private class invariants), class abstract state invariants (= public class invariants), getters, mutators
 
-## Multi-object abstractions (= entity-relationship abstractions)
-
-- [Single-class entity-relationship abstractions](entity_relationship_abstractions.md)
-  - Example: [html](https://github.com/btj/html_ir)
-  - Concepts: entity graphs, multi-object abstractions, bidirectional associations, consistency of bidirectional associations, peer objects, peer groups
-- [Multi-class entity-relationship abstractions](multi_class_abstractions.md)
-  - Concepts: packages, package-accessible fields/constructors/methods/classes, package representation invariants, package abstract state invariants, `HashSet`
-- [How to properly document multi-object abstractions](multi_object_doc_instr.md)
-
 ## Inheritance
 
 - [Polymorphism and dynamic binding](inheritance.md)
@@ -37,6 +28,17 @@
   - Concepts: interfaces, multiple inheritance, static fields, the Singleton pattern
 - [Implementation inheritance](implementation_inheritance.md)
   - Concepts: Inheritance of fields and methods, `super` constructor calls, `super` method calls
+- [Lists, sets, and maps](collections.md)
+  - Concepts: the List, Set, and Map abstract datatypes (ADTs); the ArrayList, LinkedList, HashSet, and HashMap data structures
+
+## Multi-object abstractions (= entity-relationship abstractions)
+
+- [Single-class entity-relationship abstractions](entity_relationship_abstractions.md)
+  - Example: [html](https://github.com/btj/html_ir)
+  - Concepts: entity graphs, multi-object abstractions, bidirectional associations, consistency of bidirectional associations, peer objects, peer groups
+- [Multi-class entity-relationship abstractions](multi_class_abstractions.md)
+  - Concepts: packages, package-accessible fields/constructors/methods/classes, package representation invariants, package abstract state invariants, `HashSet`
+- [How to properly document multi-object abstractions](multi_object_doc_instr.md)
 
 ## Advanced topics
 
