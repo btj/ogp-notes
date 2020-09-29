@@ -38,7 +38,7 @@ See below a proper way to document the square root module:
  *
  * @pre The given integer is nonnegative.
  *    | 0 <= x
- * @post The result is nonnegative and not greater than the given integer.
+ * @post The result is nonnegative.
  *    | 0 <= result
  * @post The square of the result is not greater than the given integer.
  *    | (long)result * result <= x
