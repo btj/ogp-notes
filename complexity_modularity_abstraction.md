@@ -47,7 +47,7 @@ See below a proper way to document the square root module:
  */
 public static int squareRoot(int x) {
     int result = 0;
-    while (result * result < x)
+    while ((long)result * result <= x)
         result++;
     return result - 1;
 }
