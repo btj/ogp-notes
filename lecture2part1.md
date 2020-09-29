@@ -2,7 +2,7 @@
 
 ### Contents
 
-- [Installing Java and Eclipse](#installing-java-and-eclipse)
+- [Installing Eclipse and FSC4J](#installing-eclipse-and-fsc4j)
 - [Building and running our first program in Eclipse](#building-and-running-our-first-program-in-Eclipse)
 - [The problem](#the-problem)
 - [Encapsulating the fields of class Interval](#encapsulating-the-fields-of-class-interval)
@@ -38,11 +38,11 @@ The `assert` statement checks if a given expression evaluates to `true`. If not,
 
 We can run this program directly in [JLearner](https://btj.github.io/jlearner/), but since JLearner does not support Java's modularity features, at this point, we will switch to a more complex but more powerful tool: the Eclipse IDE (Integrated Development Environment).
 
-## Installing Java and Eclipse
+## Installing Eclipse and FSC4J
 
-The first thing you always need to develop Java programs on your computer, is a Java Development Kit (JDK). You can download one from Oracle, but we recommend the one from [AdoptOpenJDK](https://adoptopenjdk.net/). Choose the latest OpenJDK version (as of this writing, the latest version is OpenJDK 13), and the HotSpot JVM. (Note: in the Windows installer, do not uncheck the _Add to PATH_ option.)
+We recommend that you use the [Eclipse Installer](https://www.eclipse.org/downloads/packages/installer) to install the latest Eclipse IDE for Java Developers; it will also install a matching Java Development Kit (JDK) if one is not yet present on your system.
 
-Once you have installed a JDK on your machine, you can install Eclipse. We recommend that you install the modified version of Eclipse, called [Formal Specifications Checker for Java (FSC4J)](https://fsc4j.github.io/fsc4j), that we are developing. It gives you feedback about the formal documentation you write. To install it, just follow the instructions on the FSC4J website.
+Once you have installed Eclipse, we recommend that you install the [Formal Specifications Checker for Java (FSC4J)](https://fsc4j.github.io/fsc4j), that we are developing. It is a modified version of the Java Development Tools component of Eclipse that gives you feedback about the formal documentation you write. To install it, just follow the instructions on the FSC4J website.
 
 ## Building and running our first program in Eclipse
 
