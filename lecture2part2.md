@@ -83,13 +83,13 @@ But what if we want to initialize an `Interval` object with a given lower bound 
 Java does not allow this, because there would be no way to decide which constructor to use to execute an instance creation expression `new Interval(3, 7)`. Java does allow a class to declare multiple constructors, but each constructor must have either a different number of parameters or different parameter types. So, one way to add our additional constructor is as follows:
 
 ```java
-	Interval(int lowerBound, int width, boolean dummy) {
+	Interval(int lowerBound, int width, Void dummy) {
 		this.lowerBound = lowerBound;
 		this.upperBound = lowerBound + width;
 	}
 ```
 
-This works: now, we can replace expression `new Interval(3, 7)` by the equivalent expression `new Interval(3, 4, false)` (or `new Interval(3, 4, true)`; the value for the dummy parameter does not matter).
+(`Void` is a built-in class with no instances; the only value of type `Void` is `null`.) This works: now, we can replace expression `new Interval(3, 7)` by the equivalent expression `new Interval(3, 4, null)`.
 
 Declaring multiple members with the same name is known as _overloading_. Java supports overloading of constructors, as well as methods. For example, we can extend our class with a method `setWidth` with two parameters that updates the lower bound or the upper bound, depending on the second argument:
 
@@ -117,7 +117,7 @@ class IntervalTest {
 	
 	@Test
 	void test() {
-		Interval interval = new Interval(3, 4, false);
+		Interval interval = new Interval(3, 4, null);
 
 		interval.setUpperBound(8);
 		assert interval.getLowerBound() == 3;
@@ -190,7 +190,7 @@ class Interval {
 	 * @post This interval's width equals the given width.
 	 *    | getWidth() == width
 	 */
-	Interval(int lowerBound, int width, boolean dummy) {
+	Interval(int lowerBound, int width, Void dummy) {
 		this.lowerBound = lowerBound;
 		this.upperBound = lowerBound + width;
 	}
