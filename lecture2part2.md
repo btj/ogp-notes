@@ -71,7 +71,7 @@ class IntervalTest {
 
 ## Overloading
 
-But what if we want to initialize an `Interval` object with a given lower bound and a given width? That is, we would like to additional declare the following constructor:
+But what if we want to initialize an `Interval` object with a given lower bound and a given width? That is, we would like to additionally declare the following constructor:
 
 ```java
 	Interval(int lowerBound, int width) {
