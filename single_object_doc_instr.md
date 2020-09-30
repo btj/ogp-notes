@@ -1,10 +1,153 @@
 # How to properly document single-object abstractions
 
+## Concepts
+
+### Data abstraction definition and implementation
+
+In Java, a data abstraction is *defined* by giving its *public aspects*: the class name, the names, parameter types, and return types of the class' public methods, the parameter types of the class' public constructors, and the documentation comments associated with the class, the public methods, and the public constructors.
+
+For example, the following defines a `Point` abstraction:
+```java
+/**
+ * Each instance of this class represents a point with integer coordinates
+ * in a two-dimensional coordinate system.
+ */
+public class Point {
+
+    /** Returns this instance's X coordinate. */
+    public int getX()
+    
+    /** Returns this instance's Y coordinate. */
+    public int getY()
+    
+    /**
+     * Initializes this instance so that it represents the given point.
+     * @post | getX() == x
+     * @post | getY() == y
+     */ 
+    public Point(int x, int y)
+
+}
+```
+
+An *implementation* of a given data abstraction is defined by the remaining elements of the class, called the *private aspects*: the private fields, the bodies of the public methods and constructors, any nonpublic methods and constructors, and any documentation comments associated with the nonpublic fields.
+
+That is, a `Point` class *implements* the data abstraction defined above if its public aspects are as given above. Generally, many different possible implementations exist for any given data abstraction. For example, here are two implementations of the `Point` abstraction:
+
+```java
+/**
+ * Each instance of this class represents a point with integer coordinates
+ * in a two-dimensional coordinate system.
+ */
+public class Point {
+
+    private int x;
+    private int y;
+
+    /** Returns this instance's X coordinate. */
+    public int getX() { return x; }
+    
+    /** Returns this instance's Y coordinate. */
+    public int getY() { return y; }
+    
+    /**
+     * Initializes this instance so that it represents the given point.
+     * @post | getX() == x
+     * @post | getY() == y
+     */ 
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+}
+```
+
+```java
+/**
+ * Each instance of this class represents a point with integer coordinates
+ * in a two-dimensional coordinate system.
+ */
+public class Point {
+
+    /**
+     * Stores the distance between this point and the origin of the coordinate system
+     * (that is, the r component of the polar coordinates of this point).
+     */
+    private double radius;
+    
+    /**
+     * Stores the angle, in radians, made by the origin of the
+     * coordinate system, this point, and the positive X axis
+     * (that is, the theta component of the polar coordinates of this point).
+     */
+    private double angle;
+
+    /** Returns this instance's X coordinate. */
+    public int getX() { return (int)(radius * Math.cos(angle)); }
+    
+    /** Returns this instance's Y coordinate. */
+    public int getY() { return (int)(radius * Math.sin(angle)); }
+    
+    /**
+     * Initializes this instance so that it represents the given point.
+     * @post | getX() == x
+     * @post | getY() == y
+     */ 
+    public Point(int x, int y) {
+        radius = Math.sqrt((double)x * x + (double)y * y);
+        angle = Math.atan2(y, x);
+    }
+
+}
+```
+Notice that both implementations have exactly the same public aspects; that is, they implement exactly the same abstraction. A client cannot tell whether they are using one or the other.
+
+### Abstract state
+
+The *abstract state* of a given instance O of a data abstraction at a given point in time is given by the return values of the getters of O at that time. For example, if at some point in time, we have, for some `Interval` object O, `O.getLowerBound() == 3` and `O.getWidth() == 4` and `O.getUpperBound() == 7`, then O's abstract state at that point in time could be written as (`getLowerBound()`: 3, `getWidth()`: 4, `getUpperBound()`: 7).
+
+If we then call `O.setWidth(10)`, we change O's abstract state. After the call returns, O's new abstract state is (`getLowerBound()`: 3, `getWidth()`: 10, `getUpperBound()`: 13).
+
+(If we fix the order of the getters, we can write the abstract state as a tuple. Using this notation, `O.setWidth(10)` changes O's abstract state from (3, 4, 7) to (3, 10, 13).)
+
+### Valid abstract states
+
+The *abstract state space* of a data abstraction with getters `getA()` with return type TA and `getB()` with return type TB is the set of tuples of the form (VA, VB), where VA is a value of type TA and VB is a value of type TB. For example, the abstract state space of the `Interval` abstraction is the set of triples (L, W, U) where L, W, and U are arbitrary `int` values.
+
+Generally, not all elements of an abstraction's abstract state space are meaningful abstract states of the abstraction. For example, the abstract state (`getLowerBound()`: 10, `getWidth()`: 4, `getUpperBound()`: 0) is not a meaningful abstract state. We say the abstract state is not *valid*. For the `Interval` abstraction, the valid abstract states are exactly the abstract states (L, W, U) where the constraints U = L + W and 0 ≤ W hold.
+
+### Representation, concrete state
+
+The *representation* of a data abstraction implementation is the way the implementation stores an instance's abstract state in computer memory. In simple cases, sufficient information to uniquely determine the current abstract state is stored in the instance's fields.
+
+For example, a possible representation for the `Interval` data abstraction is the one where the implementation stores an `Interval` instance's abstract state by storing the lower bound in a field `lowerBound` and the width in a field `width`. (The upper bound need not be stored separately since it can be computed from the lower bound and the width.)
+
+The *concrete state* of a given instance O of a data abstraction at a given point in time is (in simple cases) given by the values of the fields of O at that time. For example, suppose class `Interval` is implemented using fields `lowerBound` and `width`. Then, if at some point in time, we have `O.lowerBound == 3` and `O.width == 4`, then O's concrete state at that point in time could be written as (`lowerBound`: 3, `width`: 4).
+
+If we then call `O.setWidth(10)`, we change O's concrete state. After the call returns, O's new concrete state is (`lowerBound`: 3, `width`: 10).
+
+If we fix the order of the fields, we can write the concrete state as a tuple. Using this notation, `O.setWidth(10)` changes O's concrete state from (3, 4) to (3, 10).
+
+### Valid concrete states
+
+The *concrete state space* of a data abstraction implementation with fields `f1` of type `T1` and `f2` of type `T2` is the set of tuples of the form (V1, V2) where V1 is a value of type T1 and V2 is a value of type T2. For example, the concrete state space of the `Interval` implementation with fields `lowerBound` and `width` of type `int` is the set of pairs (L, W) where L and W are arbitrary `int` values.
+
+Generally, not all elements of a data abstraction implementation's concrete state space are meaningful concrete states of the implementation. For example, the concrete state (`lowerBound`: 5, `width`: -4) is not a meaningful concrete state. We say the concrete state is not *valid*. For this implementation, the valid concrete states are exactly the pairs (L, W) where 0 ≤ W holds.
+
+### Relationship between concrete states and abstract states
+
+Each implementation of a given data abstraction fixes a particular representation and therefore fixes a particular concrete state space as well as a particular relationship between an instance's concrete state and its abstract state. This relationship is defined by the implementations of the getters. Specifically, an implementation's getters compute, given a concrete state, a corresponding abstract state. (In the literature, this correspondence is called the implementation's *abstraction function* or *abstraction relation*.)
+
+A correct implementation's getters compute from each valid concrete state a valid abstract state. (If a getter is called when the instance's concrete state is invalid, the getter need not produce a valid abstract state. It may even crash.)
+
+For example, the getters of the `Interval` implementation with fields `lowerBound` and `width` map the concrete state (`lowerBound`: 3, `width`: 4) to the abstract state (`getLowerBound()`: 3, `getWidth()`: 4, `getUpperBound()`: 7).
+
 ## Class documentation
 
 If a class implements an immutable abstraction, which implies that the properties of an instance of the class do not change throughout the lifetime of the instance, then you shall include an `@immutable` tag in the Javadoc comment for the class.
 
-If not all possible values of the return types of the inspectors of a class are valid abstract values for the instances of the class, then you shall describe the set of valid abstract values by specifying one or more _public class invariants_. A public class invariant for a class can be specified in the form of an `@invar` clause in the Javadoc comment for the class or in the form of a `@post` clause in the Javadoc comment for a public getter of the class; the choice between these two forms is a matter of style.
+If not all abstract states in the abstract state space of a class are valid, then you shall describe the set of valid abstract states by specifying one or more _public class invariants_. A public class invariant for a class can be specified in the form of an `@invar` clause in the Javadoc comment for the class or in the form of a `@post` clause in the Javadoc comment for a public getter of the class; the choice between these two forms is a matter of style.
 
 For example, see the following documentation for an immutable `TimeOfDay` class:
 ```java
@@ -85,7 +228,7 @@ If a class exists only to contain static methods, and is not intended to be inst
 
 All fields of all classes shall be marked as `private`.
 
-If not all possible values of the types of the fields of a class represent a valid abstract state of an instance of the class, then you shall describe the set of valid representations by means of one or more `@invar` clauses in the Javadoc comments for the fields of the class. These specify the class' _private class invariants_, also called its _representation invariants_. (It does not matter which `@invar` clauses are in the Javadoc comment for which field; a reasonable approach is to specify all `@invar` clauses in the Javadoc comment preceding the entire block of fields.)
+If not all concrete states in the concrete state space of a class are valid, then you shall describe the set of valid concrete states by means of one or more `@invar` clauses in the Javadoc comments for the fields of the class. These specify the class' _private class invariants_, also called its _representation invariants_. (It does not matter which `@invar` clauses are in the Javadoc comment for which field; a reasonable approach is to specify all `@invar` clauses in the Javadoc comment preceding the entire block of fields.)
 
 The above `TimeOfDay` example illustrates this.
 
