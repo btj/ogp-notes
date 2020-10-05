@@ -23,7 +23,7 @@ public class String {
      *
      * @post | 0 <= result
      */
-    public int getLength()
+    public int length()
 
     /**
      * Returns the character at the given index in the sequence of characters
@@ -31,7 +31,7 @@ public class String {
      *
      * @throws IndexOutOfBoundsException if the given index is less than zero or
      *         not less than the length of this object.
-     *    | index < 0 || getLength() <= index
+     *    | index < 0 || length() <= index
      */
     public char charAt(int index)
 
@@ -39,7 +39,7 @@ public class String {
      * Returns a `String` object of length 1 containing the single given character.
      *
      * @post | result != null
-     * @post | result.getLength() == 1
+     * @post | result.length() == 1
      * @post | result.charAt(0) == c
      */
     public static String valueOf(char c)
@@ -51,11 +51,11 @@ public class String {
      *
      * @throws NullPointerException | other == null
      * @post | result != null
-     * @post | result.getLength() == getLength() + other.getLength()
-     * @post | IntStream.range(0, getLength()).allMatch(i ->
+     * @post | result.length() == length() + other.length()
+     * @post | IntStream.range(0, length()).allMatch(i ->
      *       |     result.charAt(i) == charAt(i))
-     * @post | IntStream.range(0, other.getLength()).allMatch(i ->
-     *       |     result.charAt(getLength() + i) == other.charAt(i))
+     * @post | IntStream.range(0, other.length()).allMatch(i ->
+     *       |     result.charAt(length() + i) == other.charAt(i))
      */
     public String concat(String other)
 
@@ -92,7 +92,7 @@ public class String {
      *
      * @post | 0 <= result
      */
-    public int getLength() {
+    public int length() {
         return characters.length;
     }
 
@@ -102,10 +102,10 @@ public class String {
      *
      * @throws IndexOutOfBoundsException if the given index is less than zero
      *         or not less than the length of this object.
-     *    | index < 0 || getLength() <= index
+     *    | index < 0 || length() <= index
      */
     public char charAt(int index) {
-        if (index < 0 || getLength() <= index)
+        if (index < 0 || length() <= index)
             throw new IndexOutOfBoundsException();
         return characters[index];
     }
@@ -114,7 +114,7 @@ public class String {
      * Returns a `String` object of length 1 containing the single given character.
      *
      * @post | result != null
-     * @post | result.getLength() == 1
+     * @post | result.length() == 1
      * @post | result.charAt(0) == c
      */
     public static String valueOf(char c) {
@@ -128,11 +128,11 @@ public class String {
      *
      * @throws NullPointerException | other == null
      * @post | result != null
-     * @post | result.getLength() == getLength() + other.getLength()
-     * @post | IntStream.range(0, getLength()).allMatch(i ->
+     * @post | result.length() == length() + other.length()
+     * @post | IntStream.range(0, length()).allMatch(i ->
      *       |     result.charAt(i) == charAt(i))
-     * @post | IntStream.range(0, other.getLength()).allMatch(i ->
-     *       |     result.charAt(getLength() + i) == other.charAt(i))
+     * @post | IntStream.range(0, other.length()).allMatch(i ->
+     *       |     result.charAt(length() + i) == other.charAt(i))
      */
     public String concat(String other) {
         char[] cs = new char[characters.length + other.characters.length];
@@ -158,8 +158,8 @@ Let's see what happens if we break encapsulation. Here is a first attempt to add
      * object.
      *
      * @post | result != null
-     * @post | result.length == getLength()
-     * @post | IntStream.range(0, getLength()).allMatch(i ->
+     * @post | result.length == length()
+     * @post | IntStream.range(0, length()).allMatch(i ->
      *       |     result[i] == charAt(i))
      */
     public char[] toCharArray() {
@@ -183,8 +183,8 @@ A correct way to implement method `toCharArray` is by returning a copy of the re
      *
      * @creates | result
      * @post | result != null
-     * @post | result.length == getLength()
-     * @post | IntStream.range(0, getLength()).allMatch(i ->
+     * @post | result.length == length()
+     * @post | IntStream.range(0, length()).allMatch(i ->
      *       |     result[i] == charAt(i))
      */
     public char[] toCharArray() {
@@ -208,7 +208,7 @@ A class must never leak its representation objects. But not leaking representati
      * @throws NullPointerException | characters == null
      * @inspects | characters
      * @post | result != null
-     * @post | result.getLength() == characters.length
+     * @post | result.length() == characters.length
      * @post | IntStream.range(0, characters.length)
      *       |     .allMatch(i -> result.charAt(i) == characters[i])
      */
@@ -236,7 +236,7 @@ A correct way to implement the `valueOf(char[])` method is by copying the argume
      * @throws NullPointerException | characters == null
      * @inspects | characters
      * @post | result != null
-     * @post | result.getLength() == characters.length
+     * @post | result.length() == characters.length
      * @post | IntStream.range(0, characters.length)
      *       |     .allMatch(i -> result.charAt(i) == characters[i])
      */
