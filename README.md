@@ -20,7 +20,7 @@
 ## Inheritance
 
 - [Polymorphism and dynamic binding](inheritance.md)
-  - Concepts: polymorphism, subclassing, inheritance, `instanceof`, typecasts; dynamic binding, method overriding, `@Override`; class `Object`, `Object.equals`, `Object.hashCode`, `Object.toString`, `Object.getClass`
+  - Concepts: polymorphism, subclassing, inheritance, `instanceof`, the static type checker, static/dynamic type of a variable or an expression, typecasts; dynamic binding, method overriding, `@Override`; class `Object`, `Object.equals`, `Object.hashCode`, `Object.toString`, `Object.getClass`
 - [Behavioral subtyping: modular reasoning about programs that use dynamic binding](behavioral_subtyping.md)
   - Example: [intlist_inheritance](https://github.com/btj/intlist_inheritance)
   - Concepts: Non-modular reasoning, modular reasoning, method specifications, correctness of methods; method call resolution, resolved method vs called method, static versus dynamic method call binding; strenghtening of specifications, behavioral types, behavioral subtyping
