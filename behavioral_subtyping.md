@@ -63,6 +63,7 @@ If the changed method no longer complies with its original specification, we nee
 
 In the example, there are at least two possible specifications that we can assign to method `getLocations`:
 - We can assign a strong specification:
+
   ```java
   /**
    * @post | result != null
@@ -79,6 +80,7 @@ In the example, there are at least two possible specifications that we can assig
   callers as well. We will then discover that method `printLocations` needs to
   be updated as well.
 - We can also assign a weaker specification:
+
   ```java
   /**
    * @post | result != null
