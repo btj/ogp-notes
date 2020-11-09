@@ -125,9 +125,9 @@ import java.util.stream.Stream;
 public interface Set {
 
     /**
-	 * @post | result != null
-	 * @immutable
-	 */
+     * @post | result != null
+     * @immutable
+     */
     Predicate getEligibilityPredicate();
 
     /**
@@ -154,7 +154,7 @@ public interface Set {
     
     /**
      * @pre | value != null
-	 * @pre | getEligibilityPredicate().test(value)
+     * @pre | getEligibilityPredicate().test(value)
      * @mutates | this
      * @post The given value is in the set.
      *       | Arrays.stream(toArray()).anyMatch(e -> e.equals(value))
@@ -188,9 +188,9 @@ This solution uses the interface Predicate defined as follows:
 ```java
 public interface Predicate {
     /**
-	 * @inspects | this, value
-	 * @immutable
-	 */
+     * @inspects | this, value
+     * @immutable
+     */
     boolean test(Object value);
 }
 ```
@@ -198,9 +198,9 @@ We can now define a class IsComparablePredicate:
 ```java
 public class IsComparablePredicate implements Predicate {
     /**
-	 * @inspects nothing |
-	 * @post | result == (value instanceof Comparable)
-	 */
+     * @inspects nothing |
+     * @post | result == (value instanceof Comparable)
+     */
     public boolean test(Object value) { return value instanceof Comparable; }
 }
 ```
