@@ -90,7 +90,7 @@ public interface List {
 	 * @mutates | this
 	 * @post | Arrays.equals(toArray(),
 	 *       |     IntStream.range(0, old(size()))
-	 *       |         .filter(i -> i == old(IntStream.range(0, size())
+	 *       |         .filter(i -> i != old(IntStream.range(0, size())
 	 *       |             .filter(i -> get(i).equals(value))
 	 *       |             .findFirst().orElse(-1)))
 	 *       |         .mapToObj(i -> old(toArray())[i]).toArray())
@@ -529,6 +529,7 @@ public interface Map {
 	/**
 	 * @post | result == entrySet().stream()
 	 *       |     .filter(e -> ((Entry)e).getKey().equals(key))
+	 *       |     .map(e -> ((Entry)e).getValue())
 	 *       |     .findFirst().orElse(null)
 	 */
 	Object get(Object key);
