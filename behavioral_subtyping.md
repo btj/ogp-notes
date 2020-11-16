@@ -276,6 +276,14 @@ Using these definitions, we can rephrase the principle of modular reasoning abou
 
 Or, to phrase it as a slogan: Java's static type checker ensures that a subclass D of a class C is a _syntactic_ subtype of C; to achieve correct programs, we must ensure that D is a _behavioral_ subtype of C as well.
 
+## Inheritance of specifications
+
+In the literature on behavioral subtyping, some authors propose that the *effective* specification of a method should be the *conjunction* of the *declared specification* and any *inherited specifications*. (The conjunction of a specification with precondition P1 and postcondition Q1 and a specification with precondition P2 and postcondition Q2 is the specification with precondition "P1 or P2" and postcondition "(if old(P1) then Q1) and (if old(P2) then Q2)".) In this approach, called *specification inheritance*, if the implementation of each method of a program complies with its *effective specification*, the program automatically complies with behavioral subtyping.
+
+In this course, however, we **do not** apply specification inheritance; a method's effective specification is exactly its declared specification. (Therefore, we can speak simply of "a method's specification" without introducing ambiguity.)
+
+We make one exception to this rule: if the Javadoc comment associated with a method M does not contain any specification clauses at all (i.e. no `@pre`, `@post`, `@throws`, `@may_throw`, `@inspects`, `@mutates`, `@mutates_properties`, `@creates`, `@immutable`, `@peerObject`, `@peerObjects`, or `@basic` clauses at all), *and* M overrides some method M' that itself overrides all other methods that M overrides, then M inherits the specification of M'.
+
 ## Further reading
 
 _Note: the material in this section is outside the scope of the course and is provided for the information of interested students only._
