@@ -1,6 +1,5 @@
-# First, copy the files from https://github.com/btj/jlearner
-# (in particular: language.md and the .png files)
-# into the current directory
+# First, clone https://github.com/btj/jlearner and set JLEARNERPATH
+cp $JLEARNERPATH/language.md $JLEARNERPATH/*.png .
 
 pandoc -o course-notes.html -f gfm \
   README.md \
@@ -12,13 +11,14 @@ pandoc -o course-notes.html -f gfm \
   complexity_modularity_abstraction.md \
   representation_objects.md \
   single_object_doc_instr.md \
-  entity_relationship_abstractions.md \
-  multi_class_abstractions.md \
-  multi_object_doc_instr.md \
   inheritance.md \
   behavioral_subtyping.md \
   interfaces.md \
   implementation_inheritance.md \
+  collections.md \
+  entity_relationship_abstractions.md \
+  multi_class_abstractions.md \
+  multi_object_doc_instr.md \
   iterators.md \
   generics.md
 pandoc --wrap=none -V documentclass=book --toc --template=latex.template --listings -o course-notes.tex course-notes.html
