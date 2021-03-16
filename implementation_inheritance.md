@@ -70,3 +70,7 @@ Notice the following:
 - Methods `getHue`, `getSaturation`, and `getValue` are simply _inherited_ by class `TransparentColor` from class `Color`. This means that calling
   `getHue` on a `TransparentColor` object O executes method `getHue` from class `Color` on O. This, in turn, means that inside such an execution of method `getHue`,
   `this` will refer to an instance of class `TransparentColor`.
+
+## Fields are hidden, not overridden!
+
+If a class D declares a field with the same name F as a field it inherits from its superclass C, the inherited field is *hidden*, not *overridden*! In that case, each object of class D has *two* fields named F: the one declared in class C, and the one declared in class D. When F is mentioned in class C, the field declared in class C is accessed; when F is mentioned in class D, the field declared in class D is accessed. You can access the field of class C from class D using notation `super.F`.
