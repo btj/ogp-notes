@@ -38,6 +38,8 @@ Add a public method `public GhostState hitBy(Ghost ghost, PacMan pacMan)` to cla
 
 You will have to submit classes `Direction`, `Dot`, `FoodItem`, `Ghost`, `GhostState`, `Maze`, `MazeDescriptions`, `MazeMap`, `PacMan`, `PowerPellet`, `RegularGhostState`, `Square`, and `VulnerableGhostState`, all of which shall reside in package `pacman`.
 
+In addition to the methods specified above, you may add any additional methods you deem useful to any of these classes.
+
 For this Part, you need not write any documentation, except that you shall write complete formal documentation for method `getSize` in class `FoodItem` and its subclasses; make sure to respect behavioral subtyping.
 
 You also need not submit a test suite.
