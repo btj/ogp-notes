@@ -29,7 +29,7 @@
 - [Implementation inheritance](implementation_inheritance.md)
   - Concepts: Inheritance of fields and methods, `super` constructor calls, `super` method calls
 - [Lists, sets, and maps](collections.md)
-  - Concepts: the List, Set, and Map abstract datatypes (ADTs); the ArrayList, LinkedList, HashSet, and HashMap data structures
+  - Concepts: the List, Set, and Map abstract datatypes (ADTs); the ArrayList, LinkedList, HashSet, and HashMap data structures; the Java Collections Framework
 
 ## Multi-object abstractions (= entity-relationship abstractions)
 
