@@ -40,7 +40,7 @@ You will have to submit classes `Direction`, `Dot`, `FoodItem`, `Ghost`, `GhostS
 
 In addition to the methods specified above, you may add any additional methods you deem useful to any of these classes.
 
-For this Part, you need not write any documentation, except that you shall write complete formal documentation for method `getSize` in class `FoodItem` and its subclasses; make sure to respect behavioral subtyping.
+For this Part, you need not write any documentation, except that you shall write complete formal documentation for method `getSize` in class `FoodItem` and its subclasses; make sure to respect behavioral subtyping. (Note: behavioral subtyping is not in the scope of course H02C5A; students of course H02C5A need not write any documentation at all.)
 
 You also need not submit a test suite.
 
