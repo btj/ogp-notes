@@ -65,7 +65,7 @@ generated and an `A` causes an arrival portal to be generated.
 
 ## Submission and grading
 
-You shall submit the classes from package `maze` (that is: the files `Direction.java`, `Dot.java`, `FoodItem.java`, `Ghost.java`, `GhostState.java`, `Maze.java`, `MazeDescriptions.java`, `MazeMap.java`, `PacMan.java`, `PowerPellet.java`, `RegularGhostState.java`, `Square.java`, and `VulnerableGhostState.java`), as well as the files that implement your package `pacman.wormholes` and your test suite for this package.
+You shall submit the classes from package `pacman` (that is: the files `Direction.java`, `Dot.java`, `FoodItem.java`, `Ghost.java`, `GhostState.java`, `Maze.java`, `MazeDescriptions.java`, `MazeMap.java`, `PacMan.java`, `PowerPellet.java`, `RegularGhostState.java`, `Square.java`, and `VulnerableGhostState.java`), as well as the files that implement your package `pacman.wormholes` and your test suite for this package.
 
 An automatic check will be performed on the submitted files.
 
