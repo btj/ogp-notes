@@ -282,7 +282,7 @@ In the literature on behavioral subtyping, some authors propose that the *effect
 
 In this course, however, we **do not** apply specification inheritance; a method's effective specification is exactly its declared specification. (Therefore, we can speak simply of "a method's specification" without introducing ambiguity.)
 
-We make one exception to this rule: if the Javadoc comment associated with a method M does not contain any specification clauses at all (i.e. no `@pre`, `@post`, `@throws`, `@may_throw`, `@inspects`, `@mutates`, `@mutates_properties`, `@creates`, `@immutable`, `@peerObject`, `@peerObjects`, or `@basic` clauses at all), *and* M overrides some method M' that itself overrides all other methods that M overrides, then we define the specification of M as being identical to the specification of M'.
+We make one exception to this rule: if the Javadoc comment associated with a method M does not contain any specification clauses at all (i.e. no `@pre`, `@post`, `@throws`, `@may_throw`, `@inspects`, `@mutates`, `@mutates_properties`, `@creates`, `@immutable`, `@peerObject`, or `@peerObjects` clauses at all), *and* M overrides some method M' that itself overrides all other methods that M overrides, then we define the specification of M as being identical to the specification of M'.
 
 ## Further reading
 

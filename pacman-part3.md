@@ -85,7 +85,7 @@ bidirectional associations, both as representation invariants and as abstract st
 The remaining 5 points shall be awarded as follows:
 - 1 point if you use the `@representationObject`, `@representationObjects`, `@peerObject`, and `@peerObjects` tags in the correct places in package `pacman.wormholes`.
 - 1 point if the documentation you write for package `pacman.wormholes` is fully correct and you have complete postconditions.
-- 1 point if your documentation for package `pacman.wormholes` is fully correct and complete, which implies among other things that you use `@mutates_properties` and `@basic` properly to precisely specify which properties of which objects may be mutated by a method or constructor.
+- 1 point if your documentation for package `pacman.wormholes` is fully correct and complete, which implies among other things that you use `@mutates_properties` properly to precisely specify which properties of which objects may be mutated by a method or constructor.
 - 1 point if you do not treat setting a wormhole's departure portal to its current departure portal or setting a wormhole's arrival portal to its current arrival portal as illegal, and you have complete postconditions for the setters of class `Wormhole` that correctly handle these cases.
 - 1 point if you correctly apply nested abstractions to achieve maximum class-level encapsulation (in addition to package-level encapsulation) in package `pacman.wormholes`.
 

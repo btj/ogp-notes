@@ -22,11 +22,11 @@ For more information about peer groups, see the course notes on [Entity-relation
 
 A method must not mutate any pre-existing peer groups not mentioned in its `@mutates` clause and not used to represent the state of any peer groups mentioned in its `@mutates` clause. That is, an execution of a method may mutate an object O if and only if either O was newly created during the method execution (i.e. it did not exist when the method execution started), or a member of O's peer group is mentioned in the method's `@mutates` clause, or O is a member of the peer group of a representation object of a member of the peer group of an object mentioned in the method's `@mutates` clause, or O is a member of the peer group of a representation object of a member of the peer group of a representation object of a member of the peer group of an object mentioned in the method's `@mutates` clause, and so forth.
 
-### `@mutates_properties` and `@basic` clauses
+### `@mutates_properties` clauses
 
 If a peer group is mentioned in a `@mutates` clause, then the new state of the peer group must be specified using postconditions. In general, the constructor or method's postconditions must (explicitly or by implication) specify the new return value of each getter of each member of the peer group. If most objects' getters' return values remain unchanged, and for the objects whose getters' return values do not all remain unchanged, most getters' return values do remain unchanged, one can use a `@mutates_properties` clause.
 
-The clause `@mutates_properties | O1.M1(), O2.M2()` is equivalent to `@mutates | O1, O2` plus a postcondition that states that for each object O in the union of the peer group of O1 and O2, and for each basic inspector M of O, either (O, M) is in the set {(O1, M1), (O2, M2)} or `Objects.equals(O.M(), old(O.M()))`. A basic inspector is a getter whose Javadoc comment contains a `@basic` tag.
+The clause `@mutates_properties | O1.M1(), O2.M2()` is equivalent to `@mutates | O1, O2` plus a postcondition that states that for each object O in the union of the peer group of O1 and O2, and for each basic inspector M of O, either (O, M) is in the set {(O1, M1), (O2, M2)} or `Objects.equals(O.M(), old(O.M()))`. A basic inspector is a getter that does not have a postcondition of the form `result == E` or `result.equals(E)` or `Objects.equals(result, E)` for some expression E.
 
 ### Inspects clauses
 
@@ -68,10 +68,8 @@ class Rectangle {
     private int width;
     private int height;
 
-    /** @basic */
     public int getWidth() { return width; }
 
-    /** @basic */
     public int getHeight() { return height; }
 
     /** @post | result == getWidth() * getHeight() */
