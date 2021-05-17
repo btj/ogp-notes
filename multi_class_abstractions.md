@@ -322,7 +322,7 @@ public class ProjectCourseStudent {
      * @invar | getTeamInternal() == null
      *        | || getTeamInternal().getMembersInternal().contains(this)
      * 
-     * @peerObject
+     * @peerObject (package-level)
      */
     Team getTeamInternal() { return team; }
     
@@ -331,7 +331,7 @@ public class ProjectCourseStudent {
      * 
      * @peerObject
      */
-    public Team getTeam() { return team; }
+    public Team getTeam() { return getTeamInternal(); }
     
     /**
      * Initializes this object as representing a student who is not in a team.
@@ -417,7 +417,7 @@ public class Team {
      *        |     s.getTeamInternal() == this)
      * 
      * @post | result != null && result.stream().allMatch(s -> s != null)
-     * @peerObjects
+     * @peerObjects (package-level)
      */
     Set<ProjectCourseStudent> getMembersInternal() { return Set.copyOf(members); }
     
@@ -428,7 +428,7 @@ public class Team {
      * @creates | result
      * @peerObjects
      */
-    public Set<ProjectCourseStudent> getMembers() { return Set.copyOf(members); }
+    public Set<ProjectCourseStudent> getMembers() { return getMembersInternal(); }
 
     /**
      * Initializes this object as representing an empty team.
@@ -480,11 +480,13 @@ public class Team {
 (We do not show class `BigTeamsTest` again because it is unchanged.)
 
 Notice the following:
-- An instance of a class that is part of a class-encapsulated abstraction nested within a package-encapsulated abstraction may have both a class-level peer group and a package-level peer group. The class-level peer group is always a subset of the package-level peer group. The class-level peer group is defined by the `@peerObject` and `@peerObjects` tags in the Javadoc comments for the class's private fields; the package-level peer group is defined by the `@peerObject` and `@peerObjects` tags in the Javadoc comments for the package's package-accessible getters. In the example, the objects have no class-level peer groups (or, equivalently, the class-level peer group of O is just the singleton {O}).
+- An instance of a class that is part of a class-encapsulated abstraction nested within a package-encapsulated abstraction may have both a class-level peer group and a package-level peer group. The class-level peer group is always a subset of the package-level peer group. The class-level peer group is defined by the `@peerObject` and `@peerObjects` tags in the Javadoc comments for the class's private fields; the package-level peer group is defined by the `@peerObject (package-level)` and `@peerObjects (package-level)` tags in the Javadoc comments for the package's package-accessible getters. In the example, the objects have no class-level peer groups (or, equivalently, the class-level peer group of O is just the singleton {O}).
+- A class-encapsulated abstraction nested within a package-encapsulated abstraction informs its clients of its instances' peer objects by means of `@peerObject (class-level)` and/or `@peerObjects (class-level)` clauses in the Javadoc comments for the class' package-accessible getters.
 - We specify a class-level abstraction's representation invariants using `@invar` tags in the Javadoc comments for the class' private fields.
 - In the case of a class-encapsulated abstraction nested within a package-encapsulated abstraction, we specify the class-level abstraction's abstract state invariants using `@post` tags in the Javadoc comments for the class' nonprivate getters.
 - We specify a package-level abstraction's representation invariants using `@invar` tags in the Javadoc comments for the package's package-accessible fields or getters.
 - We specify a package-level abstraction's abstract state invariants using `@invar` tags in the Javadoc comments for the package's classes and/or using `@post` tags in the Javadoc comments for the package's public getters.
+- In the case of nested abstractions, a package-encapsulated abstraction's public getters should define the package-encapsulated abstraction's abstract state in terms of the constituent class-encapsulated abstractions' abstract states. Specifically, a package's public getters should not use private fields or methods in their bodies, so that their bodies make sense not just to code inside the same class, but to code in other classes of the package as well. The bodies of a package's public getters are considered to be visible to the authors of other classes within the package. (They are not considered to be part of the implementation of the class-encapsulated abstraction.)
 - A public constructor's author must ensure that when the constructor returns, all of the constructed object's class-level and package-level representation invariants hold. (Those of its peer objects must hold as well, but usually a newly constructed object does not yet have any peer objects.)
 - At every call of a package-accessible method, it is the caller's responsibility to ensure that for each member O of the class-level peer group of each object inspected or mutated by the method, all of O's class-level representation invariants hold. It is the method author's responsibility to ensure that all of these invariants hold again when the method returns.
 - At every call of a public method, it is the caller's responsibility to ensure that for each member O of the package-level peer group of each object inspected or mutated by the method, all of O's class-level and package-level representation invariants hold. It is the method author's responsibility to ensure that all of these invariants hold again when the method returns.
