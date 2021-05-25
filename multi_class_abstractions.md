@@ -417,6 +417,7 @@ public class Team {
      *        |     s.getTeamInternal() == this)
      * 
      * @post | result != null && result.stream().allMatch(s -> s != null)
+     * @creates | result
      * @peerObjects (package-level)
      */
     Set<ProjectCourseStudent> getMembersInternal() { return Set.copyOf(members); }
