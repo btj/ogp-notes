@@ -279,7 +279,7 @@ public class FractionList {
      * Returns the element at the given index in the list of fractions stored by
      * this object.
      *
-     * @throws IndexOutOfBoundsException | 0 < index || index <= getSize()
+     * @throws IndexOutOfBoundsException | index < 0 || getSize() <= index
      */
     public Fraction getElementAt(int index) {
         if (index < 0 || getSize() <= index)
