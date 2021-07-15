@@ -17,12 +17,21 @@ public enum Multiplicity {
 Each role whose association line has not been deleted belongs to exactly one
 class box. No two roles of a class box may have the same name.
 An association line
-connects a *start role* to an *end role* (which may be the same, as in the
-example above).
+connects a *start role* to an *end role*.
 
-Allow the client to create a class box with a given name and no roles, and to create an association with a given start class, start role name, start role multiplicity, end class, end role name, and end role multiplicity. Furthermore, provide methods `getName` and `getRoles` in class `ClassBox`, the latter of which returns a `java.util.Map<String, Role>` object, methods `getClassBox` (which returns `null` if the role's associated association line has been deleted), `getName`, `getMultiplicity`, and `getAssociationLine` in class `Role`, and methods `getStartRole`, `getEndRole`, `isDeleted`, and `delete` in class `AssociationLine`. The latter deletes the association line's roles from its class boxes.
+Allow the client to create a class box with a given name and no roles, and to create an association with a given start class box, start role name, start role multiplicity, end class box, end role name, and end role multiplicity. Furthermore, provide methods `getName` and `getRoles` in class `ClassBox`, the latter of which returns a `java.util.Map<String, Role>` object, methods `getClassBox` (which returns `null` if the role's associated association line has been deleted), `getName`, `getMultiplicity`, and `getAssociationLine` in class `Role`, and methods `getStartRole`, `getEndRole`, `isDeleted`, and `delete` in class `AssociationLine`. The latter deletes the association line's roles from its class boxes.
 
 For simplicity, you may treat an attempt to create an association line that connects two roles of the same class box as illegal.
+
+See here some example class diagrams:
+
+![Some example class diagrams](classDiagrams.svg)
+
+The first class diagram consists of two class boxes, named *Student* and *Team*. Class box *Student* has a single role named *team* with multiplicity `ZERO_TO_ONE`; class box *Team* has a single role named *member* with multiplicity `ZERO_TO_MANY`. (Notice that graphically, the roles of a class box are shown on the *opposite* side of the corresponding association lines. Also, the roles of a class box are the roles played by the opposite class boxes, not the roles played by the class box itself.) A single association line connects these two roles. (Which role is the association line's start role and which is its end role is not visible. It would be potentially visible if we included the *navigability* (unidirectional or bidirectional) of association lines, but we do not.)
+
+The second class diagram consists of three class boxes, named *DeparturePortal*, *Wormhole*, and *ArrivalPortal*. Class box *DeparturePortal* has a single role named *wormhole* with multiplicity `ZERO_TO_MANY`; class box *Wormhole* has a role named *departurePortal* with multiplicity `ONE` and a role named *arrivalPortal* with multiplicity `ONE`; class box *ArrivalPortal* has a single role named *wormhole* with multiplicity `ZERO_TO_MANY`. The class diagram has two association lines: one connects role *wormhole* of class box *DeparturePortal* and role *departurePortal* of class box *Wormhole*; the other one connects role *wormhole* of class box *ArrivalPortal* and role *arrivalPortal* of class box *Wormhole*.
+
+The third class diagram consists of two class boxes, named *Airport* and *Flight*. Class box *Airport* has a role named *outgoingFlight* with multiplicity `ZERO_TO_MANY` and a role named *incomingFlight* with multiplicity `ZERO_TO_MANY`; class box *Flight* has a role named *departureAirport* with multiplicity `ONE` and a role named *arrivalAirport* with multiplicity `ONE`. The class diagram has two association lines: one connects role *outgoingFlight* of class box *Airport* and role *departureAirport* of class box *Flight*; the other one connects role *incomingFlight* of class box *Airport* and role *arrivalAirport* of class box *Flight*.
 
 Ensure your abstraction is properly encapsulated (which implies, among other things, that it does not expose representation objects and that it protects the consistency of the bidirectional associations). Provide full public and internal formal documentation. (You need not provide any informal documentation.) Deal with illegal cases of creating an object defensively, and other illegal cases contractually.
 
@@ -32,9 +41,11 @@ Provide a test suite that tests each statement of your abstraction, except for s
 
 Define a class hierarchy for representing immutable *maps*. Conceptually, a map is
 a set of key-value pairs (also known as *entries*).
-Specifically, a *map* (class `Map`) is either an *empty map* (class `EmptyMap`) or a *nonempty map* (class `NonemptyMap`). A nonempty map has a *key* and a *value* (both arbitrary objects (not `null`)) and a *tail*, which is again a `Map` instance. The set of key-value pairs of a nonempty map is the set of key-value pairs of the tail plus the given pair.
+Specifically, a *map* (class `Map`) is either an *empty map* (class `EmptyMap`) or a *nonempty map* (class `NonemptyMap`). A nonempty map has a *key* and a *value* (both arbitrary objects (not `null`)) and a *tail*, which is again a `Map` instance. The set of key-value pairs of a nonempty map M with key K, value V, and tail T is S ∪ {(K, V)} where S is the set of key-value pairs of T (unless S contains a key-value pair (K, V'), in which case the set of key-value pairs of M is S \ {(K, V')} ∪ {(K, V)}).
 
 Allow the client to obtain an `EmptyMap` instance using `EmptyMap.of`, to obtain a `NonemptyMap` instance given a key, a value, and a tail using `NonemptyMap.of`, and to retrieve a `NonemptyMap` instance's key, value, and tail using methods `getKey`, `getValue`, and `getTail`.
+
+For example, `NonemptyMap.of("one", 1, NonemptyMap.of("two", 2, EmptyMap.of()))` shall return a `Map` object that represents the set of key-value pairs {("one", 1), ("two", 2)}.
 
 Also allow the client to retrieve the value for a given key `key` in a `Map` object `map` by calling `map.get(key)`. This method should return `null` if the given key does not appear in the map. You cannot use typecasts for implementing this functionality.
 
