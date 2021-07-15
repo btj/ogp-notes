@@ -21,7 +21,7 @@ connects a *start role* to an *end role*.
 
 Allow the client to create a class box with a given name and no roles, and to create an association with a given start class box, start role name, start role multiplicity, end class box, end role name, and end role multiplicity. Furthermore, provide methods `getName` and `getRoles` in class `ClassBox`, the latter of which returns a `java.util.Map<String, Role>` object, methods `getClassBox` (which returns `null` if the role's associated association line has been deleted), `getName`, `getMultiplicity`, and `getAssociationLine` in class `Role`, and methods `getStartRole`, `getEndRole`, `isDeleted`, and `delete` in class `AssociationLine`. The latter deletes the association line's roles from its class boxes.
 
-For simplicity, you may treat an attempt to create an association line that connects two roles of the same class box as illegal.
+For simplicity, you may treat an attempt to create an association line that connects two roles of the same class box as illegal. That is, you may treat the case where an association's start role and its end role belong to the same class box as illegal.
 
 See here some example class diagrams:
 
