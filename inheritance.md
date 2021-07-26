@@ -190,6 +190,24 @@ public class Drawing {
 }
 ```
 
+### Pattern matching
+
+Consider the following piece of code:
+```java
+Shape shape = shapes[i];
+if (shape instanceof Triangle) {
+    Triangle triangle = (Triangle)shape;
+    drawingCommands += triangle.getDrawingCommand();
+}
+```
+Since Java 16, released in March 2021, we can write this code more concisely as follows:
+```java
+Shape shape = shapes[i];
+if (shape instanceof Triangle triangle)
+    drawingCommands += triangle.getDrawingCommand();
+```
+This form of the `instanceof` operator is called the *pattern match operator*. More generally, a pattern matching expression `E instanceof T x` is evaluated by first evaluating `E` to a value `V`. If `V` is `null` or a reference to an object that is not an instance of type `T`, the pattern matching expression evaluates to `false`; otherwise, it evaluates to `true` and *pattern variable* `x` is bound to `V`. It is advisable to use a pattern matching expression instead of a traditional `instanceof` check followed by a typecast wherever possible.
+
 ## Dynamic binding
 
 The implementation of method `getDrawingCommands` shown above for composing the drawing commands for a drawing works, but it is not optimal from a modularity point of view: if we extend our drawing application to also support rectangles, we need to update method `getDrawingCommands`.
