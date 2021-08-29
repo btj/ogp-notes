@@ -264,7 +264,7 @@ Note also that with this approach, we lose much of the benefit of Java's static 
 - Iterating over `staffMembers` instead of `students` in method `getNbFinishers`. This would lead to a `ClassCastException` in `getNbFinishers()`, except if `staffMembers` is empty. In the latter case, it would silently produce wrong results.
 - The corresponding errors in `addStaff`, `hasStaff`, and `getAvgNbPubs`.
 
-### Aproach 3: Generics
+### Approach 3: Generics
 
 We can achieve reuse without sacrificing static type checking by defining types `Iterator`, `Iterable`, and `LinkedList` as _generic types_ with a _type parameter_ `T`:
 ```java
