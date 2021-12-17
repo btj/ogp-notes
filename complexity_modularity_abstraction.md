@@ -117,7 +117,7 @@ Financial applications would be much easier to write in Java if Java had a built
 - The development of a financial application, not in Java but in Java++, an extension of Java with a type `Fraction` whose values are (some subset of) the rational numbers*.
 - The development of a fractions module, that implements datatype `Fraction` as a class that internally uses Java's built-in datatypes.
 
-(*) Unfortunately, in Java the values of a class type such as `Fraction` always include the special value `null`, known as the _null reference_, in addition to the _object references_ that refer to _instances_ of class `Fraction`. Tony Hoare, who originally introduced null references in the programming language Algol, calls this his "billion-dollar mistake". With new programming languages such as [Kotlin](https://kotlinlang.org/) that do not suffer from this issue gaining popularity, the industry is slowly eliminating this scourge.
+(*) Unfortunately, in Java the values of a class type such as `Fraction` always include the special value `null`, known as the _null reference_, in addition to the _object references_ that refer to _instances_ of class `Fraction`. Tony Hoare, who originally introduced null references in the programming language Algol, calls this his "billion-dollar mistake". Many new programming languages such as [Kotlin](https://kotlinlang.org/) do not suffer from this issue. As such languages gain popularity, the industry may be slowly eliminating this scourge.
 
 We call the application written in Java++ a _client module_ of the fractions module. Composing the client module with the fractions module yields a system that implements the financial application in Java.
 
