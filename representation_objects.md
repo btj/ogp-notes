@@ -1,4 +1,4 @@
-# Representation Objects and Representation Exposure
+## Representation Objects and Representation Exposure
 
 In a data abstraction, each instance of the class that implements the abstraction is associated conceptually with a particular *abstract state*. In the case of a mutable abstraction, this association can change over time; in the case of an immutable abstraction, it is fixed upon creation of the object. Clients can use getter methods to inspect an object's abstract state. In order for the class to be able to implement these getter methods, it must store some concrete *representation* of the object's abstract state in the computer's memory. For example, in order for class `Interval` to be able to implement methods `getLowerBound()`, `getUpperBound()`, and `getWidth()`, it must store sufficient information to be able to derive an `Interval` object's lower bound, upper bound, and width in the computer's memory. One example implementation of class `Interval` that we have seen stores an `Interval` object's lower bound and width in *fields* of the object. We call these fields, and the way they relate to the object's abstract state, the object's *representation*. Usually, there are many different possible ways to design the represention for a given abstraction: for example, another example implementation of class `Interval` that we have seen stores an `Interval` object's lower bound and upper bound, rather than its lower bound and width.
 
@@ -6,7 +6,7 @@ In the example data abstraction implementations we have seen so far, such as `In
 
 In this chapter, we first use the example of a `String` class to introduce the concept of representation objects, and to show how *representation exposure* can break immutability. Then, we use a `FractionList` example to show how representation exposure can break consistency of an abstraction's representation. Finally, we use a `ByteBuffer` example to show how representation exposure can break modular reasoning.
 
-## Strings
+### Strings
 
 For example, consider (an extract from) the API of class `String` from the Java Platform API:
 
@@ -149,7 +149,7 @@ After a `String` object S has been initialized, field `S.characters` points to a
 
 Notice that the existence of A is completely invisible to clients of S: the API of class `String` provides no means for clients to obtain a reference to an instance's representation object. We say the representation object is *encapsulated*. 
 
-## Representation Exposure
+### Representation Exposure
 
 Let's see what happens if we break encapsulation. Here is a first attempt to add a method `toCharArray` to class `String`:
 ```java
@@ -196,7 +196,7 @@ Notice the following:
 - We made it explicit in the documentation of method `toCharArray` that the returned array has been newly created by the method. Tag `@creates | result` means that `result` has been newly created by the method, and furthermore that it is not a representation object of the receiver object or of any other object. The client can therefore safely mutate it without affecting any other object's abstract state.
 - Our implementation of class `String` uses array objects for two very different purposes: to represent a `String` object's abstract state, and as a container for a sequence of characters to be returned as the result of a method call. It is crucial to always use separate objects for these two different purposes.
 
-## Representation Exposure without Leaking
+### Representation Exposure without Leaking
 
 A class must never leak its representation objects. But not leaking representation objects is not sufficient to prevent representation exposure. Additionally, a class must never use pre-existing client-visible objects as representation objects. For example, here is a first attempt to add a method `valueOf(char[])` to class `String`:
 
@@ -247,7 +247,7 @@ A correct way to implement the `valueOf(char[])` method is by copying the argume
 
 Here, too, arrays are used for two different purposes: to represent a `String` object's abstract state, and to contain a sequence of characters to be passed as an argument to a method call. It is crucial to always use separate objects for these two different purposes.
 
-## FractionLists: Representation Exposure Breaks Consistency
+### FractionLists: Representation Exposure Breaks Consistency
 
 We have seen that immutable classes must encapsulate their representation object to protect their immutability. There is another important reason why classes must encapsulate their representation objects. We illustrate it by means of the following `FractionList` example.
 
@@ -369,11 +369,11 @@ As before, we can fix this leak by copying the array:
     }
 ```
 
-## Modular Reasoning: `@mutates`
+### Modular Reasoning: `@mutates`
 
 If a class is mutable and its representation invariants do not mention the mutable state of its representation object(s), then exposing representation object(s) does not endanger its immutability or its consistency. But even then, exposing representation object(s) is wrong, because it breaks modular reasoning, as we will illustrate next.
 
-### ByteBuffer: first attempt (INCORRECT)
+#### ByteBuffer: first attempt (INCORRECT)
 
 Consider the following INCORRECT attempt at designing and implementing an API for a `ByteBuffer` class.
 
@@ -456,7 +456,7 @@ There are (at least) two possible ways to fix the `ByteBuffer` class, correspond
 
 We show elaborations of both options below.
 
-### ByteBuffer (opaque)
+#### ByteBuffer (opaque)
 
 In this version of class `ByteBuffer`, the backing array is hidden from the client. This class is similar to Java's `ByteArrayOutputStream` class.
 
@@ -542,7 +542,7 @@ myBuffer.put(5);
 assert moreBytes[1] == 2; // Succeeds
 ```
 
-### ByteBuffer (transparent)
+#### ByteBuffer (transparent)
 
 In this version of class `ByteBuffer`, the client is aware of the backing array. Therefore, the backing array is *not* a representation object and the contents of the backing array are *not* part of the state of the `ByteBuffer` object. Here, the `ByteBuffer` object does not store a sequence of bytes; it merely stores a reference to an array object.
 
@@ -632,6 +632,6 @@ myBuffer.put(5);
 assert moreBytes[1] == 5; // Succeeds, as expected
 ```
 
-## Conclusion
+### Conclusion
 
 In this chapter, we introduced the notion of representation objects: objects used internally by an abstraction to help represent an instance's abstract state. We showed by means of three examples (`String`, `FractionList`, and `ByteBuffer`) that it is crucial that representation objects never be *exposed* to clients, since doing so can break immutability of the abstraction, consistency of the abstraction's representation, and/or modular reasoning about the abstraction by clients. If an object used by an abstraction is exposed to clients, it is not a representation object of the abstraction, its state is not a part of the state of the abstraction, and methods that mutate it must declare this explicitly in their `@mutates` clause.

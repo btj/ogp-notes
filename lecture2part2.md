@@ -1,6 +1,6 @@
-# First Steps in Modular Programming (Part II)
+## First Steps in Modular Programming (Part II)
 
-## Constructors
+### Constructors
 
 At this point, to use an `Interval` object to store a given interval, we must first create the object using a `new Interval()` expression, and then set its properties through the `setLowerBound`, `setUpperBound`, and/or `setWidth` setters. It is often convenient, and sometimes necessary, to allow client code to create an object and initialize its properties to desired values in one step. For this purpose, Java allows us to declare _constructors_. For example, we can allow clients to create an `Interval` object storing the interval with lower bound 3 and upper bound 7 using expression `new Interval(3, 7)` by inserting a _constructor declaration_ into class `Interval` as follows:
 
@@ -69,7 +69,7 @@ class IntervalTest {
 }
 ```
 
-## Overloading
+### Overloading
 
 But what if we want to initialize an `Interval` object with a given lower bound and a given width? That is, we would like to additionally declare the following constructor:
 
@@ -102,7 +102,7 @@ Declaring multiple members with the same name is known as _overloading_. Java su
 	}
 ```
 
-## API Semantics: Documentation
+### API Semantics: Documentation
 
 Consider the following modified version of class `IntervalTest`:
 

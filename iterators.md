@@ -1,8 +1,8 @@
-# Iterators
+### Iterators
 
 _Iterators_ are a solution to an _API design problem_: how to introduce an _abstract API_ between a collection implementation and its clients, that hides the data structure used to implement the collection, without increasing the time or space (memory) usage of clients that iterate over the elements of the collection?
 
-## The problem
+#### The problem
 
 We illustrate the problem by means of the example of two data structures for storing a collection of objects, and a client that iterates over both of them:
 
@@ -60,7 +60,7 @@ Notice also that the client program has to duplicate the logic of printing all e
 
 To see the solution, carefully consider both `printAll` methods and notice that they follow a similar pattern: they use some piece of data to track where they are in the data structure; they perform a test on the piece of data to see whether they have reached the end of the data structure; they retrieve the current element pointed to by the piece of data; and they update the piece of data to point to the next element.
 
-## Iterators
+#### Iterators
 
 The solution, then, is to encapsulate this piece of data into an object, which we will call an _iterator_, and provide methods to allow clients to test whether the iterator has reached the end of the data structure, to retrieve the current element, and to mutate the iterator so that it points to the next element.
 
@@ -178,7 +178,7 @@ public class ClientProgram {
 }
 ```
 
-## Iterables
+#### Iterables
 
 We can perform a further step of generalization, and further simplify the client code, by introducing an interface to be implemented by
 any collection that supports iteration:
@@ -217,9 +217,9 @@ public class ClientProgram {
 ```
 Notice that the client no longer even needs to know that it is dealing with an array-based list and a linked list.
 
-## Applying nested classes
+#### Applying nested classes
 
-### Static nested classes
+##### Static nested classes
 
 Classes `ArrayList` and `ArrayListIterator` are not really independent classes; rather, they together implement the `Iterable` abstraction. To make this explicit, it makes sense
 to instead define `ArrayListIterator` as a _nested class_ inside of class `ArrayList`:
@@ -252,7 +252,7 @@ public class ArrayList implements Iterable {
 One major advantage of defining the iterator API implementation as a nested class is that since nested classes have access to the private members of their enclosing class, we can now encapsulate
 the `elements` field. Another major advantage is that the nested class itself can be made private; it is now hidden from other toplevel classes, even if they are in the same package.
 
-### Inner classes
+##### Inner classes
 
 We can simplify the implementation of class `ArrayList` by turning class
 `IteratorImpl` into a _nonstatic nested class_, more commonly referred to as an
@@ -318,7 +318,7 @@ public class ArrayList implements Iterable {
 
 We also left out the constructor, which is now generated implicitly.
 
-### Local classes
+##### Local classes
 
 In fact, since class `IteratorImpl` is only referred to inside method `iterator()`, it is cleaner to define it as a _local class_ inside method `iterator()`:
 
@@ -352,7 +352,7 @@ the `private` keyword, and in fact this is not allowed.
 As we will see later, an additional advantage of local classes is that they can (under certain conditions) refer to the parameters and local
 variables of the enclosing method.
 
-### Anonymous classes
+##### Anonymous classes
 
 We can apply one more simplification: since in our example class `IteratorImpl` is referred to in only one place, to create an instance of it, we can replace it by an _anonymous class_.
 This relieves us from the need to invent a name for it:
@@ -386,7 +386,7 @@ As you can see, an _anonymous class instance creation expression_ consists of:
 - a constructor argument list
 - a class body
 
-## Enhanced `for` loops
+#### Enhanced `for` loops
 
 The interfaces `Iterator` and `Iterable` defined above exist in the Java Platform API in packages `java.util` and `java.lang`, respectively. When using those,
 client code like
@@ -404,7 +404,7 @@ for (Object element : iterable) {
 ```
 All collection classes in package `java.util`, such as `java.util.ArrayList` and `java.util.HashSet`, implement interface `java.lang.Iterable` and can therefore be iterated over using an enhanced `for` loop.
 
-## Internal iterators: `forEach` methods
+#### Internal iterators: `forEach` methods
 
 The kind of iterators we have seen so far are referred to as _external iterators_: the client requests an iterator object and then interacts with the iterator object to retrieve the successive elements of the collection. Another common type of iterator API is known as _internal iterators_. This is the primary type of iterators in the Ruby programming language. In the case of internal iterators, the client passes a _consumer object_ to the collection; the collection then repeatedly calls the consumer object's `accept` method, passing each element of the collection in turn as an argument.
 
@@ -457,7 +457,7 @@ public class ClientProgram {
 ```
 Notice that the client program implements interface `Consumer` with an anonymous class whose `accept` method prints the element to the screen.
 
-### Lambda expressions
+##### Lambda expressions
 
 We can write this client program even more concisely using a _lambda expression_:
 ```java
@@ -486,7 +486,7 @@ we can leave out the parentheses:
 iterable.forEach(value -> System.out.println(value));
 ```
 
-### Capturing outer variables
+##### Capturing outer variables
 
 Local classes, anonymous classes, and lambda expressions can refer to parameters and local variables from the enclosing method. Their value is copied into an implicit field of the resulting object; this is known as _capturing_.
 

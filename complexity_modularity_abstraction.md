@@ -1,4 +1,4 @@
-# Managing Complexity through Modularity and Abstraction
+## Managing Complexity through Modularity and Abstraction
 
 The question addressed by this course is: how can we manage the complexity of the task of building large software systems?
 
@@ -8,7 +8,7 @@ In the case of software development, this means trying to _decompose_ the system
 
 One of the most effective ways to come up with such a decomposition is to try to come up with effective _abstractions_. In this course, we teach two main types of abstractions: _procedural abstractions_ and _data abstractions_.
 
-## Procedural abstractions
+### Procedural abstractions
 
 In the case of procedural abstractions, we try to identify _operations_ such that it would make the system development task easier if those operations were _built into the programming language_.
 
@@ -63,7 +63,7 @@ Proper documentation for a module, then, simplifies both the task of developing 
 - The developers that implement the module need to look only at the module's API documentation to learn what the module is supposed to do.
 - The developers that implement the client modules (i.e. the modules that use the module) need to look only at the module's API documentation to learn what the module does.
 
-## Modular software development
+### Modular software development
 
 Splitting a system up into modules with a clearly defined, abstract API between them is an effective way of splitting a software development task into a set of simpler subtasks. Each module is not just easier to **build** than the system as a whole; it is also easier for someone to come in, read the codebase, and understand what is going on, because each module can be **understood** separately. This is because there is now a well-defined notion, for each module separately, of what that module is supposed to do (i.e. there is a well-defined notion of _correctness_ for each module separately): a module is correct if it implements its API in such a way that it complies with the module's API documentation, assuming that the lower-level modules it builds upon comply with their API documentation.
 
@@ -71,7 +71,7 @@ Having a notion of correctness for each module separately means we can **verify*
 
 It also means the modules of the system can be built in parallel, by independent software development teams. Furthermore, the developers of a module can release **new versions** of the module that fix bugs, improve performance, or add new features. So long as the new versions of the module comply with the original API documentation, the old version can be replaced by the new version in the overall system without adversely impacting the overall system's correct operation.
 
-## Data abstractions
+### Data abstractions
 
 Procedural abstractions allow clients to work with a more powerful programming language, that has more operations built in.
 
@@ -337,7 +337,7 @@ for (int i = 0; i < 10; i++)
 assert total.equals(Fraction.of(100, 100));
 ```
 
-### Mutable versus immutable data abstractions
+#### Mutable versus immutable data abstractions
 
 An alternative abstraction that one could introduce for simplifying the task of building financial applications,
 is a _mutable_ class for calculating with fractions:

@@ -1,4 +1,4 @@
-# Dynamic binding
+### Dynamic binding
 
 The implementation of method `toSVG` shown in the preceding chapter works, but it has a drawback: if we extend our drawing application to also support rectangles, we need to update method `toSVG`.
 
@@ -76,7 +76,7 @@ When the computer executes the method call `shape.toSVG()`, it determines which 
 
 If a method declared by a subclass has the same name and the same number and types of parameters as a method declared by its superclass, we say it _overrides_ the superclass method. Calls of the method on an object of the subclass will execute the overriding method instead of the overridden method.
 
-## Methods equals, hashCode, and toString
+#### Methods equals, hashCode, and toString
 
 Class `Object` declares a number of methods:
 
@@ -200,7 +200,7 @@ Specifically, Java calls an object's `toString()` method when it is added to a s
 
 As we will see later, the Java Collections Framework uses methods `equals` and `hashCode` to compare elements of collections. For example, `List.of(e1, e2).contains(e3)` returns `true` if and only if either `e3.equals(e1)` or `e3.equals(e2)` returns `true`, and `new HashSet(List.of(e1, e2)).size()` may return 1 or 2 depending both on whether `e1.hashCode()` equals `e2.hashCode()` and on whether `e1.equals(e2)` or `e2.equals(e1)` return `true`.
 
-### Record classes
+##### Record classes
 
 Since Java 16, released in March 2021, class `Point` above can be declared more concisely as follows:
 ```java

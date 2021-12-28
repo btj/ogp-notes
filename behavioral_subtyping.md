@@ -1,8 +1,8 @@
-# Behavioral subtyping: modular reasoning about programs that use dynamic binding
+### Behavioral subtyping: modular reasoning about programs that use dynamic binding
 
-## Modular reasoning about programs
+#### Modular reasoning about programs
 
-### Non-modular reasoning
+##### Non-modular reasoning
 
 In order to be able to deliver programs that exhibit correct behavior, we need to _reason_ about them, so as to convince ourselves that the program will exhibit the correct behavior in all circumstances.
 
@@ -51,7 +51,7 @@ For example, if we change method `getLocations` to return an array of size two, 
 
 Does this mean that method `printLocations` is incorrect? Or does it mean that method `getLocations` is incorrect? The answer is: neither. With non-modular reasoning, there is no notion of correctness of methods; there is only the correctness of the program as a whole.
 
-## Modular reasoning
+#### Modular reasoning
 
 The solution, of course, is to perform _modular reasoning_ instead. In the modular reasoning approach, we assign a _specification_ to each method, which specifies the _correct behaviors_ of the method. This way, we define a notion of _correctness of a method_: a method M is correct if and only if all of its behaviors are allowed by its specification, _assuming that the method calls performed by M behave in accordance with the called methods' specifications_.
 
@@ -105,7 +105,7 @@ In the example, there are at least two possible specifications that we can assig
   change method `getLocations` to return an array of size two. This modified
   version of `getLocations` still complies with its original specification, so we can conclude immediately that the correctness of the program as a whole is preserved. In particular, since during our review of method `printLocations`, we assumed only the specification of method `getLocations` and did not look at its implementation, the reasoning we used to conclude the correctness of method `printLocations` still holds, so we do not have to review method `printLocations` again.
 
-## Dynamic binding
+#### Dynamic binding
 
 Before we discuss modular reasoning about programs that use dynamic binding, we briefly review the concept of dynamic binding.
 
@@ -165,9 +165,9 @@ These two calls illustrate the two different types of method calls in Java:
   declares a method `getLocations` that overrides the one from class `Company`,
   so this is the one that is called.
 
-## Modular reasoning about programs that use dynamic binding
+#### Modular reasoning about programs that use dynamic binding
 
-### Applying basic modular reasoning
+##### Applying basic modular reasoning
 
 To reason about programs that use dynamic binding, such as the one shown above, we can simply apply the principle we introduced above: assign a specification to each method of the program, and check that each method's behavior complies with its specification, assuming that the behavior of method calls complies with the called methods' specifications. Suppose we assign the strong specification to method `getLocations` in class `CompanyA`:
 ```java
@@ -206,7 +206,7 @@ In general, when applying the simple modular reasoning approach defined above to
 
 We conclude that the basic modular reasoning approach defined above is not adequate for reasoning about programs that use dynamic binding.
 
-### Modular reasoning about dynamic binding: basic principle
+##### Modular reasoning about dynamic binding: basic principle
 
 To solve this issue, we look, when checking a method, not at the specifications of the _called methods_ of the call expressions that appear in the method, but at the specifications of the _resolved methods_. For example, when checking method `printLocations`, we only look at the specification of method `getLocations` in class `Company`. Furthermore, we check, when checking a method, not just that it complies with its own specification, but also that it complies with the specifications of _all methods it overrides_. In the example, we check that method `getLocations` in class `CompanyA` complies both with its own specification, and with the specification of method `getLocations` in class `Company`.
 
@@ -220,7 +220,7 @@ We summarize the basic principle of effective modular reasoning about programs w
 - A method is correct if and only if its behaviors are allowed by its own specification and by the specifications of all methods it overrides, assuming that the behavior of each call it performs complies with the specification of the _resolved_ method of the call.
 - If all of a program's methods are correct, and the specification of the program's main method expresses the allowed behaviors of the program as a whole, then correctness of the program as a whole follows as a corollary.
 
-### Derived principle: strengthening of specifications
+##### Derived principle: strengthening of specifications
 
 If we apply this basic principe directly, we potentially have to verify a single method implementation against many different specifications. To avoid this, we can instead use a derived principle, that requires us to only check that 1) each method complies with its own specification, and 2) that each method's specification _strengthens_ the specifications of all methods it overrides. We say that a specification S strengthens another specification S' if and only if each imaginable method that complies with S also complies with S'.
 
@@ -260,7 +260,7 @@ public static int abs(int x)
 ```
 The first specification is the weakest possible one: it does not allow any calls of the method, so the method is free to crash or exhibit any behavior whatsoever. The last one is the strongest possible one, because it is unimplementable: since there exists no method implementation that satisfies postcondition `false`, it is vacuously true that every such implementation has the desired behavior (for any definition of "desired behavior" whatsoever).
 
-### Derived principle: behavioral subtyping
+##### Derived principle: behavioral subtyping
 
 If we assign a specification to each method of a class C, then in doing so, we define a _behavioral type_. We say an object O is of behavioral type C, if, for every method M of C, the behavior of a call of M on O complies with the specification of M in C.
 
@@ -276,7 +276,7 @@ Using these definitions, we can rephrase the principle of modular reasoning abou
 
 Or, to phrase it as a slogan: Java's static type checker ensures that a subclass D of a class C is a _syntactic_ subtype of C; to achieve correct programs, we must ensure that D is a _behavioral_ subtype of C as well.
 
-## Inheritance of specifications
+#### Inheritance of specifications
 
 In the literature on behavioral subtyping, some authors propose that the *effective* specification of a method should be the *conjunction* of the *declared specification* and any *inherited specifications*. (The conjunction of a specification with precondition P1 and postcondition Q1 and a specification with precondition P2 and postcondition Q2 is the specification with precondition "P1 or P2" and postcondition "(if old(P1) then Q1) and (if old(P2) then Q2)".) In this approach, called *specification inheritance*, if the implementation of each method of a program complies with its *effective specification*, the program automatically complies with behavioral subtyping.
 
@@ -284,7 +284,7 @@ In this course, however, we **do not** apply specification inheritance; a method
 
 We make one exception to this rule: if the Javadoc comment associated with a method M does not contain any specification clauses at all (i.e. no `@pre`, `@post`, `@throws`, `@may_throw`, `@inspects`, `@mutates`, `@mutates_properties`, `@creates`, `@immutable`, `@peerObject`, or `@peerObjects` clauses at all), *and* M overrides some method M' that itself overrides all other methods that M overrides, then we define the specification of M as being identical to the specification of M'.
 
-## Further reading
+#### Further reading
 
 _Note: the material in this section is outside the scope of the course and is provided for the information of interested students only._
 

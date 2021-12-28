@@ -1,6 +1,6 @@
-# Generics
+### Generics
 
-## Basic concept
+#### Basic concept
 
 In this note, we introduce Java's support for _generic_ classes, interfaces, and methods. We motivate and illustrate the concepts by means of the example task of implementing a class `University` that has the following methods:
 
@@ -36,7 +36,7 @@ class Student { int nbCredits; }
 class Staff { int nbPubs; }
 ```
 
-### Approach 1: Duplicate collection classes
+##### Approach 1: Duplicate collection classes
 
 To implement class `University`, we need to implement a data structure for storing the current set of students, and a data structure for storing the current set of staff members. A data structure for storing a set of students could look like this:
 ```java
@@ -151,7 +151,7 @@ class University {
 
 Obviously, we would like to avoid having to introduce a separate linked list implementation, and separate types for iterables and iterators, for each element type.
 
-### Approach 2: Using subtype polymorphism
+##### Approach 2: Using subtype polymorphism
 
 One way to achieve reuse of collection classes is by exploiting the fact that all objects are of type `Object`, so we can use a data structure with element type `Object` to store any collection:
 ```java
@@ -264,7 +264,7 @@ Note also that with this approach, we lose much of the benefit of Java's static 
 - Iterating over `staffMembers` instead of `students` in method `getNbFinishers`. This would lead to a `ClassCastException` in `getNbFinishers()`, except if `staffMembers` is empty. In the latter case, it would silently produce wrong results.
 - The corresponding errors in `addStaff`, `hasStaff`, and `getAvgNbPubs`.
 
-### Approach 3: Generics
+##### Approach 3: Generics
 
 We can achieve reuse without sacrificing static type checking by defining types `Iterator`, `Iterable`, and `LinkedList` as _generic types_ with a _type parameter_ `T`:
 ```java
@@ -376,7 +376,7 @@ class University {
 Note: if the type arguments for an instance creation expression can be derived from the context, they can be omitted: in the example above, instead of `new LinkedList<Student>()`, we can simply write
 `new LinkedList<>()`; this is known as _diamond notation_.
 
-## Bounded type parameters
+#### Bounded type parameters
 
 Suppose we want to store the university's students sorted by number of credits obtained, and the staff members sorted by number of publications. We want to develop a class `SortedLinkedList<T>`
 as a subclass of `LinkedList<T>`. For class `SortedLinkedList<T>` to be able to compare its elements, its elements should implement interface `Comparable<T>`, defined as follows:
@@ -436,7 +436,7 @@ class Staff implements Comparable<Staff> {
 
 (The term "upper bound" refers to the image of superclasses being "above" subclasses.)
 
-## Invariance
+#### Invariance
 
 Suppose, now, that we want to extend class `University` with a method `getMembers()` that returns a collection containing all members of the university. First, we introduce class `Member` as a superclass of `Student` and `Staff`:
 ```java
@@ -504,9 +504,9 @@ This, however, does not work, for two reasons.
 
 In summary, generic types are neither covariant nor contravariant in their type parameter. In other words, they are _invariant_.
 
-## Wildcards
+#### Wildcards
 
-### Upper-bounded wildcards
+##### Upper-bounded wildcards
 
 Even though `LinkedList<Student>` is not a subtype of `LinkedList<Member>`, it is in fact safe for the call of `members.addAll` to pass `students` as an argument: indeed, `addAll` only retrieves
 elements from its argument; it does not add new elements to it. For that reason, it is safe for `addAll` to take as an argument a `LinkedList<U>` object, for any subtype `U` of `T`. We can express
@@ -521,7 +521,7 @@ void addAll(LinkedList<? extends T> other) {
 
 Wildcard type `LinkedList<? extends T>` generalizes over all types `LinkedList<U>`, for all subtypes `U` of `T`, as well as `LinkedList<T>` itself. It could be proncounced "linked list of some type that extends T".
 
-### Lower-bounded wildcards
+##### Lower-bounded wildcards
 
 Even though `LinkedList<Member>` is not a subtype of `LinkedList<Staff>`, it is in fact safe for the call of `staffMembers.copyInto` to pass `members` as an argument: indeed, `copyInto` only puts
 elements into its argument; it does not retrieve any elements from it. For that reason, it is safe for `copyInto` to take as an argument a `LinkedList<U>` object, for any supertype `U` of `T`. We can
@@ -536,7 +536,7 @@ void copyInto(LinkedList<? super T> other) {
 
 Wildcard type `LinkedList<? super T>` generalizes over all types `LinkedList<U>`, for all supertypes `U` of `T`, as well as `LinkedList<T>` itself. It could be pronounced "linked list of some supertype of T".
 
-## Generic methods
+#### Generic methods
 
 Suppose we add the following static method to class `LinkedList`:
 
@@ -585,7 +585,7 @@ static <T> LinkedList<T> copy(LinkedList<T> list) {
 }
 ```
 
-## Limitations
+#### Limitations
 
 After the static type checker finishes checking a Java program, but before the program is executed, all generics are _erased_ from it. That is, in generic type declarations, each type parameter is replaced by its upper bound (or `Object` if it has no explicit upper bound), and type arguments are simply removed. Typecasts are inserted as necessary to preserve well-typedness. For example, after erasing the example program from Approach 3, we obtain the example program from Approach 2. This involves inserting typecasts that cast the result of `iterator.next()` to the expected type.
 

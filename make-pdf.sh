@@ -2,26 +2,31 @@
 cp $JLEARNERPATH/language.md $JLEARNERPATH/*.png .
 
 pandoc -o course-notes.html -f gfm \
-  README.md \
-  intro.md \
-  programming.md \
-  language.md \
-  lecture2part1.md \
-  lecture2part2.md \
-  complexity_modularity_abstraction.md \
-  representation_objects.md \
-  single_object_doc_instr.md \
-  polymorphism.md \
-  dynamic_binding.md \
-  behavioral_subtyping.md \
-  interfaces.md \
-  implementation_inheritance.md \
-  collections.md \
-  entity_relationship_abstractions.md \
-  multi_class_abstractions.md \
-  multi_object_doc_instr.md \
-  iterators.md \
-  generics.md
+  part-0-preface.md \
+   intro.md \
+   README.md \
+  part-1-single-object-abstractions.md \
+   programming.md \
+   language.md \
+   lecture2part1.md \
+   lecture2part2.md \
+   complexity_modularity_abstraction.md \
+   representation_objects.md \
+   single_object_doc_instr.md \
+  part-2-inheritance.md \
+   polymorphism.md \
+   dynamic_binding.md \
+   behavioral_subtyping.md \
+   interfaces.md \
+   implementation_inheritance.md \
+   collections.md \
+  part-3-multi-object-abstractions.md \
+   entity_relationship_abstractions.md \
+   multi_class_abstractions.md \
+   multi_object_doc_instr.md \
+  part-4-advanced-topics.md \
+   iterators.md \
+   generics.md
 pandoc --wrap=none -V documentclass=book --toc --template=latex.template --listings -o course-notes.tex course-notes.html
 sed -i '' \
   -e 's/\chapter{Managing Complexity through Modularity and Abstraction}/\chapter[Managing Complexity: Modularity \\\& Abstraction]{Managing Complexity through Modularity and Abstraction}/' \

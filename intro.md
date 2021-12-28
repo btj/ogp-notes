@@ -1,4 +1,4 @@
-# Introduction: Topic of the course
+## Introduction: Topic of the course
 
 The official title of the course is "Object-oriented programming". However, a better title would be "Modular programming", because while you will in fact learn the Java programming language and object-oriented programming, the most important concept of the course is "Modular programming".
 

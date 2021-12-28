@@ -1,4 +1,4 @@
-# First Steps in Modular Programming (Part I)
+## First Steps in Modular Programming (Part I)
 
 ### Contents
 
@@ -38,13 +38,13 @@ The `assert` statement checks if a given expression evaluates to `true`. If not,
 
 We can run this program directly in [JLearner](https://btj.github.io/jlearner/), but since JLearner does not support Java's modularity features, at this point, we will switch to a more complex but more powerful tool: the Eclipse IDE (Integrated Development Environment).
 
-## Installing Eclipse and FSC4J
+### Installing Eclipse and FSC4J
 
 We recommend that you use the [Eclipse Installer](https://www.eclipse.org/downloads/packages/installer) to install the latest Eclipse IDE for Java Developers; it will also install a matching Java Development Kit (JDK) if one is not yet present on your system.
 
 Once you have installed Eclipse, we recommend that you install the [Formal Specifications Checker for Java (FSC4J)](https://fsc4j.github.io/fsc4j), that we are developing. It is a modified version of the Java Development Tools component of Eclipse that gives you feedback about the formal documentation you write. To install it, just follow the instructions on the FSC4J website.
 
-## Building and running our first program in Eclipse
+### Building and running our first program in Eclipse
 
 Once Eclipse is installed, start it by double-clicking the Eclipse program. First, if you see the _Welcome to the Eclipse IDE for Java Developers_ screen, uncheck the _Always show Welcome at start up_ box in the bottom right corner of the screen, and then click the _Workbench_ button in the top right corner of the screen.
 
@@ -120,7 +120,7 @@ We are now ready to run our code. Right-click on the `IntervalTest.java` node in
 
 To see what happens if an error is detected, change `width == 4` to `width == 5` and run the program again. A shortcut for running the same program again is to simply click the green Play button in the Eclipse toolbar. Notice that you now get a red bar in the JUnit view. The Failure Trace part of the JUnit view tells you what went wrong. In this case an `AssertionError` occurred at `IntervalTest.java:16`, meaning line 16 of file `IntervalTest.java`. Double-click this message in the Failure Trace to highlight this line in the editor. If we change `width == 5` back to `width == 4` and run the program again, we again get a green bar.
 
-## The problem
+### The problem
 
 We have now written a program consisting of two source files: `Interval.java` and `IntervalTest.java`. However, our program is not modular: we cannot change the structure of class `Interval` without breaking the `IntervalTest` program. For example, suppose we decide that it is better to store intervals by storing their lower bound and their width, rather than their lower bound and their upper bound. Update file `Interval.java` as follows:
 
@@ -135,7 +135,7 @@ class Interval {
 
 Even though, conceptually, the class stores the same information as before, just in a different form, we have now broken our _client code_ (i.e. the code that uses our class). Indeed, Eclipse now shows a red wavy line below the references to field `upperBound` in `IntervalTest.java`; these references are now broken since this field no longer exists. These red wavy lines are known as _compilation errors_. They are errors that the programming environment detects even before we run the program. Errors detected only while running a program are called _run-time errors_. We here see a major advantage of statically typed programming languages: many errors can be detected even before we run the program.
 
-## Encapsulating the fields of class Interval
+### Encapsulating the fields of class Interval
 
 This experiment shows that we should never access the fields of another class directly. Instead, we should access the information we need from an object through _methods_. This is known as _encapsulation_. Let's update our program in `IntervalTest` to use methods to access the properties of `Interval` objects. First, define methods for inspecting and updating the properties of an interval:
 
@@ -281,7 +281,7 @@ class IntervalTest {
 }
 ```
 
-## Moving the methods inside class Interval
+### Moving the methods inside class Interval
 
 We now have two modules: one module consists of file `Interval.java` plus the getters and setters in file `IntervalTest.java`, and the other module consists of method `test` in file `IntervalTest.java`. We can change the way we store the interval properties in the first module without breaking the second module. However, it would of course be much better if each module is in its own file. For this reason, Java allows us to define the methods that belong together with a given class inside the class itself. To move a method into a class, however, we need to prefix it with the keyword `static`:
 
@@ -345,7 +345,7 @@ class IntervalTest {
 }
 ```
 
-## Enforcing encapsulation: accessibility modifiers
+### Enforcing encapsulation: accessibility modifiers
 
 We have now cleanly separated our interval module and our client module into separate files and separate classes. If we want to change the way we store the interval properties again, we only need to update the `Interval` class; this is thanks to the fact that the `IntervalTest` class accesses the interval properties only via the getters and setters, not by directly accessing the fields of class `Interval`.
 
@@ -389,7 +389,7 @@ Now, if we replace `Interval.setUpperBound(interval, 7)` by `interval.upperBound
 
 By making the fields of class `Interval` private, we now get the guarantee that any client code of class `Interval` that has no compilation errors will not break if we change the way we store the interval properties. If our module is used by many clients around the world, this is an extremely valuable guarantee.
 
-## Instance methods
+### Instance methods
 
 Notice that all of the methods of class `Interval` take a reference to an `Interval` object as their first argument. This is of course a very common phenomenon. For that reason, Java supports a more concise notation for this case, known as _instance methods_. An instance method is a method declared without the `static` keyword. (A method that does have the `static` keyword is known as a _static method_.) An instance method declared in a class C has an _implicit_ parameter of type C, called the _receiver_. To refer to the receiver in the body of an instance method, use the keyword `this`. When calling an instance method, the receiver object is written before the method name, with a dot in between the two:
 

@@ -1,4 +1,4 @@
-# Multi-class entity-relationship abstractions
+### Multi-class entity-relationship abstractions
 
 In [Entity-relationship abstractions](entity_relationship_abstractions.md), we
 introduced the concept of entity-relationship abstractions. The examples we
@@ -296,7 +296,7 @@ Notice the following:
 - We use methods `LogicalSet.plus` and `LogicalSet.minus` from [`logicalcollections`](https://github.com/btj/logicalcollections) to concisely specify the effect of `join` and `leaveTeam` on the team's set of members.
 - We use a `@mutates_properties | this.getTeam(), team.getMembers()` clause to conveniently specify that `joinTeam(team)` mutates the peer group of `this` and the peer group of `team`, and that for any object O in either of these peer groups, and for any basic getter M of O, we have either that (O, M) is in the set {(`this`, `getTeam`), (`team`, `getMembers`)} or `Objects.equals(O.M(), old(O.M()))`. That is, from the client's point of view, `joinTeam(team)` mutates only `this.getTeam()` and `team.getMembers()` and leaves all other properties of both peer groups involved (as given by the peer group objects' basic getters) unchanged. (A getter is basic if it does not have a postcondition of the form `result == E` or `result.equals(E)` or `Objects.equals(result, E)` for some expression E.)
 
-## Nesting class-encapsulated and package-encapsulated abstractions
+#### Nesting class-encapsulated and package-encapsulated abstractions
 
 Making the fields of a module package-accessible is probably fine for small modules such as the example module, but for larger modules this quickly becomes error-prone. Therefore, it is preferrable to _always_ declare fields as `private`, and to encapsulate them into a class-level abstraction, even if the class is part of a multi-class abstraction as well. We call this a case of _nested abstractions_. In such cases of class-level abstractions nested within a package-level abstraction, each class of the package is a _client_ of the class-level abstractions implemented by the other classes of the package.
 

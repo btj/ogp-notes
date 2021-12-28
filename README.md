@@ -1,6 +1,6 @@
-# Object-Oriented Programming
+## Table of Contents
 
-## Single-object abstractions
+### Single-object abstractions
 
 - [Introduction: Topic of the course](intro.md)
 - [Principles of programming in Java](programming.md)
@@ -17,7 +17,7 @@
 - [How to properly document single-object abstractions](single_object_doc_instr.md)
   - Concepts: defensive programming, contractual programming, preconditions, postconditions, class representation invariants (= private class invariants), class abstract state invariants (= public class invariants), getters, mutators
 
-## Inheritance
+### Inheritance
 
 - [Polymorphism](polymorphism.md)
   - Concepts: abstract classes, polymorphism, subclassing, inheritance, `instanceof`, the static type checker, static/dynamic type of a variable or an expression, typecasts, pattern matching; class Object, autoboxing and -unboxing
@@ -33,7 +33,7 @@
 - [Lists, sets, and maps](collections.md)
   - Concepts: the List, Set, and Map abstract datatypes (ADTs); the ArrayList, LinkedList, HashSet, and HashMap data structures; the Java Collections Framework
 
-## Multi-object abstractions (= entity-relationship abstractions)
+### Multi-object abstractions (= entity-relationship abstractions)
 
 - [Single-class entity-relationship abstractions](entity_relationship_abstractions.md)
   - Example: [html](https://github.com/btj/html_ir)
@@ -42,7 +42,7 @@
   - Concepts: packages, package-accessible fields/constructors/methods/classes, package representation invariants, package abstract state invariants, `HashSet`
 - [How to properly document multi-object abstractions](multi_object_doc_instr.md)
 
-## Advanced topics
+### Advanced topics
 
 (Students of course H02C5A can ignore this material.)
 

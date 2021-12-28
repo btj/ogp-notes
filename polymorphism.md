@@ -1,4 +1,4 @@
-# Polymorphism
+### Polymorphism
 
 Suppose we need to develop a drawing application. A drawing consists of a
 number of circles and polygons, so we define a class where each instance
@@ -86,7 +86,7 @@ assertEquals(false, shape1 instanceof Polygon);
 assertEquals(false, shape2 instanceof Circle);
 ```
 
-## Static type checking
+#### Static type checking
 
 Java is a _statically typed_ programming language. This means that the computer will refuse to execute any Java program that is not _statically well-typed_.
 Specifically, before the computer starts executing a Java program, it first type-checks it. If the type-check fails, the program is not executed.
@@ -117,7 +117,7 @@ int radius = myCircle.getRadius();
 ```
 Java's type checker rejects the assignment `myCircle = myShape` because the static type of `myShape` is `Shape` and class `Shape` is not a subclass of class `Circle`.
 
-## Typecasts
+#### Typecasts
 
 To allow programmers to work around the incompleteness of Java's static type-checker, Java supports _typecasts_. The following program is accepted by Java's static type checker:
 ```java
@@ -177,7 +177,7 @@ public class Drawing {
 }
 ```
 
-### Pattern matching
+##### Pattern matching
 
 Consider the following piece of code:
 ```java
@@ -201,7 +201,7 @@ evaluates to `false`; otherwise, it evaluates to `true` and *pattern variable*
 instead of a traditional `instanceof` check followed by a typecast wherever
 possible.
 
-## Class Object
+#### Class Object
 
 It is not, in fact, strictly true that we needed to introduce a class `Shape` in order
 to be able to store `Circle` objects and `Polygon` objects in an array. We could have
@@ -237,7 +237,7 @@ Shape[] shapes = {new Circle(5, 10, 5), new Polygon(-10, 0, 10, 0, 0, 20), "Hi!"
 is rejected by Java's static type checker, since class `String` is not a subclass of class `Shape`.
 Therefore, using a specific abstract class is generally preferable to using class `Object`.
 
-### Class Object and primitive values
+##### Class Object and primitive values
 
 Java's primitive types `boolean`, `byte`, `short`, `char`, `int`, `long`, `float`, and `double` are not classes
 and their values are not objects. Nonetheless, the following works:

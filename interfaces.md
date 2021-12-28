@@ -1,4 +1,4 @@
-# Interfaces
+### Interfaces
 
 Suppose we are implementing a programming language. Our language supports the
 datatypes `boolean`, `int`, and `string`, amongst others:

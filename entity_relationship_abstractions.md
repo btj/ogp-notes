@@ -1,4 +1,4 @@
-# Entity-relationship abstractions
+### Entity-relationship abstractions
 
 In this course, we consider the question of how to split up complex software development tasks into simpler subtasks. The main tool we teach is _abstraction_: developing _modules_ that extend the programming language with new _operations_ (_procedural abstraction_) and new _datatypes_ (_data abstraction_) so that _client modules_ can be written in a more powerful programming language.
 
@@ -8,7 +8,7 @@ In this course, we consider two types of data abstractions:
 
 Multi-object abstractions, also called _entity-relationship abstractions_, are the topic of this document.
 
-## OOP Teams
+#### OOP Teams
 
 Suppose I wanted to write a Java program to manage the Object-Oriented Programming course. In particular, I would want to track team compositions for the project. Students are encouraged to work in teams of two students, but they can work alone if they really want to.
 
@@ -138,7 +138,7 @@ The abstraction exposes the _is-teammate-of_ relation as a getter `getTeammate()
 either student `s`'s teammate, or `null` if student `s` has no teammate. This reflects the fact that in OOP, a student can have at most
 one teammate.
 
-## Consistency of bidirectional associations
+#### Consistency of bidirectional associations
 
 This example exhibits a typical characteristic of entity-relationship abstractions: the states of the objects that together constitute
 the entity-relationship abstraction are not independent: if `s1.getTeammate()` returns `s2`, then `s2.getTeammate()` must return `s1`.
@@ -156,7 +156,7 @@ assertEquals(alice, bob.getTeammate()); // Inconsistent!
 The second `setTeammate` call is incorrect and should cause an exception. Otherwise, after this call `bob.getTeammate()` returns `alice`
 while `alice.getTeammate()` returns `carol`, which is inconsistent.
 
-## Peer groups
+#### Peer groups
 
 This interdependency between the states of the objects that constitute the entity-relationship abstraction is reflected in the
 representation invariants: the representation invariant for an `OOPStudent` object `s1` where `s1.teammate == s2` talks not just

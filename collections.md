@@ -1,10 +1,10 @@
-# Lists, sets, and maps
+### Lists, sets, and maps
 
 In this chapter, we consider three important examples of the use of inheritance to generalize over different implementations of an _abstract datatype_ (ADT). In the first example, the `List` interface generalizes over the `ArrayList` and `LinkedList` implementations; in the second example, the `Set` interface generalizes over the `ArraySet` and `HashSet` implementations; and in the third example, the `Map` interface generalizes over the `ArrayMap` and `HashMap` implementations. Besides serving as illustrations of inheritance and behavioral subtyping, they also emphasize the difference between API and implementation by showing how in each case, exactly the same API is implemented in two very different ways. Furthermore, these examples are important in their own right; they are some of the most useful and most widely used data structures and should be known by every programmer.
 
 The examples are simplified versions of the corresponding interfaces and classes in the `java.util` package of the Java Platform API; see the discussion at the end of the chapter.
 
-## Lists
+#### Lists
 
 If a Java program needs to store a sequence of values, an array can be used. However, the number of operations available for working with arrays is limited. For example, it is not possible to add or remove elements. To solve this problem, we can define a *list* abstraction, with operations for adding and removing elements in arbitrary positions.
 
@@ -289,7 +289,7 @@ public class LinkedList implements List {
 }
 ```
 
-## Sets
+#### Sets
 
 Checking whether an `ArrayList` or `LinkedList` object contains a given value and removing a given value from an `ArrayList` or `LinkedList` take time proportional to the size of the list. If those operations are important in a given application, a *hash table* may be more appropriate. Assuming a good *hash function* is used, checking for the presence of an element, adding an element if it is not yet present, and removing an element take (amortized) constant expected time. Therefore, hash tables are ideal for implementing a *set* abstract data type.
 
@@ -463,7 +463,7 @@ public class HashSet implements Set {
 ```
 Notice that the `HashSet` object simply delegates the `contains`, `add`, and `remove` operations to the element's bucket, which is determined by retrieving its *hash code* using the `hashCode()` method and deriving the bucket index by taking the remainder of dividing the hash code by the number of buckets. If method `hashCode()` implements a good hash function, which means that the hash codes of the elements are uniformly distributed, then the expected number of elements in each bucket is proportional to the *load factor*, which is the total number of elements divided by the number of buckets. This means that if the load factor is bounded, then so is the expected number of elements in each bucket, and as a result, the expected time taken by `contains`, `add`, and `remove` is independent of the number of elements in the `HashSet` object. The `HashSet` implementation shown above has a fixed capacity; this works well if the maximum load (i.e. number of elements) of the `HashSet` object is known beforehand. If not, code should be added to increase the capacity and *rehash* (i.e. copy the elements from the old buckets to the new buckets) when the load factor exceeds some fixed threshold value.
 
-## Maps
+#### Maps
 
 Applications often need to store a set of *key-value pairs* (where distinct pairs have distinct keys) and efficiently add a pair and retrieve the value associated with a given key. In Java, such sets are known as *maps* and a key-value pair is called a *map entry*.
 
@@ -684,7 +684,7 @@ public class HashMap implements Map {
 }
 ```
 
-## The Java Collections Framework
+#### The Java Collections Framework
 
 The [Java Platform API](https://docs.oracle.com/en/java/javase/15/docs/api/index.html) is a library of classes and interfaces that are available to every Java program. It is divided into *modules*, each of which is divided into *packages*. The [`java.util` package](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/package-summary.html) of the `java.base` module contains the Java Collections Framework, a library of interfaces representing abstract datatypes and classes that implement them. ADT interfaces include [`List`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/List.html), [`Set`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/Set.html), and [`Map`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/Map.html), and the classes include [`ArrayList`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/ArrayList.html), [`LinkedList`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/LinkedList.html), [`HashSet`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/HashSet.html), and [`HashMap`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/HashMap.html), and [many others](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/doc-files/coll-reference.html). The interfaces and classes we defined above are simplified versions of the ones in the Java Collections Framework.
 
@@ -726,7 +726,7 @@ Some important methods and constructors:
 - Similarly, `mySet.equals(myObject)` returns `true` if and only if `myObject` is a `Set` object, has the same size as `mySet`, and for every element `e1` of `mySet`, there is an element `e2` in `myObject` such that `Objects.equals(e1, e2)` returns `true`.
 - Similarly, `myMap.equals(myObject)` returns `true` if and only if `myObject` is a `Map` object and their entry sets are equal as defined above.
 
-### Other notable data structures
+##### Other notable data structures
 
 - [`ArrayDeque`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/ArrayDeque.html) implements ADTs [`Queue`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/Queue.html) and [`Deque`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/Deque.html) (*double-ended queue*) using the *ring buffer* data structure. It supports adding to and removing from the front and the back in constant time, with better performance than `LinkedList`.
 - When iterating over `HashSet` or `HashMap` objects, the order in which elements are returned is unspecified and may be different every time. [`LinkedHashSet`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/LinkedHashSet.html) and [`LinkedHashMap`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/LinkedHashMap.html) are like `HashSet` and `HashMap` except that the iteration order is well-defined: the elements are returned in the order in which they were added.
