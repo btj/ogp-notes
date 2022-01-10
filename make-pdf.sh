@@ -1,4 +1,5 @@
 # First, clone https://github.com/btj/jlearner and set JLEARNERPATH
+set -x -e
 cp $JLEARNERPATH/language.md $JLEARNERPATH/*.png .
 
 pandoc -o course-notes.html -f gfm \
@@ -23,7 +24,12 @@ pandoc -o course-notes.html -f gfm \
   iterators.md \
   generics.md
 pandoc --wrap=none -V documentclass=book --toc --template=latex.template --listings -o course-notes.tex course-notes.html
-sed -i'' \
+if [ `uname -s` = Darwin ]; then
+  SED_IN_PLACE=(-i '')
+else
+  SED_IN_PLACE=(-i)
+fi
+sed "${SED_IN_PLACE[@]}" \
   -e 's/\\chapter{Object-Oriented Programming}/\\chapter{Overview}/' \
   -e 's/\\chapter{First Steps in Modular Programming (Part I)}/\\part{Part I: Single-Object Abstractions}\\chapter{First Steps in Modular Programming (Part I)}/' \
   -e 's/\\chapter{Managing Complexity through Modularity and Abstraction}/\\chapter[Managing Complexity: Modularity \\\& Abstraction]{Managing Complexity through Modularity and Abstraction}/' \
