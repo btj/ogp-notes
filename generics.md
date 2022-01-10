@@ -587,7 +587,7 @@ static <T> LinkedList<T> copy(LinkedList<T> list) {
 
 ## Limitations
 
-After the static type checker finishes checking a Java program, but before it is executed, all generics are _erased_ from it. That is, in generic type declarations, each type parameter is replaced by its upper bound (or `Object` if it has no explicit upper bound), and type arguments are simply removed. Typecasts are inserted as necessary to preserve well-typedness. For example, after erasing the example program from Approach 3, we obtain the example program from Approach 2. This involves inserting typecasts that cast the result of `iterator.next()` to the expected type.
+After the static type checker finishes checking a Java program, but before the program is executed, all generics are _erased_ from it. That is, in generic type declarations, each type parameter is replaced by its upper bound (or `Object` if it has no explicit upper bound), and type arguments are simply removed. Typecasts are inserted as necessary to preserve well-typedness. For example, after erasing the example program from Approach 3, we obtain the example program from Approach 2. This involves inserting typecasts that cast the result of `iterator.next()` to the expected type.
 
 This approach, called _erasure_, has the following implications:
 - Type arguments must be subtypes of `Object`; using a primitive type (like `int`) as a type argument is not allowed. To store primitive values in a generic collection, you must first box them.
