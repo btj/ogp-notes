@@ -1,10 +1,11 @@
 # Object-Oriented Programming
 
-## Single-object abstractions
-
 - [Introduction: Topic of the course](intro.md)
 - [Principles of programming in Java](programming.md)
   - Concepts: values, variables, types, methods, parameters, arguments, return values, classes, fields, objects, object creation, object references, method activations and the call stack
+
+## Single-object abstractions
+
 - First steps in modular programming [Part 1](lecture2part1.md) [Part 2](lecture2part2.md)
   - Example: [squareroot](https://github.com/btj/squareroot)
   - Example: [max3](https://github.com/btj/max3)
