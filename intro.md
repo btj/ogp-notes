@@ -16,7 +16,15 @@ Each module must then be _implemented_ such that it complies with its API specif
 Additionally, this _correctness_ must only depend on the specifications, not the implementations, of the modules whose program elements it uses.
 Good specifications of module APIs are widely recognized as essential in software engineering, especially for important, long-lived APIs between separately developed modules.
 
-The principle of modular programming is extremely general.
+For example, consider a student using an HP laptop running the Google Chrome web browser on Microsoft Windows to remotely attend a course via Blackboard Inc.'s `bbcollab.com` website. The software system running on this laptop consists of (at least) four modules:
+- The web page downloaded from `bbcollab.com` contains JavaScript code that invokes operations defined by the web browser, as specified by the [DOM API](https://www.w3.org/TR/REC-DOM-Level-1/), such as [`createTextNode`](https://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#i-Document) to e.g. show chat messages.
+- The web browser implements the DOM API by invoking the operations defined by Windows, as specified by the [Windows API](https://docs.microsoft.com/en-us/windows/win32/apiindex/windows-api-list), such as [`CreateWindow`](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowa) to show a window on the user's desktop.
+- Windows implements the Windows API by invoking the operations defined by the device drivers for the laptop, as specified by the [Windows Driver API](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/), such as [`DrawPrimitive`](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/d3dumddi/nc-d3dumddi-pfnd3dddi_drawprimitive) to draw a line on the laptop's screen.
+- The device drivers developed by HP for the laptop implement the Windows Driver API.
+
+From time to time, Blackboard Inc., Google, Microsoft, and HP, independently and in parallel, develop new versions of their module and deploy them to the student's laptop. If the student's laptop keeps working correctly, this is thanks to the fact that the APIs between these modules have been specified clearly and carefully.
+
+As shown by this example, the principle of modular programming is extremely general.
 Specifically, its relevance is _not_ restricted to object-oriented programming or high-level languages like Java.
 Nevertheless, this course covers modular software development in the context of OOP and particularly Java.
 Both the OOP model and Java include principles (like encapsulation) and features (like static types) that facilitate modularity and defining APIs.
