@@ -432,3 +432,13 @@ By specifying an object in a `@creates` clause, you indicate that the object was
 The purpose is to allow the client to conclude that the object will not be inspected or mutated by any future method calls that mutate or inspect pre-existing objects.
 
 Objects created by a method or constructor that do not become visible to the client when the method or constructor finishes need not (and cannot) be mentioned in a `@creates` clause.
+
+## Further reading
+
+_The material in this section is outside the scope of the course and is provided for the information of interested students only._
+
+The specification formalism introduced in this course text is intended as a simplified approximation of the formalism introduced in _Matthew J. Parkinson. [Local reasoning for Java.](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-654.pdf) PhD Thesis, Cambridge University, 2005._ Parkinson's PhD thesis represents the state of the art in formal specification of Java modules and formal modular reasoning about the correctness of Java programs. Instead of effects clauses (`@mutates`, `@inspects`, `@creates`), Parkinson uses [_separation logic_](http://www0.cs.ucl.ac.uk/staff/p.ohearn/SeparationLogic/Separation_Logic/SL_Home.html), which is an extension of _Hoare logic_ for reasoning about heap effects. Hoare logic was the first logic for deducing program correctness judgments, also known as _Hoare triples_.
+
+The present author has, with others, implemented Parkinson's approach in a tool for modular formal verification of Java (and C) programs, called [VeriFast](https://github.com/verifast/verifast/). An introduction to VeriFast for Java is provided in _Smans et al. [VeriFast for Java: A Tutorial.](https://lirias.kuleuven.be/retrieve/224504) In Clarke et al. (eds.), Aliasing in Object-Oriented Programming, LNCS 7850, Springer, 2013._
+
+For further related research, see these documents' “Related work” sections. For new developments, see the proceedings of conferences such as [_Principles of Programming Languages_](https://dblp.org/db/conf/popl/index.html) and [_Computer-Aided Verification_](https://dblp.org/db/conf/cav/index.html).
