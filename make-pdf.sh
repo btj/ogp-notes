@@ -37,7 +37,7 @@ sed "${SED_IN_PLACE[@]}" \
   -e 's/\\chapter{How to properly document single-object abstractions}/\\chapter[How to document single-object abstractions]{How to properly document single-object abstractions}/' \
   -e 's/\\chapter{Polymorphism}/\\part{Part II: Inheritance}\\chapter{Polymorphism}/' \
   -e 's/\\chapter{Entity-relationship abstractions}/\\part{Part III: Multi-Object Abstractions}\\chapter{Entity-relationship abstractions}/' \
-  -e 's/\\section{Nesting class-encapsulated and package-encapsulated abstractions}/\\section[Nesting class-level and package-level abstractions]{Nesting class-encapsulated and package-encapsulated abstractions}/' \
+  -e 's/\\section{Advanced: Nesting class-encapsulated and package-encapsulated abstractions}/\\section[Nesting class-level and package-level abstractions]{Advanced: Nesting class-encapsulated and package-encapsulated abstractions}/' \
   -e 's/\\chapter{How to properly document multi-object abstractions}/\\chapter[How to document multi-object abstractions]{How to properly document multi-object abstractions}/' \
   -e 's/\\chapter{Behavioral subtyping: modular reasoning about programs that use dynamic binding}/\\chapter[Modular reasoning about dynamic binding]{Behavioral subtyping: modular reasoning about programs that use dynamic binding}/' \
   -e 's/\\section{Modular reasoning about programs that use dynamic binding}/\\section[Modular reasoning about dynamic binding]{Modular reasoning about programs that use dynamic binding}/' \
