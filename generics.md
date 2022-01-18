@@ -594,3 +594,25 @@ This approach, called _erasure_, has the following implications:
   For example, `ArrayList<int>` is not allowed, but `ArrayList<Integer>` is allowed. Java will convert `int` values to `Integer` objects and vice versa automatically. (However, the memory allocation involved in autoboxing may have a significant performance impact.)
 - Since type arguments are not available at run time, they cannot be used in ways that affect the run-time type of an object or otherwise affect the program's run-time behavior. For example, if `T` is a type parameter, the expressions `new T()`, `new T[]`, `T.class`, or `... instanceof T`  are not allowed. However, `new LinkedList<T>()` is allowed, since the type argument `<T>` is removed during erasure anyway.
 - Casts to types that are not run-time types (i.e. types that are different from their erasure, such as `T` (whose erasure is `Object`) or `LinkedList<T>` (whose erasure is `LinkedList`)) are allowed, but it may not be possible to fully check them at run time. In those cases, the static type checker generates an _unchecked cast warning_. For example, suppose `object` is a variable of type `Object`. The cast `(LinkedList<Student>)object` generates an unchecked cast warning, since it cannot be determined at run time whether the `LinkedList` object was created as a `LinkedList<Student>`, a `LinkedList<Staff>`, or with yet some other type argument. If `object` points to a `LinkedList` object that contains a `Staff` object, then `((LinkedList<Student>)object).iterator().next()` will throw a `ClassCastException` when the `next()` call returns, because this expression's erasure is `(Student)((LinkedList)object).iterator().next()` and the return value of the `next()` call is a `Staff` object.
+
+## Generics in Java and other languages
+
+Generics are widely used in Java.
+For example, the `Iterator` and `Iterable` interfaces that we discussed in the previous chapter are defined as follows in the Java Platform API (omitting some details):
+```java
+interface Consumer<T> {
+  void accept(T t);
+}
+interface Iterator<E> {
+  boolean hasNext();
+  E next();
+}
+interface Iterable<T> {
+  void forEach(Consumer<? super T> consumer);
+  Iterator<T> iterator();
+}
+```
+
+Generics and similar features also exist in many other languages with static type systems like C\#, Scala, C++, Haskell, OCaml, Rust, etc.
+However, the details often vary; for example, bounded type parameters only exist in languages with subtyping and even then, the details of how they work tend to vary.
+In functional programming languages like Haskell and OCaml, generics are referred to as parametric polymorphism (not to be confused with subtype polymorphism, which refers to subtyping).

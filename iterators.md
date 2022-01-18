@@ -1,5 +1,11 @@
 # Iterators
 
+In the preceding chapters, we have studied how to define and document APIs, of increasing complexity.
+Defining, implementing and interacting with APIs are important skills for software engineers.
+In this chapter and the next, we discuss two more advanced techniques that are widely used in practical APIs: iterators and generics.
+The former are a design pattern for offering a standard API for iterating over different data structures (like arrays, linked lists or balanced trees).
+The latter are a programming language feature that allows defining APIs that are parameterised by argument types.
+
 _Iterators_ are a solution to an _API design problem_: how to introduce an _abstract API_ between a collection implementation and its clients, that hides the data structure used to implement the collection, without increasing the time or space (memory) usage of clients that iterate over the elements of the collection?
 
 ## The problem
@@ -53,12 +59,19 @@ Notice the following:
 - The class of linked list nodes is defined as a _static nested class_ within the class of linked lists. This is essentially equivalent to defining it in the usual way outside of another class,
   except that in order to refer to it from outside of the enclosing class, you need to qualify its name by the name of the enclosing class. For example, in the client program the class is referred to as `LinkedList.Node`. More details about static and non-static nested classes will follow later in this text.
 - When passing an object as an argument, `System.out.println` calls `toString()` on it and prints the resulting string to the screen.
+- The two invocations of `printAll` will be resolved to the two overloaded implementations based on the static type of the argument.
 
 Notice also that the client program has to duplicate the logic of printing all elements for the two data structures. The question we consider in this text is: how can we introduce an API that generalizes the two data structures, and allows the client to write the logic for printing all elements only once and apply it unchanged to both data structures, without hurting performance?
 
-(We could introduce a method into both data structures that returns the elements as an array; the client could call it and then iterate over the array to print all elements. However, this would increase the memory usage of the client: it would need an amount of extra memory linear in the number of elements in the collection.)
-
-To see the solution, carefully consider both `printAll` methods and notice that they follow a similar pattern: they use some piece of data to track where they are in the data structure; they perform a test on the piece of data to see whether they have reached the end of the data structure; they retrieve the current element pointed to by the piece of data; and they update the piece of data to point to the next element.
+Let's first consider two approaches that are not a solution:
+- We could introduce a method into both data structures that returns the elements as an array; the client could call it and then iterate over the array to print all elements.
+  However, this would increase the memory usage of the client: temporarily converting the linked list to an array would require an amount of extra memory linear in the number of elements in the collection.
+- Alternatively, we could implement a method `getElement(int i)` in the `LinkedList` class that returns the `i`th element of the list.
+  `printAll` could then use this method to iterate over the list in the same way as it iterates over the array.
+  The downside of this approach is that it increases the time complexity: `getElement(i)` requires a number of steps linear in the length of the list, which would give `printAll` quadratic time complexity.
+  
+To see the solution, carefully consider both `printAll` methods and notice that they follow a similar pattern: they use some piece of data to track where they are in the data structure: respectively an index into the array and a pointer to the current node of the list.
+Then, they perform a test on the piece of data to see whether they have reached the end of the data structure; they retrieve the current element pointed to by the piece of data; and they update the piece of data to point to the next element.
 
 ## Iterators
 
@@ -456,6 +469,20 @@ public class ClientProgram {
 }
 ```
 Notice that the client program implements interface `Consumer` with an anonymous class whose `accept` method prints the element to the screen.
+
+### Java's Iterable
+
+It is worth pointing out that external iteration and internal iteration are not mutually exclusive.
+In fact, Java's `Iterable` interface provides both an `iterator()` method and a `forEach()` method:
+```java
+public interface Iterable {
+    Iterator iterator();
+    default void forEach(Consumer consumer) {
+        for (Iterator i = iterator(); i.hasNext(); )
+            consumer.accept(i.next());
+    }
+}
+```
 
 ### Lambda expressions
 
