@@ -91,6 +91,11 @@ Java does not allow this, because there would be no way to decide which construc
 
 (`Void` is a built-in class with no instances; the only value of type `Void` is `null`.) This works: now, we can replace expression `new Interval(3, 7)` by the equivalent expression `new Interval(3, 4, null)`.
 
+(Note that distinguishing the two constructors by the presence of an unused dummy argument is not actually an ideal solution: the difference may be unintuitive and error-prone for clients of the API.
+Some other programming languages support a more elegant approach.
+Swift, for example, allows one to declare a constructor (called an _initializer_ in Swift) `init(lowerBound: Int, upperBound: Int)` and a separate constructor `init(lowerBound: Int, width: Int)`, with invocations like `Interval(lowerBound: 10, upperBound: 20)` and `Interval(lowerBound: 10, width: 20)` clearly distinguished by means of _argument labels_.
+Unfortunately, Java does not support argument labels.)
+
 Declaring multiple members with the same name is known as _overloading_. Java supports overloading of constructors, as well as methods. For example, we can extend our class with a method `setWidth` with two parameters that updates the lower bound or the upper bound, depending on the second argument:
 
 ```java
