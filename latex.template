@@ -411,10 +411,13 @@ $endif$
 {\huge\bfseries Object-Oriented Programming\par}
 \vspace{2cm}
 {\Large Prof. Dr. Bart Jacobs\par}
-\vspace{0.5cm}
+{\large with \href{https://github.com/btj/ogp-notes/graphs/contributors}{contributors}\par}
+\vspace{0.75cm}
 {Department of Computer Science, KU Leuven\par}
 \vspace{2cm}
-\today
+{\today\par}
+\vspace{4cm}
+\url{https://github.com/btj/ogp-notes}
 
 \end{center}
 \vspace*{\fill}
