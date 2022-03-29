@@ -174,6 +174,10 @@ public class ArrayList implements List {
 
 }
 ```
+Notice that, when creating an `ArrayList` object and then adding many elements, between any two expansions (i.e. two executions of the line `elements = newElements;`) E1 and E2, if the size of the `ArrayList` before the first expansion E1 is N, then the number of elements added between the two expansions is also N, and the number of array element store or copy steps performed between the two expansions is 3N: N stores (`elements[index] = value;`) performed as part of adding the N elements, and 2N copy steps as part of the `System.arraycopy` call during the second expansion E2. So if the number of array element store or copy steps before the very first expansion of the `ArrayList` object is N0, then at any point P thereafter, the total number of array element store or copy steps performed before point P is less than N0 + 3N, where N is the number of elements added before point P. Therefore, the total number of steps performed when adding N elements is linear in N, so the average (or "amortized") number of steps performed per `add` call is constant (or, to be precise, bounded by a constant) in N.
+
+Notice also that, for this performance result to hold, it is crucial that at each expansion, the capacity of the array is increased by a multiple of the old capacity. The average number of steps performed per `add` call would not be bounded by a constant if at each expansion, the capacity is increased only by a fixed amount (e.g. 10).
+
 We can also implement the same API by storing the elements in a doubly-linked chain of `Node` objects:
 ```java
 package collections;
