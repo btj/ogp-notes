@@ -417,7 +417,7 @@ Instances of immutable classes need not be mentioned in `@inspects` clauses.
 
 ### Defaults
 
-If no `@mutates` or `@inspects` clause is specified for a given method or constructor, the default is that it may inspect and mutate any object that is not an instance of an immutable class. Exception: if an instance method's name starts with `get` or `is`, the default is that it may mutate no object and that it may inspect `this`.
+If no `@mutates` or `@inspects` clause is specified for a given method or constructor, the default is that it may inspect any object and mutate any object that is not an instance of an immutable class. Exception: if an instance method's name starts with `get` or `is`, the default is that it may mutate no object and that it may inspect `this`.
 
 A constructor is always allowed to mutate `this`.
 
