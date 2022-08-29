@@ -266,3 +266,24 @@ for (Object value : values)
 ```
 Java implicitly calls the appropriate inspector on the wrapper class to retrieve the primitive value. The line `sumOfIntegers += i;` is equivalent to
 `sumOfIntegers += i.intValue();`. Similarly, `sumOfIntegers += (int)values[1];` is equivalent to `sumOfIntegers += ((Integer)values[1]).intValue();`.
+
+## Polymorphism and arrays
+
+Arrays are involved in polymorphism in two ways:
+- Arrays are objects, so array references can be assigned to variables of type `Object`:
+  ```java
+  Object o = new int[] {10, 20, 30};
+  if (o instanceof int[])
+    assert ((int[])o)[2] == 30;
+  ```
+- Arrays are *covariant*. That means that if T is a class, a variable of type `T[]` can refer to an array whose element type is T or a subclass of T. For example:
+  ```java
+  Circle[] myCircles = {new Circle(5, 10, 5), new Circle(10, 20, 10)};
+  Shape[] myShapes = myCircles; // OK, Circle is a subclass of Shape
+  ```
+  This means, however, that a run-time check is generally necessary to ensure that objects assigned to array components are of the array's element type:
+  ```java
+  myShapes[0] = new Circle(10, 5, 10); // OK
+  myShapes[1] = new Polygon(10, 20, 30, 40, 50, 60); // Throws ArrayStoreException
+  ```
+  Since the static type of `myShapes` is `Shape[]` and `Polygon` is a subclass of `Shape`, Java's static type checker accepts the assignment of a `Polygon` object to a component of the array. However, since `myShapes` refers to an array with element type `Circle` (i.e. its dynamic type is `Circle[]`), execution of the assignment fails with an `ArrayStoreException` at run time.
