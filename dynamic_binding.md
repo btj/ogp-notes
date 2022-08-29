@@ -200,6 +200,8 @@ Specifically, Java calls an object's `toString()` method when it is added to a s
 
 As we will see later, the Java Collections Framework uses methods `equals` and `hashCode` to compare elements of collections. For example, `List.of(e1, e2).contains(e3)` returns `true` if and only if either `e3.equals(e1)` or `e3.equals(e2)` returns `true`, and `new HashSet(List.of(e1, e2)).size()` may return 1 or 2 depending both on whether `e1.hashCode()` equals `e2.hashCode()` and on whether `e1.equals(e2)` or `e2.equals(e1)` return `true`.
 
+Since arrays are objects and can be assigned to variables of type `Object`, the `equals`, `hashCode`, and `toString` methods can be invoked on arrays. However, arrays simply inherit the implementations of these methods from class `Object`. This means that if `array1` and `array2` are arrays, `array1.equals(array2)` is equivalent to `array1 == array2`; it compares the identities of the arrays, not their contents. To compare the contents, use [`Arrays.equals(array1, array2)`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Arrays.html#equals(java.lang.Object%5B%5D,java.lang.Object%5B%5D)) or [`Arrays.deepEquals(array1, array2)`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Arrays.html#deepEquals(java.lang.Object%5B%5D,java.lang.Object%5B%5D)).
+
 ### Record classes
 
 Since Java 16, released in March 2021, class `Point` above can be declared more concisely as follows:
