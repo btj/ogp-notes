@@ -437,6 +437,8 @@ Note: the above meaning of `@creates` clauses does not apply if the specified ex
 - O is `null` or an immutable object, or
 - O was created during the execution of M and furthermore, O is distinct from any direct or indirect representation objects of any objects mentioned in any of M's `@inspects` or `@mutates` clauses.
 
+If `@creates | result` is specified on an inspector method, this additionally means that it is not the identity of the returned object that is part of the receiver's abstract state, but its contents. For example, consider the opaque version of class ByteBuffer shown in the chapter on Representation objects. In this version, the abstract state of a ByteBuffer object consists of a sequence of bytes (the contents of the array returned by `getBytes()`) and an offset (the `int` value returned by `getOffset()`). In contrast, in the transparent version of class ByteBuffer shown in the same chapter, the abstract state of a ByteBuffer object consists of an array reference (the `byte[]` value returned by `getArray()`) and an offset (the `int` value returned by `getOffset()`). This distinction is indicated in these versions' documentation by the fact that the documentation of `getBytes()` mentions `@creates | result` and the documentation of `getArray()` does not.
+
 ## Further reading
 
 _The material in this section is outside the scope of the course and is provided for the information of interested students only._
