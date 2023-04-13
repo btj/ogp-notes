@@ -40,6 +40,8 @@ If no `@mutates`, `@mutates_properties`, or `@inspects` clause is specified for 
 
 By specifying an object in a `@creates` clause, you indicate that every member of the object's peer group was created during the execution of the method, and furthermore, that the peer group is disjoint from that of any direct or indirect representation object of any peer group mentioned in any of the method's `@inspects` or `@mutates` clauses.
 
+Note: this meaning of `@creates` clauses does not apply if the specified expression evaluates to `null` or to an immutable object. In these cases, the clause is simply ignored.
+
 ### Specifying collections of objects
 
 One can specify a collection of objects in a `@mutates`, `@mutates_properties`, `@inspects`, or `@creates` clause using the `...collection` syntax:

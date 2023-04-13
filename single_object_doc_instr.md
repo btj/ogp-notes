@@ -431,7 +431,11 @@ By specifying an object in a `@creates` clause, you indicate that the object was
 
 The purpose is to allow the client to conclude that the object will not be inspected or mutated by any future method calls that mutate or inspect pre-existing objects.
 
-Objects created by a method or constructor that do not become visible to the client when the method or constructor finishes need not (and cannot) be mentioned in a `@creates` clause.
+Objects created by a method or constructor that do not become visible to the client when the method or constructor finishes need not (and cannot) be mentioned in that method or constructor's `@creates` clause.
+
+Note: the above meaning of `@creates` clauses does not apply if the specified expression evaluates to `null` or to an immutable object; in that case, the `@creates` clause does not say anything about that reference. In other words, a `@creates | O` clause in the documentation for a method or constructor M means that:
+- O is `null` or an immutable object, or
+- O was created during the execution of M and furthermore, O is distinct from any direct or indirect representation objects of any objects mentioned in any of M's `@inspects` or `@mutates` clauses.
 
 ## Further reading
 
