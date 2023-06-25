@@ -417,6 +417,8 @@ for (Object element : iterable) {
 ```
 All collection classes in package `java.util`, such as `java.util.ArrayList` and `java.util.HashSet`, implement interface `java.lang.Iterable` and can therefore be iterated over using an enhanced `for` loop.
 
+*Note: the documentation for `java.util.Iterator` specifies that the `next` method shall throw a `NoSuchElementException` if there are no elements left. For simplicity, in this course we ignore this requirement.*
+
 ## Internal iterators: `forEach` methods
 
 The kind of iterators we have seen so far are referred to as _external iterators_: the client requests an iterator object and then interacts with the iterator object to retrieve the successive elements of the collection. Another common type of iterator API is known as _internal iterators_. This is the primary type of iterators in the Ruby programming language. In the case of internal iterators, the client passes a _consumer object_ to the collection; the collection then repeatedly calls the consumer object's `accept` method, passing each element of the collection in turn as an argument.
