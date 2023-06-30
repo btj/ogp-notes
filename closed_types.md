@@ -1,6 +1,6 @@
 # Closed types
 
-Classes and interfaces are typically *open-ended*, both in the sense of having an open-ended number of instances (e.g. clients can create arbitrarily many instances of class `ArrayList`) and in the sense of having an open-ended number of direct subtypes (e.g. client can define arbitrarily many classes that implement interface `List`).
+Classes and interfaces are typically *open-ended*, both in the sense of having an open-ended number of instances (e.g. clients can create arbitrarily many instances of class `ArrayList`) and in the sense of having an open-ended number of direct subtypes (e.g. clients can define arbitrarily many classes that implement interface `List`).
 
 However, sometimes it makes more sense for a type to be *closed*, either in the sense of not allowing clients to create new instances, or  in the sense of not allowing clients to define new direct subtypes, or both.
 
