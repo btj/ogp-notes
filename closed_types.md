@@ -22,7 +22,7 @@ public final class Score {
 
     private final int ordinal;
     private final String name;
-    private int value;
+    private final int value;
 
     public int ordinal() { return ordinal; }
     public String name() { return name; }
@@ -38,3 +38,49 @@ public final class Score {
 ```
 
 We declare the constructor as `private` so that clients cannot create new instances.
+
+### Enum classes
+
+In fact, Java supports a more concise syntax for declaring such classes with an enumerated set of instances:
+```java
+public enum Score {
+    LOVE(0),
+    FIFTEEN(15),
+    THIRTY(30),
+    FORTY(40) {
+        @Override
+        public Score next() { throw new UnsupportedOperationException("There is no next score"); }
+    };
+
+    private final int value;
+
+    public int value() { return value; }
+    public Score next() { return values()[ordinal() + 1]; }
+
+    private Score(int value) { this.value = value; }
+}
+```
+
+### Switching over an enum class instance
+
+Java has convenient syntax for performing case analysis on an enum class instance, in the form of *switch statements* and *switch expressions*:
+```java
+public String getScoreInFrench(Score score) {
+    switch (score) {
+        case LOVE -> { return "zéro"; }
+        case FIFTEEN -> { return "quinze"; }
+        case THIRTY -> { return "trente"; }
+        default -> { return "quarante"; }
+    }
+}
+```
+```java
+public String getScoreInFrench(Score score) {
+    return switch (score) {
+        case LOVE -> "zéro";
+        case FIFTEEN -> "quinze";
+        case THIRTY -> "trente";
+        case FORTY -> "quarante";
+    };
+}
+```
