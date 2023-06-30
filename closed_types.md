@@ -112,9 +112,12 @@ We can use switch statements or switch expressions to switch over a sealed type:
 ```java
 public String toString(GameState state) {
     return switch (state) {
-        case GameState.Regular(var servingPlayerScore, var receivingPlayerScore) -> servingPlayerScore.value() + "-" + receivingPlayerScore.value();
-        case GameState.Advantage(var servingPlayer) -> "advantage " + (servingPlayer ? "serving" : "receiving") + " player";
-        case GameState.Won(var servingPlayer) -> "won by the " + (servingPlayer ? "serving" : "receiving") + " player";
+        case GameState.Regular(var servingPlayerScore, var receivingPlayerScore) ->
+                servingPlayerScore.value() + "-" + receivingPlayerScore.value();
+        case GameState.Advantage(var servingPlayer) ->
+                "advantage " + (servingPlayer ? "serving" : "receiving") + " player";
+        case GameState.Won(var servingPlayer) ->
+                "won by the " + (servingPlayer ? "serving" : "receiving") + " player";
     };
 }
 ```
