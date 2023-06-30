@@ -108,7 +108,7 @@ public sealed interface GameState { /* ... */ }
 
 ### Switching over a sealed type
 
-We can use switch statements or switch expressions to switch over a sealed type:
+We can use switch statements or switch expressions to perform case analysis on an instance of a sealed type:
 ```java
 public String toString(GameState state) {
     return switch (state) {
