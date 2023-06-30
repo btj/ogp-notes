@@ -84,3 +84,37 @@ public String getScoreInFrench(Score score) {
     };
 }
 ```
+
+## Types with a closed set of direct subtypes
+
+Consider an interface GameState whose instances are intended to represent the various states that a game of tennis can be in:
+```java
+public interface GameState {
+    public record Regular(Score servingPlayerScore, Score receivingPlayerScore) implements GameState {
+        Regular { Objects.requireNonNull(servingPlayerScore); Objects.requireNonNull(receivingPlayerScore); }
+    }
+    public record Advantage(boolean servingPlayer) implements GameState {}
+    public record Won(boolean servingPlayer) implements GameState {}
+}
+```
+We can prevent clients from defining additional classes that implement interface GameState by declaring it as *sealed*:
+```java
+public sealed interface GameState permits GameState.Regular, GameState.Advantage, GameState.Won { /* ... */ }
+```
+In this example, we can in fact just leave out the `permits` clause. This means only direct subtypes declared in the same file are allowed:
+```java
+public sealed interface GameState { /* ... */ }
+```
+
+### Switching over a sealed type
+
+We can use switch statements or switch expressions to switch over a sealed type:
+```java
+public String toString(GameState state) {
+    return switch (state) {
+        case GameState.Regular(var servingPlayerScore, var receivingPlayerScore) -> servingPlayerScore.value() + "-" + receivingPlayerScore.value();
+        case GameState.Advantage(var servingPlayer) -> "advantage " + (servingPlayer ? "serving" : "receiving") + " player";
+        case GameState.Won(var servingPlayer) -> "won by the " + (servingPlayer ? "serving" : "receiving") + " player";
+    };
+}
+```
