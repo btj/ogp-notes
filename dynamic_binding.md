@@ -233,4 +233,16 @@ public record Circle(int x, int y, int radius) {
     }
 }
 ```
+
+Instances of record classes can be inspected concisely using *record patterns*: the snippet
+```java
+if (shape instanceof Circle circle)
+    return "Circle(" + circle.x + ", " + circle.y + ", " + circle.radius + ")";
+```
+can be written more concisely as
+```java
+if (shape instanceof Circle(int x, int y, int radius))
+    return "Circle(" + x + ", " + y + ", " + radius + ")";
+```
+
 Warning: be careful when using a record class if some of the components are mutable objects that should be treated like representation objects; the predefined members do not prevent representation exposure. Be extra careful when using arrays as record components: an array's `equals` method simply compares the identities of the two objects; it does not compare the array elements.
