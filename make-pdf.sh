@@ -17,6 +17,7 @@ pandoc -o course-notes.html -f gfm \
   behavioral_subtyping.md \
   interfaces.md \
   implementation_inheritance.md \
+  closed_types.md \
   collections.md \
   entity_relationship_abstractions.md \
   multi_class_abstractions.md \
@@ -42,6 +43,7 @@ sed "${SED_IN_PLACE[@]}" \
   -e 's/\\chapter{Behavioral subtyping: modular reasoning about programs that use dynamic binding}/\\chapter[Modular reasoning about dynamic binding]{Behavioral subtyping: modular reasoning about programs that use dynamic binding}/' \
   -e 's/\\section{Modular reasoning about programs that use dynamic binding}/\\section[Modular reasoning about dynamic binding]{Modular reasoning about programs that use dynamic binding}/' \
   -e 's/\\chapter{Iterators}/\\part{Part IV: Advanced Topics}\\chapter{Iterators}/' \
+  -e 's/language=Java/language=Java,morekeywords={enum,record,sealed,permits}/g' \
   course-notes.tex
 pdflatex course-notes.tex
 pdflatex course-notes.tex

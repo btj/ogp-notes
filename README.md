@@ -31,6 +31,8 @@
   - Concepts: interfaces, multiple inheritance, static fields, the Singleton pattern
 - [Implementation inheritance](implementation_inheritance.md)
   - Concepts: Inheritance of fields and methods, `super` constructor calls, `super` method calls
+- [Closed types](closed_types.md)
+  - Concepts: types with a closed set of instances, enum classes, types with a closed set of direct subtypes, sealed types, switch statements and expressions
 - [Lists, sets, and maps](collections.md)
   - Concepts: the List, Set, and Map abstract datatypes (ADTs); the ArrayList, LinkedList, HashSet, and HashMap data structures; the Java Collections Framework
 

@@ -252,8 +252,13 @@ $if(listings)$
     language=java,
     basicstyle=\ttfamily\footnotesize,
     commentstyle=\color{ogpjavadoc}\ttfamily\footnotesize,
+    morekeywords={enum,record,sealed,permits},
     frame=lines,
     rulecolor=\color{black}}
+\lstset{
+    extendedchars=true,
+    literate={é}{{\'e}}1,
+}
 %\lstset{xleftmargin=-2cm,xrightmargin=-2cm}
 $endif$
 $if(lhs)$

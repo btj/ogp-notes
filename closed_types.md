@@ -14,7 +14,7 @@ public final class Score {
     public static final Score THIRTY = new Score(2, "THIRTY", 30);
     public static final Score FORTY = new Score(3, "FORTY", 40) {
         @Overrride
-        public Score next() { throw new UnsupportedOperationException("There is no next score"); }
+        public Score next() { throw new UnsupportedOperationException(); }
     };
     private static final Score[] values = {LOVE, FIFTEEN, THIRTY, FORTY};
 
@@ -49,7 +49,7 @@ public enum Score {
     THIRTY(30),
     FORTY(40) {
         @Override
-        public Score next() { throw new UnsupportedOperationException("There is no next score"); }
+        public Score next() { throw new UnsupportedOperationException(); }
     };
 
     private final int value;
@@ -90,16 +90,21 @@ public String getScoreInFrench(Score score) {
 Consider an interface GameState whose instances are intended to represent the various states that a game of tennis can be in:
 ```java
 public interface GameState {
-    public record Regular(Score servingPlayerScore, Score receivingPlayerScore) implements GameState {
-        Regular { Objects.requireNonNull(servingPlayerScore); Objects.requireNonNull(receivingPlayerScore); }
+    public record Regular(Score serverScore, Score receiverScore) implements GameState {
+        Regular {
+            Objects.requireNonNull(serverScore);
+            Objects.requireNonNull(receiverScore);
+        }
     }
-    public record Advantage(boolean servingPlayer) implements GameState {}
-    public record Won(boolean servingPlayer) implements GameState {}
+    public record Advantage(boolean server) implements GameState {}
+    public record Won(boolean server) implements GameState {}
 }
 ```
 We can prevent clients from defining additional classes that implement interface GameState by declaring it as *sealed*:
 ```java
-public sealed interface GameState permits GameState.Regular, GameState.Advantage, GameState.Won { /* ... */ }
+public sealed interface GameState
+    permits GameState.Regular, GameState.Advantage, GameState.Won
+{ /* ... */ }
 ```
 In this example, we can in fact just leave out the `permits` clause. This means only direct subtypes declared in the same file are allowed:
 ```java
@@ -112,12 +117,12 @@ We can use switch statements or switch expressions to perform case analysis on a
 ```java
 public String toString(GameState state) {
     return switch (state) {
-        case GameState.Regular(var servingPlayerScore, var receivingPlayerScore) ->
-                servingPlayerScore.value() + "-" + receivingPlayerScore.value();
-        case GameState.Advantage(var servingPlayer) ->
-                "advantage " + (servingPlayer ? "serving" : "receiving") + " player";
-        case GameState.Won(var servingPlayer) ->
-                "won by the " + (servingPlayer ? "serving" : "receiving") + " player";
+        case GameState.Regular(var serverScore, var receiverScore) ->
+                serverScore.value() + "-" + receiverScore.value();
+        case GameState.Advantage(var server) ->
+                "advantage " + (server ? "server" : "receiver");
+        case GameState.Won(var server) ->
+                "won by the " + (server ? "server" : "receiver");
     };
 }
 ```
