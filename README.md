@@ -10,7 +10,7 @@
   - Example: [squareroot](https://github.com/btj/squareroot)
   - Example: [max3](https://github.com/btj/max3)
   - Example: [timeofday](https://github.com/btj/timeofday)
-  - Concepts: Using Eclipse, creating JUnit test cases, creating classes, instance methods, encapsulation, `private` versus `public`, using Git, constructors
+  - Concepts: Using Eclipse, creating JUnit test cases, creating classes, instance methods, encapsulation, `private` versus `public`, using Git, constructors, unit testing basics and best practices
 - [Managing complexity through modularity and abstraction](complexity_modularity_abstraction.md)
   - Concepts: modularity, abstraction, API, client module, importance of documentation, information hiding, procedural abstraction, data abstraction, immutable versus mutable abstractions, abstract value/state of an object, Java's built-in datatypes and operators
 - [Representation objects and representation exposure](representation_objects.md)

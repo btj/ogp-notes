@@ -380,7 +380,7 @@ When we right-click the IntervalTest class and select "Run As" > "JUnit Test", w
 
 In fact, because we are using FSC4J, we actually get a different result:
 
-<img src="eclipse-junit-fsc4j-postcondition-failure.png" width=200 />
+<img src="eclipse-junit-fsc4j-postcondition-failure.png" width=400 />
 
 This is because FSC4J will implicitly add assertions to every functions to verify that its postcondition holds and it is this postcondition failure that is detected by the JUnit test case.
 As a result, when using FSC4J, we can, in principle, simplify our test suite, by removing explicit tests for postconditions.
