@@ -313,10 +313,10 @@ For example, remember that we have the following instance methods in our impleme
 	 * @post This interval's width equals the given value.
 	 *     | getWidth() == value
 	 * @post If the caller specified that the lower bound should be updated, the
-     *       upper bound has remained unchanged.
+	 *       upper bound has remained unchanged.
 	 *     | !updateLowerBound || getUpperBound() == old(getUpperBound())
 	 * @post If the caller specified that the lower bound should not be updated,
-     *       the lower bound has remained unchanged.
+	 *       the lower bound has remained unchanged.
 	 *     | updateLowerBound || getLowerBound() == old(getLowerBound())
 	 */
 	void setWidth(int value, boolean updateLowerBound) {
@@ -387,16 +387,16 @@ As a result, when using FSC4J, we can, in principle, simplify our test suite, by
 However, unless you are sure that all developers of the library will always use FSC4J, now and in the future, it is safer to include the assertions anyway.
 
 ```java
-    //...
+	//...
     
-    @Test
-    void testSetUpperBound() {
+	@Test
+	void testSetUpperBound() {
 		Interval interval = new Interval(3, 4, null);
 
 		interval.setUpperBound(8);
-    }
+	}
 
-    //...
+	//...
 ```
 
 ### Unit Test Best Practices
@@ -413,16 +413,16 @@ This includes particularly inputs that are somehow at the boundary of an accepta
 For example, for properly testing `Interval.setUpperBound(int lb)`, we should at least include the following extra test (creating a zero-length interval):
 
 ```java
-    //...
+	//...
     
-    @Test
-    void testSetUpperBoundEmpty() {
+	@Test
+	void testSetUpperBoundEmpty() {
 		Interval interval = new Interval(3, 4, null);
 
 		interval.setUpperBound(3);
-    }
+	}
 
-    //...
+	//...
 ```
 Note that it is not necessary to test an invocation like `interval.setUpperBound(2)` because this is not allowed by the contract of `Interval.setUpperBound(int value)`.
 Depending on the number of arguments and the contract's restrictions on them, there may be very many corner cases.
@@ -467,8 +467,7 @@ JUnit offers several other useful `assert` methods like `assertTrue`, `assertFal
 If a class has many public methods, then it is good practice to test all of them.
 However, it is not a good idea to test them all in a single unit test:
 ```java
-    //...
-    
+	//...
 
 	@Test
 	void test() {
@@ -488,7 +487,7 @@ However, it is not a good idea to test them all in a single unit test:
 		assertEquals(15,interval.getLowerBound());
 	}
 
-    //...
+	//...
 ```
 This is not a good idea because it makes tests unnecessarily hard to diagnose.
 If one of the methods under test includes an error, then JUnit will just report that `IntervalTest.test()` has failed and it is not easy to see where the problem is exactly.
@@ -513,14 +512,14 @@ It is better to split up unit tests into many small tests of individual methods:
 		assertEquals(3,interval.getLowerBound());
 	}
     
-    @Test
-    void testSetUpperBoundEmpty() {
+	@Test
+	void testSetUpperBoundEmpty() {
 		Interval interval = new Interval(3, 4, null);
 
 		interval.setUpperBound(3);
 		assertEquals(3, interval.getUpperBound());
 		assertEquals(3,interval.getLowerBound());
-    }
+	}
 
 	@Test
 	void testSetLowerBound() {
@@ -567,12 +566,12 @@ class IntervalTest {
 		assertArrayEquals(new int[] {4, 5, 6, 7}, myInterval.getElements());
 	}
     
-    @Test
-    void testSetUpperBound() {
+	@Test
+	void testSetUpperBound() {
 		myInterval.setUpperBound(8);
 		assertEquals(4,myInterval.getLowerBound());
 		assertEquals(8,myInterval.getUpperBound());
-    }
+	}
 
   	@Test
 	void testSetWidth() {
@@ -581,7 +580,7 @@ class IntervalTest {
 		assertEquals(4, myInterval.getLowerBound());
 	}
 
-    //...
+	//...
 }
 ```
 The above code uses an instance variable myInterval as test data in several tests and initializes it in a method `initEach`.
