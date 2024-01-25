@@ -376,7 +376,7 @@ Note that our example code imports all static methods from this class using an `
 The error mentioned above (implementing `setWidth(int value)` in terms of `setWith(int value, boolean updateLowerBound)`) would be detected by the above test suite.
 When we right-click the IntervalTest class and select "Run As" > "JUnit Test", we would normally see the following test failure:
 
-![JUnit test `testSetWidth` run in Eclipse detects programming error.](eclipse-junit-setWidth.png)
+<img src="eclipse-junit-setWidth.png" title="JUnit test `testSetWidth` run in Eclipse detects programming error." alt="JUnit test `testSetWidth` run in Eclipse detects programming error." width=400 />
 
 In fact, because we are using FSC4J, we actually get a different result:
 
@@ -446,7 +446,7 @@ For example, consider the following unit test:
 ```
 If `interval.getUpperBound()` incorrectly returns the value 5, then JUnit will report the following:
 
-<img src="eclipse-junit-wrong-assert.png" width=200 />
+<img src="eclipse-junit-wrong-assert.png" width=400 />
 
 Eclipse points us to the assertion that failed, and says "expected <5> but was <8>".
 In other words, it says 5 is the expected value and 8 the observed value, but it should be the other way around.
