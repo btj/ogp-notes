@@ -446,7 +446,7 @@ For example, consider the following unit test:
 ```
 If `interval.getUpperBound()` incorrectly returns the value 5, then JUnit will report the following:
 
-<img src="eclipse-junit-wrong-assert" width=200 />
+<img src="eclipse-junit-wrong-assert.png" width=200 />
 
 Eclipse points us to the assertion that failed, and says "expected <5> but was <8>".
 In other words, it says 5 is the expected value and 8 the observed value, but it should be the other way around.
