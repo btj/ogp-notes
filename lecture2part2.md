@@ -376,11 +376,11 @@ Note that our example code imports all static methods from this class using an `
 The error mentioned above (implementing `setWidth(int value)` in terms of `setWith(int value, boolean updateLowerBound)`) would be detected by the above test suite.
 When we right-click the IntervalTest class and select "Run As" > "JUnit Test", we would normally see the following test failure:
 
-<img src="eclipse-junit-setWidth.png" title="JUnit test `testSetWidth` run in Eclipse detects programming error." alt="JUnit test `testSetWidth` run in Eclipse detects programming error." width=400 />
+<img src="eclipse-junit-setWidth.png" title="JUnit test `testSetWidth` run in Eclipse detects programming error." alt="JUnit test `testSetWidth` run in Eclipse detects programming error." width=100% />
 
 In fact, because we are using FSC4J, we actually get a different result:
 
-<img src="eclipse-junit-fsc4j-postcondition-failure.png" width=200 />
+<img src="eclipse-junit-fsc4j-postcondition-failure.png" width=40% />
 
 This is because FSC4J will implicitly add assertions to every functions to verify that its postcondition holds and it is this postcondition failure that is detected by the JUnit test case.
 As a result, when using FSC4J, we can, in principle, simplify our test suite, by removing explicit tests for postconditions.
@@ -446,7 +446,7 @@ For example, consider the following unit test:
 ```
 If `interval.getUpperBound()` incorrectly returns the value 5, then JUnit will report the following:
 
-<img src="eclipse-junit-wrong-assert.png" width=400 />
+<img src="eclipse-junit-wrong-assert.png" width=100% />
 
 Eclipse points us to the assertion that failed, and says "expected <5> but was <8>".
 In other words, it says 5 is the expected value and 8 the observed value, but it should be the other way around.
