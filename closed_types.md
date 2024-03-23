@@ -8,12 +8,12 @@ However, sometimes it makes more sense for a type to be *closed*, either in the 
 
 For example, consider a class `Score` whose instances represent the possible scores that a player can have during a game in a tennis match: 0 (*love*), 15, 30, and 40. We can define such a class as follows:
 ```java
-public final class Score {
+public class Score {
     public static final Score LOVE = new Score(0, "LOVE", 0);
     public static final Score FIFTEEN = new Score(1, "FIFTEEN", 15);
     public static final Score THIRTY = new Score(2, "THIRTY", 30);
     public static final Score FORTY = new Score(3, "FORTY", 40) {
-        @Overrride
+        @Override
         public Score next() { throw new UnsupportedOperationException(); }
     };
     private static final Score[] values = {LOVE, FIFTEEN, THIRTY, FORTY};
@@ -91,7 +91,7 @@ Consider an interface GameState whose instances are intended to represent the va
 ```java
 public interface GameState {
     public record Regular(Score serverScore, Score receiverScore) implements GameState {
-        Regular {
+        public Regular {
             Objects.requireNonNull(serverScore);
             Objects.requireNonNull(receiverScore);
         }
