@@ -41,7 +41,6 @@ public class Node {
 	public Set<Node> getNeighbors() { return Set.copyOf(neighbors); }
 
 	/**
-	 * @mutates | this // optional
 	 * @post | getNeighbors().isEmpty()
 	 */
 	public Node() {}

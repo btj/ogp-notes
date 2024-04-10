@@ -47,8 +47,6 @@ public class TimeOfDay {
     /**
      * Initializes this object with the given hours and minutes.
      * 
-     * @mutates | this
-     *
      * @throws IllegalArgumentException if the given hours are not between 0
      *         and 23
      *    | !(0 <= hours && hours <= 23)
@@ -191,7 +189,6 @@ public class StringList {
     /**
      * Initializes this object so that it stores an empty list of text strings.
      *
-     * @mutates | this
      * @post This object's list of text strings is empty.
      *    | getElements().length == 0
      */

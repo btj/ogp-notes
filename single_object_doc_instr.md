@@ -405,11 +405,13 @@ To achieve a complete specification of the behavior of a method or constructor, 
 
 A method must not mutate any pre-existing objects not mentioned in its `@mutates` clause and not used to represent the state of any objects mentioned in its `@mutates` clause. That is, an execution of a method may mutate an object O if and only if either O was newly created during the method execution (i.e. it did not exist when the method execution started), or O is mentioned in the method's `@mutates` clause, or O is a representation object of an object mentioned in the method's `@mutates` clause, or O is a representation object of a representation object of an object mentioned in the method's `@mutates` clause, and so forth.
 
+The same holds for constructors. Note: for the purpose of this rule, in the case of a constructor `this` is not considered to be a pre-existing object. Therefore, a constructor is always allowed to mutate `this`.
+
 An object O is a representation object of another object O' if a field marked `@representationObject` of O' holds a reference to O. For example, a `StringList` object's `elements` array is a representation object of the `StringList` object. This is why method `allToUpperCase` can mutate the array object, even though it is not mentioned by the method's `@mutates` clause.
 
 ### Inspects clauses
 
-Similarly, a method must not inspect the state of any pre-existing *mutable* objects not mentioned in its `@inspects` or `@mutates` clause and not used to represent the state of any objects mentioned in its `@inspects` or `@mutates` clause.
+Similarly, a method or constructor must not inspect the state of any pre-existing *mutable* objects not mentioned in its `@inspects` or `@mutates` clause and not used to represent the state of any objects mentioned in its `@inspects` or `@mutates` clause.
 
 Instances of immutable classes need not be mentioned in `@inspects` clauses.
 

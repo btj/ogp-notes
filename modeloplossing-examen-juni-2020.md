@@ -45,7 +45,6 @@ public class Exam {
 	}
 	
 	/**
-	 * @mutates | this // optioneel
 	 * @post | getRooms().isEmpty()
 	 */
 	public Exam() {}
@@ -105,7 +104,6 @@ public class Room {
 	}
 	
 	/**
-	 * @mutates | this // optioneel
 	 * @post | getExams().isEmpty()
 	 */
 	public Room() {}

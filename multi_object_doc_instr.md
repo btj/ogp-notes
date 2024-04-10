@@ -42,6 +42,12 @@ By specifying an object in a `@creates` clause, you indicate that every member o
 
 Note: this meaning of `@creates` clauses does not apply if the specified expression evaluates to `null` or to an immutable object. In these cases, the clause is simply ignored.
 
+### Evaluation
+
+The expressions that appear in `@mutates`, `@mutates_properties`, and `@inspects` clauses are evaluated *before* the execution of the method or constructor. For example, the clause `@mutates_properties | this.getTeam(), this.getTeam().getMembers()` in the documentation of method `leaveTeam` of class `ProjectCourseStudent` means that the method can mutate the `getTeam()` property of `this` and the `getMembers()` property of the object identified by the *old* value of `this.getTeam()`.
+
+The objects listed in `@mutates` and `@inspects` clauses are the *pre-existing* objects that the method or constructor can mutate or inspect. It follows that it does not make sense to mention `this` in the `@mutates` clause of a constructor, since `this` is not a pre-existing object. Similarly, the properties listed in `@mutates_properties` clauses are the properties of *pre-existing* objects that the method or constructor can mutate. It follows that it does not make sense to mention properties of `this` in the `@mutates_properties` clause of a constructor.
+
 ### Specifying collections of objects
 
 One can specify a collection of objects in a `@mutates`, `@mutates_properties`, `@inspects`, or `@creates` clause using the `...collection` syntax:
@@ -84,7 +90,7 @@ class Rectangle {
     public void setWidth(int newWidth) { width = newWidth; }
 
     /**
-     * @inspects rectangles
+     * @inspects | rectangles
      * @mutates_properties | (...rectangles).getWidth()
      * @post | Arrays.stream(rectangles).allMatch(r -> r.getWidth() == newWidth)
      */
