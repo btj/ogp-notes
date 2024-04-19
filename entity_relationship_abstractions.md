@@ -93,6 +93,8 @@ public class OOPStudent {
      *    | getTeammate() != null
      * @throws IllegalArgumentException if the given student already has a teammate
      *    | teammate.getTeammate() != null
+     * @throws IllegalArgumentException if the given student is this student
+     *    | teammate == this
      * @mutates | this, teammate
      * @post This student's teammate equals the given teammate
      *    | getTeammate() == teammate
@@ -109,6 +111,9 @@ public class OOPStudent {
         if (teammate.teammate != null)
             throw new IllegalArgumentException(
                 "The given teammate already has a teammate");
+        if (teammate == this)
+            throw new IllegalArgumentException(
+                "Cannot be a teammate of oneself");
         this.teammate = teammate;
         teammate.teammate = this;
     }
