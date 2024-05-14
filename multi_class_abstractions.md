@@ -122,7 +122,7 @@ it may be accessed by any code in the same package.
 
 We conclude that to implement multi-class abstractions, we generally need to implement them using a _package_ as the unit of encapsulation rather than a _class_. We apply this
 principle to the example by moving the example client (class `BigTeamsTest`) out of package `bigteams` and by making the fields of class `ProjectCourseStudent` and `Team` package-accessible.
-Analogously to class-encapsulated abstractions, we specify package representation invariants (using `@invar` clauses in the fields' Javadoc comments) and package abstract state invariants (using `@invar` clauses in the classes' Javadoc comments):
+Analogously to class-encapsulated abstractions, we specify package representation invariants (using `@invar` clauses in the fields' Javadoc comments) and package abstract state invariants (using `@invar` clauses in the classes' Javadoc comments and/or `@post` clauses in the Javadoc comments for the public inspectors):
 
 ```java
 package bigteams;
