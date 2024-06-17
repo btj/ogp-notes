@@ -462,6 +462,10 @@ This is because our invocation of `assertEquals` is wrong: the first argument sh
 ```
 JUnit offers several other useful `assert` methods like `assertTrue`, `assertFalse`, `assertThrows`, `assertDoesNotThrow`, `assertInstanceOf`, `assertArrayEquals`, `assertNotEquals`, `assertSame`, `assertNotSame`, `assertNull` that one should use where appropriate.
 
+It is important to note that JUnit methods are only intended for use in unit tests and they should not be used elsewhere.
+This is contrary to the Java keyword `assert`, which may be used in arbitrary code to perform additional sanity-checks.
+Such `assert` checks will normally be enabled during development but turned off in production.
+
 #### Test Methods Separately ####
 
 If a class has many public methods, then it is good practice to test all of them.
