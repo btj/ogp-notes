@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: registry.gitlab.com/islandoftex/images/texlive:TL2024-2025-01-05-medium
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run a one-line script
+        run: . ./ci.sh
+
+      - uses: actions/upload-artifact@v4.5.0
+        with:
+          path: /workdir/ogp-notes/course-notes.pdf
+          if-no-files-found: error
