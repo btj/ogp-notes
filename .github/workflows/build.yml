@@ -9,12 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: registry.gitlab.com/islandoftex/images/texlive:TL2024-2025-01-05-medium
+    container: registry.gitlab.com/islandoftex/images/texlive:TL2024-2025-01-05-medium@sha256:3c51378a5396fefbeb722c347450660e9a9b5539ffbfcf5da13df7c6a22cb0e3
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Run a one-line script
+        shell: bash
         run: . ./ci.sh
 
       - uses: actions/upload-artifact@v4.5.0
