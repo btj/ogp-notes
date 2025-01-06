@@ -24,7 +24,7 @@ pandoc -o course-notes.html -f gfm \
   multi_object_doc_instr.md \
   iterators.md \
   generics.md
-pandoc --wrap=none -V documentclass=book --toc --template=latex.template --listings -o course-notes.tex course-notes.html
+pandoc --wrap=none -V documentclass=book -V papersize:a4 --toc --template=latex.template --listings -o course-notes.tex course-notes.html
 if [ `uname -s` = Darwin ]; then
   SED_IN_PLACE=(-i '')
 else
