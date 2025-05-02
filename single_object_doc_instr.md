@@ -158,7 +158,7 @@ For example, see the following documentation for an immutable `TimeOfDay` class:
  * @invar This object's hours are between 0 and 23
  *    | 0 <= getHours() && getHours() <= 23
  * @invar This object's minutes are between 0 and 59
- *    | 0 <= getMinutes() && getMinutes <= 59
+ *    | 0 <= getMinutes() && getMinutes() <= 59
  */
 public class TimeOfDay {
 
