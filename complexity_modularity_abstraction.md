@@ -198,7 +198,8 @@ public class Fraction {
             gcd = -gcd;
         return new Fraction(numerator / gcd, denominator / gcd);
     }
-    
+
+    @Override
     /**
      * Returns whether this object and the given object represent the same
      * rational number.
@@ -368,7 +369,8 @@ public class FractionContainer {
     
     public long getNumerator() { return numerator; }
     public long getDenominator() { return denominator; }
-    
+
+    @Override
     /**
      * Returns whether the rational number stored by this object
      * equals the rational number defined by the given numerator
