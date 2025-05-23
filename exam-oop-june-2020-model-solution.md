@@ -65,8 +65,6 @@ public class Node {
 	 * @post | other.getNeighbors().equals(LogicalSet.minus(old(other.getNeighbors()), this))
 	 */
 	public void unlinkFrom(Node other) {
-		if (other == null)
-			throw new IllegalArgumentException("other is null");
 		neighbors.remove(other);
 		other.neighbors.remove(this);
 	}
