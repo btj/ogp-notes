@@ -1,3 +1,5 @@
+**Note: this course text has moved to https://github.com/btj/modular-programming**
+
 # Object-Oriented Programming
 
 - [Introduction: Topic of the course](intro.md)
